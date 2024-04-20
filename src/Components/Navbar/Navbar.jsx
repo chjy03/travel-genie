@@ -5,6 +5,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { TbGridDots } from 'react-icons/tb';
 import { IoPersonCircle } from 'react-icons/io5';
 import { Link, NavLink } from 'react-router-dom';
+import logoImage from '../../Assets/logo.jpg';
 
 const Navbar = () => {
     const [active, setActive] = useState(false);
@@ -25,7 +26,8 @@ const Navbar = () => {
 
                 <div className="logoDiv">
                     <Link to="/" className='logo flex'>
-                        <h1><MdOutlineTravelExplore className="icon" /> TravelGenie.</h1>
+                    <img src={logoImage} alt="TravelGenie Logo" className="icon" />
+                    <h1>TravelGenie.</h1>
                     </Link>
                 </div>
 

@@ -52,6 +52,11 @@ const Footer = () => {
                             <BsTwitter className='icon'/>
                         </a>
                 </div> 
+
+                {/* Copyright Section */}
+                <div className="copyright">
+                    &copy; {new Date().getFullYear()} TravelGenie. All Rights Reserved.
+                </div>
             </div>
         </div>
     )

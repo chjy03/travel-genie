@@ -42,6 +42,17 @@
 .header .personIcon:hover {
   color: var(--SecondaryColor);
 }
+.header .logo img {
+  width: 30px; /* Set the width of the logo image */
+  height: 30px; /* Set the height of the logo image */
+  border-radius: 50%; /* Apply border-radius to make the image circular */
+  -o-object-fit: cover;
+     object-fit: cover; /* Ensure the image covers the entire circular area */
+  margin-bottom: 9px;
+}
+.header h1 {
+  padding-left: 0.4rem;
+}
 @media screen and (max-width: 768px) {
   .header .navBar {
     position: absolute;
