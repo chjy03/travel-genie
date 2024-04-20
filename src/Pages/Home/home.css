@@ -1,0 +1,97 @@
+:root {
+  --PrimaryColor:hsl(199,100%,33%);
+  --SecondaryColor:hsl(187,85%,43%);
+  --gradientColor:linear-gradient(to right,hsl(187,85%,43%),hsl(199,100%,33%));
+  --whiteColor:hsl(0,0%,100%);
+  --blackColor:hsl(201,33%,16%);
+  --textColor:hsl(240,4%,36%);
+  --whiteColorDeam:hsl(0,0%,93%);
+  --greyText:rgb(190,190,190);
+  --inputColor:rgb(239,239,239);
+  --bodyColor:rgb(240,240,246);
+  --cardBG:rgb(225,225,235);
+}
+
+.home {
+  width: 100%;
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 1rem;
+}
+.home .setContainer .homeText {
+  text-align: center;
+}
+.home .setContainer .homeText .welcome {
+  color: var(--blackColor);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 3.5rem;
+  padding-top: 6rem;
+}
+.home .setContainer .homeText .title {
+  color: var(--blackColor);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 3.5rem;
+  padding-top: 3rem;
+}
+.home .setContainer .homeText .subTitle {
+  color: var(--blackColor);
+  opacity: 1;
+  font-size: 17px;
+  font-weight: 400;
+  max-width: 70%;
+  text-align: center;
+  margin: auto;
+  padding-bottom: 0.9rem;
+}
+.home .setContainer .homeCard {
+  width: 80%;
+  border-radius: 1rem;
+  padding: 2rem;
+  background: var(--whiteColorDeam);
+  position: relative;
+  gap: 1rem;
+  justify-content: center;
+  bottom: -35%;
+  transform: translate(-50%);
+  left: 50%;
+  box-shadow: 0 2px 8px 4px rgba(178, 178, 178, 0.45);
+}
+@media screen and (min-width: 480px) {
+  .home .home .setContainer .homeCard {
+    bottom: -100px;
+    width: 90%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 556px) {
+  .home .home .setContainer .homeText .title {
+    font-size: 2.5rem;
+  }
+  .home .home .setContainer .homeText .subTitle {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 720px) {
+  .home .home .setContainer .homeCard {
+    bottom: -20%;
+  }
+}
+@media screen and (min-width: 960px) {
+  .home .home .setContainer .homeText {
+    padding: 1rem 10rem;
+  }
+  .home .home .setContainer .homeText .title {
+    font-size: 3.5rem;
+    margin: auto;
+    line-height: 4rem;
+    font-size: 2.5rem;
+  }
+  .home .home .setContainer .homeText .subTitle {
+    width: 70%;
+  }
+}/*# sourceMappingURL=home.css.map */

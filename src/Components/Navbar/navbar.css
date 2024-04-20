@@ -20,8 +20,7 @@
   background: var(--whiteColorDeam);
   width: 100%;
   padding: 1rem;
-  z-index: 1200;
-  box-shadow: 40px 20px 10px rgba(154, 202, 253, 0.292);
+  z-index: 1000;
 }
 .header .logo {
   color: var(--Color);
@@ -56,7 +55,6 @@
     padding: 1rem;
     transform: translate(-50%);
     z-index: 2000;
-    box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
     transition: 0.5 ease-in-out;
   }
   .header .navBar .navLists {
@@ -135,7 +133,7 @@
   color: var(--SecondaryColor);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 760px) {
   .toggleNavbar, .closeNavbar {
     display: none;
   }

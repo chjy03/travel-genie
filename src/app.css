@@ -82,6 +82,16 @@ input{
 }
 
 body{
-    background: var(--bodyColor);
+    background: transparent;
+    /* background: var(--whiteColorDeam); */
 }
+
+Footer{
+    padding: 40px;
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+
 

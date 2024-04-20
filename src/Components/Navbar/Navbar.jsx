@@ -4,13 +4,19 @@ import { MdOutlineTravelExplore } from 'react-icons/md';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { TbGridDots } from 'react-icons/tb';
 import { IoPersonCircle } from 'react-icons/io5';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
-    const [active, setActive] = useState(false); // Use boolean state to toggle
+    const [active, setActive] = useState(false);
 
     // Function to toggle navBar visibility
     const toggleNav = () => {
-        setActive(!active); // Toggle the state between true and false
+        setActive(!active);
+    };
+
+    // Function to close navBar when a nav item is clicked
+    const closeNav = () => {
+        setActive(false);
     };
 
     return (
@@ -18,45 +24,45 @@ const Navbar = () => {
             <header className="header flex">
 
                 <div className="logoDiv">
-                    <a href="/" className='logo flex'>
+                    <Link to="/" className='logo flex'>
                         <h1><MdOutlineTravelExplore className="icon" /> TravelGenie.</h1>
-                    </a>
+                    </Link>
                 </div>
 
                 <div className={`navBar ${active ? 'activeNavbar' : ''}`}>
                     <ul className="navLists flex">
                         <li className="navItem">
-                            <a href="/home" className="navLink">
+                            <NavLink to="/home" className="navLink" onClick={closeNav}>
                                 Home
-                            </a>
+                            </NavLink>
                         </li>
 
                         <li className="navItem">
-                            <a href="/packages" className="navLink">
+                            <NavLink to="/packages" className="navLink" onClick={closeNav}>
                                 Packages
-                            </a>
+                            </NavLink>
                         </li>
 
                         <li className="navItem">
-                            <a href="/planning" className="navLink">
+                            <NavLink to="/planning" className="navLink" onClick={closeNav}>
                                 Planning
-                            </a>
+                            </NavLink>
                         </li>
 
                         <li className="navItem">
-                            <a href="/payment" className="navLink">
+                            <NavLink to="/payment" className="navLink" onClick={closeNav}>
                                 Payment
-                            </a>
+                            </NavLink>
                         </li>
                         
                         <li className="navItem">
-                            <a href="/forum" className="navLink">
+                            <NavLink to="/forum" className="navLink" onClick={closeNav}>
                                 Forum
-                            </a>
+                            </NavLink>
                         </li>
 
                         <button className='btn'> 
-                            <a href="/">BOOK NOW</a>
+                            <Link to="/signUp" onClick={closeNav}>SIGN UP</Link>
                         </button>
 
                         <li className="navItem" onClick={toggleNav}>
