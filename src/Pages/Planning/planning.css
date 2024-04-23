@@ -14,9 +14,6 @@
 }
 
 .planning {
-  width: 100%;
-  position: relative;
-  display: grid;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -91,7 +88,6 @@
   border: 1px solid #afafaf;
   border-radius: 5px;
   padding: 0.5rem;
-  font-size: medium;
 }
 .planning .container .sideContainer .selectedDest .selectedList .selectedItem span {
   margin-right: 1rem;

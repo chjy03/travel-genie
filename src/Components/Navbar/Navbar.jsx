@@ -8,6 +8,9 @@ import logoImage from '../../Assets/logo.jpg';
 
 const Navbar = () => {
     const [active, setActive] = useState(false);
+    // const [showDropdown, setShowDropdown] = useState(false); // State for profile dropdown
+    // const [showManagePackageDropdown, setShowManagePackageDropdown] = useState(false); // State for manage package dropdown
+    const [showPackageDropdown, setShowPackageDropdown] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false); // State for profile dropdown
     const [showManagePackageDropdown, setShowManagePackageDropdown] = useState(false); // State for manage package dropdown
 
@@ -45,21 +48,24 @@ const Navbar = () => {
                             </NavLink>
                         </li>
 
-                        <li className="navItem">
-                            {/* "Package" NavLink with Manage Packages dropdown */}
-                            <div className="navLink" onClick={toggleManagePackageDropdown}>
-                                Package
-                                {showManagePackageDropdown && (
-                                    <ul className="dropdownMenu">
-                                        <li>
-                                            <NavLink to="/manage-packages" onClick={closeNav} className='dropdownItem'>
-                                                Package Form
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                )}
-                                <span className="dropdownArrow"></span>
-                            </div>
+              
+                        <li 
+                            className="navItem"
+                            onMouseEnter={() => setShowPackageDropdown(true)}
+                            onMouseLeave={() => setShowPackageDropdown(false)}
+                        >
+                            <NavLink to="/package" className="navLink" onClick={closeNav}>
+                                Packages
+                            </NavLink>
+                            {showPackageDropdown && (
+                                <ul className="dropdown">
+                                    <li>
+                                        <NavLink to="/manage-package" className="navLink" onClick={closeNav}>
+                                            Manage Travel Packages
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
 
                         <li className="navItem">
