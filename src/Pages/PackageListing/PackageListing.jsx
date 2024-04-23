@@ -87,6 +87,9 @@ import './packageListing.css';
 import img1 from '../../Assets/img1.jpg';
 import img2 from '../../Assets/img2.jpg';
 import img3 from '../../Assets/img3.jpg';
+// import img3 from '../../Assets/pink mosque.jpeg';
+// import img2 from '../../Assets/image.png';
+// import img1 from '../../Assets/imgKL.jpg';
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
