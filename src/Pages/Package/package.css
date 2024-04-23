@@ -23,7 +23,7 @@
 }
 .package .overlay {
   position: absolute;
-  height: 40%;
+  height: 42%;
   width: 100%;
   background: rgb(120, 137, 143);
   top: 0;
@@ -33,7 +33,7 @@
 }
 .package video {
   position: absolute;
-  height: 40%;
+  height: 42%;
   width: 100%;
   top: 0;
   bottom: 0;
@@ -60,6 +60,7 @@
   padding: 3rem 0 1rem;
   position: relative;
   z-index: 2;
+  color: var(--whiteColor);
 }
 .package .packageContent .textDiv .smallText {
   font-size: 13px;
