@@ -71,7 +71,7 @@ const Payment = () => {
 
   const handleCheckout = () => {
     // Redirect to the payment page
-    window.location.href = 'card.html';
+    window.location.href = 'Card.html';
   };
 
   // Use useEffect to simulate componentDidMount

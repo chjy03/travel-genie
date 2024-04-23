@@ -7,6 +7,7 @@ import Home from './Pages/Home/Home';
 import Packages from './Pages/Packages/Packages';
 import Planning from './Pages/Planning/Planning';
 import Payment from './Pages/Payment/Payment';
+import Card from './Pages/Card/Card';
 import Forum from './Pages/Forum/Forum';
 import SignUp from './Pages/GeneralModule/SignUp/SignUp';
 import ForgotPassword from './Pages/GeneralModule/ForgotPassword/ForgotPassword';
@@ -23,6 +24,7 @@ const App = () => {
                     <Route path="/packages" element={<Packages />} />
                     <Route path="/planning" element={<Planning />} />
                     <Route path="/payment" element={<Payment />} />
+                    <Route path="/card" element={<Card />} />
                     <Route path="/forum" element={<Forum />} />
                     <Route path="/signUp" element={<SignUp/>} />
                     <Route path="/forgotPassword" element={<ForgotPassword/>} />
