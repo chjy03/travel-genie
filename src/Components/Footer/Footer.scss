@@ -30,9 +30,12 @@ body {
 .footer{
     background: var(--bodyColor);
     padding: 2rem 0;
-    position: relative;
+    position: sticky;
     text-align: center;
     width: 100%;
+    // left: 50%;
+    // transform: translateX(-50%);
+    // bottom: 0;
 
     .setContainer{
         gap: 1.5rem;

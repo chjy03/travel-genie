@@ -1,0 +1,208 @@
+:root{
+    --PrimaryColor:hsl(199,100%,33%);
+    --SecondaryColor:hsl(187,85%,43%);
+    --gradientColor:linear-gradient(to right,hsl(187,85%,43%),hsl(199,100%,33%));
+    --whiteColor:hsl(0,0%,100%);
+    --blackColor:hsl(201,33%,16%);
+    --textColor:hsl(240,4%,36%);
+    --whiteColorDeam:hsl(0,0%,93%);
+    --greyText:rgb(190,190,190);
+    --inputColor:rgb(239,239,239);
+    --bodyColor:rgb(240,240,246);
+    --cardBG:rgb(225,225,235);
+}
+
+.signUp{
+    width: 600px;
+    position: relative;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 8rem;
+    padding-bottom: 55rem;
+    height: 900px;
+
+    .homeCard{
+        width: 600px;
+        border-radius: 1rem;
+        background: var(--whiteColor);
+        position: relative;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+
+    .title{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 9px;
+        width: 100%;
+        margin-top: 30px;
+        padding-top: 2rem;
+        position: relative;
+    }
+
+    .text {
+        position: relative;
+        font-size: 28px; 
+        font-weight: 700;
+    }
+
+    .underline{
+        width: 61px;
+        height: 6px;
+        background: var(--SecondaryColor);
+        border-radius: 9px;
+    }
+
+    .inputs{
+        margin-top: 55px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .input{
+        display: flex;
+        align-items: center;
+        margin: auto;
+        width: 480px;
+        height: 80px;
+        border-radius: 6px;
+        background: hsl(240,4%,89%);
+
+        .inputIcon{
+            margin: 0px 30px;
+            font-size: 25px;
+        }
+    
+        input{
+            height: 50px;
+            width: 400px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #797979;
+            font-size: 19px;
+        }
+
+        label {
+            font-size: 19px;
+            color: var(--textColor);
+            transform: translateX(28px);
+        }
+        
+        select {
+            height: 50px;
+            width: 50%; /* Full width within the container */
+            font-size: 19px;
+            padding: 0 15px;
+            background: #f5f5f5; /* Light background color */
+            border: 2px solid var(--cardBG); /* Light border */
+            border-radius: 6px;
+            color: var(--textColor); /* Text color */
+            outline: none;
+            transform: translateX(40px);
+            transition: border-color 0.3s ease;
+        }
+        
+        select:focus {
+            border-color: var(--SecondaryColor); /* Highlight border color on focus */
+        }
+        
+
+        option {
+            background: var(--whiteColor);
+            color: #797979;
+            font-size: 19px;
+        }
+
+        select::after {
+            content: '\25BC'; /* Unicode character for downward arrow */
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+    }
+
+    .forgot-password{
+        padding-left: 15px;
+        margin-top: 29px;
+        color: #797979;
+        font-size: 18px;
+
+        span{
+            color: #4c00b4;
+            cursor: pointer;
+        }
+    }
+
+    .submit-container{
+        display: flex;
+        gap: 30px;
+        margin: 60px auto;
+
+        .submit{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 220px;
+            height: 59px;
+            background: var(--SecondaryColor);
+            border-radius: 50px;
+            font-size: 19px;
+            font-weight: 700;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+        }
+
+        .gray{
+            color: var(--textColor);
+            background: hsl(240,4%,89%);
+        }
+
+        
+       
+        
+        
+        
+    }
+}
+
+@media screen and (min-width: 448px){
+    .home{
+        .setContainer{
+            .homeCard{
+                bottom: -100px;
+                width: 50%;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 648px){
+    .home{
+        .setContainer{
+            .homeCard{
+                bottom: -20%;
+            }
+        }
+    }
+}
+    
+
+    
+
+
+    
+
+

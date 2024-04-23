@@ -30,7 +30,7 @@ body {
 .footer {
   background: var(--bodyColor);
   padding: 2rem 0;
-  position: relative;
+  position: sticky;
   text-align: center;
   width: 100%;
 }
@@ -143,4 +143,4 @@ body {
     padding: 2rem;
     grid-template-columns: repeat(4, 1fr);
   }
-}/*# sourceMappingURL=footer.css.map */
+}/*# sourceMappingURL=Footer.css.map */

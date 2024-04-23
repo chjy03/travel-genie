@@ -58,11 +58,12 @@
         padding-left: .4rem;
     }
 
+
     @media screen and (max-width: 768px){
         .navBar{
             position: absolute;
             background: var(--whiteColorDeam);
-            height: max-content;
+            height: max-Menu;
             width: 80%;
             border-radius: 1rem;
             top: -500rem;
@@ -75,7 +76,7 @@
 
             .navLists{
                 flex-direction: column;
-                justify-content: center;
+                justify-Menu: center;
                 width: 100%;
                 margin: auto;
                 padding: .5rem 0;
@@ -95,7 +96,7 @@
                             color: var(--SecondaryColor);
                             
                             &::after {
-                                content: "";
+                                Menu: "";
                                 width: 20%;
                                 height: 2px;
                                 background: var(--SecondaryColor);
@@ -125,7 +126,7 @@
                 }
 
                 .personIcon{
-                    margin-left: 1rem;
+                    margin-left: .1rem;
                     font-size: 55px;
                     color: var(--PrimaryColor);
                     cursor: pointer;
@@ -135,7 +136,7 @@
                     margin-left: .11rem;
                     &:hover {
                         color: var(--SecondaryColor); 
-                    }
+                    }                
                 }
             }
 
@@ -166,7 +167,85 @@
     }
 }
 
-@media screen and (min-width: 760px) {
+.dropdownMenu{
+    position: absolute;
+    top: 42px;
+    right: 0px;
+    width: 180px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    border: 1px solid gray;
+}
+
+.dropdownMenu .btn{
+    margin-top: 80rem;
+}
+
+.dropdownMenu .btn a {
+    color: rgb(255, 255, 255);
+    transition: color 0.15s ease-in-out;
+}
+
+.dropdownMenu .btn:hover a {
+    color: rgb(253, 249, 56);
+}
+
+.dropdownMenu li {
+    margin-bottom: 15px; /* Add bottom margin between each dropdown item */
+}
+
+.dropdownMenu a{
+    padding: 20px 20px;
+    text-decoration: none;
+    color: var(--textColor);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    left: 10px;
+    top: 7px;
+}
+
+.dropdownMenu a:hover,
+.dropdownMenu button:hover {
+    color: var(--SecondaryColor);
+    background-color: #f5f5f5;
+    font-size: 0.93rem;
+}
+
+.dropdownItem {
+    position: relative; /* Position relative for absolute positioning of ::after */
+    padding-right: 20px; /* Add space to the right for the arrow */
+    color: var(--textColor); /* Text color */
+    font-size: 14px; /* Font size */
+    line-height: 1.4; /* Adjust line height for vertical centering */
+    transition: color 0.5s ease; 
+}
+
+.dropdownItem::after {
+    content: '>'; /* Use right-pointing arrow as content */
+    position: absolute; /* Position the arrow absolutely */
+    top: 50%; /* Vertically center the arrow */
+    left: 130px; /* Align the arrow to the right edge */
+    transform: translateY(-50%); /* Center the arrow vertically */
+    color: var(--textColor); /* Color of the arrow */
+    font-size: 18px;
+}
+
+.dropdownItem:hover::after {
+    color: var(--SecondaryColor); /* Change arrow color on hover */
+    font-size: 20px;
+}
+
+
+
+
+
+
+@media screen and (min-width: 750px) {
     .toggleNavbar,.closeNavbar{
         display: none;
     }
@@ -178,7 +257,7 @@
             .navLists {
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-Menu: center;
                 flex-direction: row;
 
                 .navItem {
@@ -196,7 +275,7 @@
                             color: var(--SecondaryColor);
         
                             &::after {
-                                content: "";
+                                Menu: "";
                                 width: 70%;
                                 height: 2px;
                                 background: var(--SecondaryColor);
@@ -227,7 +306,14 @@
 
             .personIcon{
                 margin-left: 1rem;
+
+                .dropdownMenu{
+                    top: 62px;
+                    right: 10px;
+                }
             }
+
+            
         }
     }   
 }
@@ -242,11 +328,48 @@
             }
         }
     }
+
+    .dropdownMenu{
+        top: 62px;
+        right: 5px;
+    }
+
+    .dropdownMenu::before{
+        content: '';
+        position: absolute;
+        top: -0.7rem;
+        right: 1.1rem;
+        width: 20px;
+        height: 20px;
+        transform: rotate(45deg);
+        background: var(--whiteColor);
+        border-left: 1px solid gray;
+        border-top: 1px solid gray;
+    }
+
 }
 
 @media screen and (min-width: 1240px) {
     .header{
         padding: 1rem 8.5rem;
+    }
+
+    .dropdownMenu{
+        top: 62px;
+        right: 5px;
+    }
+
+    .dropdownMenu::before{
+        content: '';
+        position: absolute;
+        top: -0.7rem;
+        right: 1.1rem;
+        width: 20px;
+        height: 20px;
+        transform: rotate(45deg);
+        background: var(--whiteColor);
+        border-left: 1px solid gray;
+        border-top: 1px solid gray;
     }
 }
 

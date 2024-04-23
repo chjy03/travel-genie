@@ -8,7 +8,9 @@ import Packages from './Pages/Packages/Packages';
 import Planning from './Pages/Planning/Planning';
 import Payment from './Pages/Payment/Payment';
 import Forum from './Pages/Forum/Forum';
-import SignUp from './Pages/GeneralModule/SignUp';
+import SignUp from './Pages/GeneralModule/SignUp/SignUp';
+import ForgotPassword from './Pages/GeneralModule/ForgotPassword/ForgotPassword';
+import Profile from './Pages/GeneralModule/Profile/Profile';
 
 const App = () => {
     return (
@@ -23,6 +25,8 @@ const App = () => {
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/forum" element={<Forum />} />
                     <Route path="/signUp" element={<SignUp/>} />
+                    <Route path="/forgotPassword" element={<ForgotPassword/>} />
+                    <Route path="/profile" element={<Profile/>} />
                 </Routes>
                 <Footer />
             </div>
