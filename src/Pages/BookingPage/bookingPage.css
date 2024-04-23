@@ -42,4 +42,27 @@
   font-size: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
+}
+.bookingPage form .policyCheck {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.bookingPage form .policyCheck input[type=checkbox] {
+  margin-right: 10px;
+}
+.bookingPage form .policyDetails {
+  display: block;
+}
+.bookingPage form .policyDetails p {
+  margin-top: 20px;
+  font-size: 14px;
+}
+.bookingPage form .policyDetails.hidden {
+  display: none;
+}
+.bookingPage form span {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }/*# sourceMappingURL=bookingPage.css.map */
