@@ -1,0 +1,127 @@
+:root {
+  --PrimaryColor: hsl(199,100%,33%);
+  --SecondaryColor: hsl(187,85%,43%);
+  --gradientColor: linear-gradient(to right,hsl(187,85%,43%),hsl(199,100%,33%));
+  --whiteColor: hsl(0,0%,100%);
+  --blackColor: hsl(201,33%,16%);
+  --textColor: hsl(240,4%,36%);
+  --whiteColorDeam: hsl(0,0%,93%);
+  --greyText: rgb(190,190,190);
+  --inputColor: rgb(239,239,239);
+  --bodyColor: rgb(240,240,246);
+  --cardBG: rgb(225,225,235);
+}
+
+.package {
+  width: 100%;
+  position: relative;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  overflow: hidden;
+}
+.package .overlay {
+  position: absolute;
+  height: 40%;
+  width: 100%;
+  background: rgb(120, 137, 143);
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  mix-blend-mode: hard-light;
+}
+.package video {
+  position: absolute;
+  height: 40%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: 0;
+}
+.package .packageContent {
+  width: 100%;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 4rem 2rem 2rem;
+  display: block;
+  row-gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  margin: auto;
+  color: var(--blackColor);
+  z-index: 2;
+  position: relative;
+}
+.package .packageContent .textDiv {
+  padding: 3rem 0 1rem;
+  position: relative;
+  z-index: 2;
+}
+.package .packageContent .textDiv .smallText {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.package .packageContent .textDiv .title {
+  position: relative;
+  font-size: 1.8rem;
+}
+.package .packageContent .cardDiv {
+  position: relative;
+  padding: 1.5rem 1.5rem;
+  background: var(--whiteColor);
+  border-radius: 10px;
+  gap: 1rem;
+}
+.package .packageContent .cardDiv label {
+  display: block;
+  color: var(--textColor);
+  padding-bottom: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.package .packageContent .cardDiv .label_total {
+  justify-content: space-between;
+  align-items: center;
+}
+.package .packageContent .cardDiv .label_total .total {
+  color: var(--textColor);
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+.package .packageContent .cardDiv .input {
+  height: 40px;
+  padding: 0 1rem;
+  background: var(--inputColor);
+  border-radius: 3rem;
+}
+.package .packageContent .cardDiv .input input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 500;
+}
+.package .packageContent .cardDiv .input input::-moz-placeholder {
+  font-size: 13px;
+}
+.package .packageContent .cardDiv .input input::placeholder {
+  font-size: 13px;
+}
+.package .packageContent .cardDiv .input .icon {
+  font-size: 18px;
+  color: var(--PrimaryColor) !important;
+  margin-left: 10px;
+}
+.package .packageContent .cardDiv .input .input[type=range] {
+  background: blue;
+}
+@media screen and (max-width: 768px) {
+  .package .packageContent {
+    padding: 2rem 1rem 1rem;
+  }
+}/*# sourceMappingURL=package.css.map */
