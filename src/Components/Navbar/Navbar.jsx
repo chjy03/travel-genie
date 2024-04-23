@@ -9,6 +9,7 @@ import logoImage from '../../Assets/logo.jpg';
 
 const Navbar = () => {
     const [active, setActive] = useState(false);
+    const [showPackageDropdown, setShowPackageDropdown] = useState(false);
 
     // Function to toggle navBar visibility
     const toggleNav = () => {
@@ -39,10 +40,23 @@ const Navbar = () => {
                             </NavLink>
                         </li>
 
-                        <li className="navItem">
-                            <NavLink to="/packages" className="navLink" onClick={closeNav}>
+                         <li 
+                            className="navItem"
+                            onMouseEnter={() => setShowPackageDropdown(true)}
+                            onMouseLeave={() => setShowPackageDropdown(false)}
+                        >
+                            <NavLink to="/package" className="navLink" onClick={closeNav}>
                                 Packages
                             </NavLink>
+                            {showPackageDropdown && (
+                                <ul className="dropdown">
+                                    <li>
+                                        <NavLink to="/manage-package" className="navLink" onClick={closeNav}>
+                                            Manage Travel Packages
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
 
                         <li className="navItem">
