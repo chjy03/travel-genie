@@ -1,0 +1,68 @@
+.managePackage {
+  width: 60%;
+  margin: auto;
+  padding: 2rem;
+  padding-top: 120px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.managePackage h2 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  color: var(--PrimaryColor);
+}
+.managePackage form {
+  display: flex;
+  flex-direction: column;
+}
+.managePackage form div {
+  margin-bottom: 1rem;
+}
+.managePackage form div label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.managePackage form div input[type=text],
+.managePackage form div input[type=number],
+.managePackage form div input[type=url],
+.managePackage form div input[type=date],
+.managePackage form div textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+.managePackage form div input[type=text]:focus,
+.managePackage form div input[type=number]:focus,
+.managePackage form div input[type=url]:focus,
+.managePackage form div input[type=date]:focus,
+.managePackage form div textarea:focus {
+  border-color: var(--PrimaryColor);
+  outline: none;
+}
+.managePackage form div textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.managePackage form button[type=submit] {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--PrimaryColor);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.managePackage form button[type=submit]:hover {
+  background-color: var(--SecondaryColor);
+}
+@media screen and (max-width: 768px) {
+  .managePackage {
+    width: 90%;
+  }
+}/*# sourceMappingURL=managePackage.css.map */

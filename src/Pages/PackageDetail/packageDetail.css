@@ -1,0 +1,66 @@
+.packageDetail {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid transparent; /* Transparent border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for 3D effect */
+}
+.packageDetail .detailHeader {
+  text-align: center;
+}
+.packageDetail .detailHeader img {
+  max-width: 100%;
+  height: auto;
+  padding-top: 90px;
+  border-radius: 10px;
+}
+.packageDetail .detailHeader h2 {
+  margin: 20px 0 10px;
+}
+.packageDetail .detailHeader .location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.packageDetail .detailHeader .location .icon {
+  margin-right: 5px;
+  font-size: 20px;
+}
+.packageDetail .detailContent p {
+  margin-bottom: 20px;
+}
+.packageDetail .detailContent .price {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.packageDetail .detailContent .itinerary {
+  margin-top: 20px;
+}
+.packageDetail .detailContent .itinerary h4 {
+  margin-bottom: 10px;
+}
+.packageDetail .detailContent .itinerary ul {
+  list-style: none;
+  padding-left: 0;
+}
+.packageDetail .detailContent .itinerary ul li {
+  margin-bottom: 10px;
+}
+.packageDetail .detailContent .bookNowBtn {
+  display: block;
+  text-align: center;
+  background-color: var(--PrimaryColor);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+.packageDetail .detailContent .bookNowBtn:hover {
+  background-color: var(--SecondaryColor);
+}/*# sourceMappingURL=packageDetail.css.map */

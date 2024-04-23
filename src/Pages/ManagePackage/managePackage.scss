@@ -1,0 +1,73 @@
+.managePackage {
+  width: 60%;
+  margin: auto;
+  padding: 2rem;
+  padding-top: 120px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  h2 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: var(--PrimaryColor);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    div {
+      margin-bottom: 1rem;
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      input[type='text'],
+      input[type='number'],
+      input[type='url'],
+      input[type='date'],
+      textarea {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+        box-sizing: border-box;
+
+        &:focus {
+          border-color: var(--PrimaryColor);
+          outline: none;
+        }
+      }
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+    }
+
+    button[type='submit'] {
+      width: 100%;
+      padding: 0.5rem;
+      background-color: var(--PrimaryColor);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: (var(--SecondaryColor));
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
+}
+
