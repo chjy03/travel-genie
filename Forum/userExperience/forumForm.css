@@ -1,0 +1,35 @@
+.forum-form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #f9f9f9;
+  width: 100%;
+}
+
+.forum-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.forum-form-container label {
+  margin-bottom: 10px;
+}
+
+.forum-form-container input[type=text],
+.forum-form-container textarea,
+.forum-form-container input[type=file] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btnn subtn {
+  margin-left: 5px;
+}
+
+.btnn cancelbtn {
+  margin-right: 5px;
+}/*# sourceMappingURL=forumForm.css.map */
