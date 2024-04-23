@@ -10,6 +10,7 @@
   --inputColor:rgb(239,239,239);
   --bodyColor:rgb(240,240,246);
   --cardBG:rgb(225,225,235);
+  --cardHover:rgb(225,225,255);
 }
 
 .planning {
@@ -19,9 +20,160 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  padding: 3rem;
+  padding: 5rem;
 }
 .planning h1 {
-  padding-top: 6rem;
   position: relative;
+  font-size: 2.5rem;
+}
+.planning .pageTitle {
+  margin-bottom: 1rem;
+}
+.planning .pageTitle .title {
+  position: relative;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+  padding-top: 3rem;
+  color: var(--blackColor);
+  z-index: 1;
+}
+.planning .pageTitle .pageTitleTagLine {
+  position: relative;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+  font-size: medium;
+  color: var(--textColor);
+}
+.planning .container {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Search bar width is auto, card list takes remaining space */
+  align-items: start;
+}
+.planning .container .sideContainer {
+  max-width: 15rem;
+  display: flex;
+  flex-direction: column;
+}
+.planning .container .sideContainer .filters {
+  display: flex;
+  flex-direction: column;
+}
+.planning .container .sideContainer .filters .search-bar {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.planning .container .sideContainer .filters .filter-checkbox {
+  display: inline-block;
+  margin-top: 0.5rem;
+  margin-right: 1rem; /* Adjust spacing between filter checkboxes */
+}
+.planning .container .sideContainer .selectedDest {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.planning .container .sideContainer .selectedDest .categoryTitle {
+  margin-top: 3rem;
+}
+.planning .container .sideContainer .selectedDest .selectedList {
+  margin-top: 1rem;
+}
+.planning .container .sideContainer .selectedDest .selectedList .selectedItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  border: 1px solid #afafaf;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: medium;
+}
+.planning .container .sideContainer .selectedDest .selectedList .selectedItem span {
+  margin-right: 1rem;
+  flex-grow: 1; /* Allow the name to take up remaining space */
+  overflow: hidden; /* Prevent text from overflowing */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+.planning .container .sideContainer .selectedDest .selectedList .selectedItem .iconRemove {
+  margin-left: 1rem;
+  font-size: medium;
+}
+.planning .container .sideContainer .selectedDest .btn {
+  margin-top: 1rem;
+}
+.planning .container .sideContainer .selectedDest .btn .btnText {
+  text-align: center;
+}
+.planning .container .secContent {
+  display: flex; /* Use flex display */
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  justify-content: center;
+  gap: 1.5rem;
+}
+.planning .container .secContent .singleDestination {
+  max-width: 250px;
+  height: 100%;
+  margin-left: 1rem;
+  display: grid;
+  row-gap: 10px;
+  border-radius: 10px;
+  align-items: center;
+  background: var(--cardBG);
+  box-shadow: 0 2px 4px rgba(140, 140, 141, 0.549);
+  overflow: hidden;
+}
+.planning .container .secContent .singleDestination:hover {
+  background: var(--cardHover);
+  box-shadow: 1 4px 4px rgba(140, 140, 114, 0.549);
+  transition: 0.3s ease;
+}
+.planning .container .secContent .singleDestination .imageDiv {
+  height: 180px;
+  width: 100%;
+  overflow: hidden;
+}
+.planning .container .secContent .singleDestination .imageDiv img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.planning .container .secContent .singleDestination .imageDiv:hover img {
+  transform: scale(1.1);
+}
+.planning .container .secContent .singleDestination .cardInfo {
+  padding: 1rem;
+}
+.planning .container .secContent .singleDestination .cardInfo .destTitle {
+  color: var(--blackColor);
+  font-size: 1.25rem;
+  max-width: 220px; /* Adjust the width as needed */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for long titles */
+  white-space: nowrap; /* Prevent line breaks */
+}
+.planning .container .secContent .singleDestination .cardInfo .continent {
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+.planning .container .secContent .singleDestination .cardInfo .continent .locationIcon {
+  color: var(--textColor);
+  font-size: 18px;
+}
+.planning .container .secContent .singleDestination .cardInfo .continent .name {
+  color: var(--textColor);
+}
+.planning .container .secContent .singleDestination .cardInfo .btn {
+  color: var(--whiteColor);
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }/*# sourceMappingURL=planning.css.map */
