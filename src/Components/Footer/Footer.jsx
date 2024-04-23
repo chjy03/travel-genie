@@ -24,7 +24,7 @@ const Footer = () => {
                             Helpful Links
                         </span>
                         <li>
-                            <a href="#">Support</a>
+                            <a href="#">Report Problem</a>
                         </li>
                         <li>
                             <a href="#">Travel & Conditions</a>

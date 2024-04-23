@@ -96,25 +96,3 @@ const Payment = () => {
 };
 
 export default Payment;
-
-// const Payment = () => {
-//     return (
-        // <section className='payment'>
-        //     <h1>Payment</h1>
-        //     <div class="container">
-        //         <div class="packages">
-        //             <h2>Travel Packages</h2>
-        //             <ul id="booking-list"></ul>
-        //         </div>
-        //         <div class="total-cost">
-        //             <h2>Total Cost</h2>
-        //             <p id="total-cost-value">$0.00</p>
-        //             <button id="checkout-btn">Checkout</button>
-        //         </div>
-        //     </div>
-        // </section>
-        
-//     )
-// }
-
-// export default Payment;

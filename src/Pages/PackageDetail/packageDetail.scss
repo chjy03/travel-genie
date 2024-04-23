@@ -1,0 +1,84 @@
+.packageDetail {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid transparent; /* Transparent border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for 3D effect */
+
+  
+    .detailHeader {
+      text-align: center;
+  
+      img {
+        max-width: 100%;
+        height: auto;
+        padding-top: 90px;
+        border-radius: 10px;
+      }
+  
+      h2 {
+        margin: 20px 0 10px;
+      }
+
+      .location {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+  
+        .icon {
+          margin-right: 5px;
+          font-size: 20px;
+        }
+      }
+    }
+  
+    .detailContent {
+      p {
+        margin-bottom: 20px;
+      }
+  
+      .price {
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+  
+      .itinerary {
+        margin-top: 20px;
+  
+        h4 {
+          margin-bottom: 10px;
+        }
+  
+        ul {
+          list-style: none;
+          padding-left: 0;
+  
+          li {
+            margin-bottom: 10px;
+          }
+        }
+      }
+  
+      .bookNowBtn {
+        display: block;
+        text-align: center;
+        background-color: var(--PrimaryColor);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 20px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: var(--SecondaryColor);
+        }
+      }
+    }
+  }
+  
+  

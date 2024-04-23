@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './navbar.css';
-import { MdOutlineTravelExplore } from 'react-icons/md';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { TbGridDots } from 'react-icons/tb';
 import { IoPersonCircle } from 'react-icons/io5';
@@ -9,6 +8,7 @@ import logoImage from '../../Assets/logo.jpg';
 
 const Navbar = () => {
     const [active, setActive] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false); // State for dropdown menu
 
     // Function to toggle navBar visibility
     const toggleNav = () => {
@@ -20,14 +20,19 @@ const Navbar = () => {
         setActive(false);
     };
 
+    // Function to toggle dropdown menu visibility
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
+    };
+
     return (
         <section className='navBarSection'>
             <header className="header flex">
 
                 <div className="logoDiv">
                     <Link to="/" className='logo flex'>
-                    <img src={logoImage} alt="TravelGenie Logo" className="icon" />
-                    <h1>TravelGenie.</h1>
+                        <img src={logoImage} alt="TravelGenie Logo" className="icon" />
+                        <h1>TravelGenie.</h1>
                     </Link>
                 </div>
 
@@ -56,7 +61,7 @@ const Navbar = () => {
                                 Payment
                             </NavLink>
                         </li>
-                        
+
                         <li className="navItem">
                             <NavLink to="/forum" className="navLink" onClick={closeNav}>
                                 Forum
@@ -67,8 +72,17 @@ const Navbar = () => {
                             <Link to="/signUp" onClick={closeNav}>SIGN UP</Link>
                         </button>
 
-                        <li className="navItem" onClick={toggleNav}>
+                        <li className="navItem" onClick={toggleDropdown}>
                             <IoPersonCircle className='personIcon'/>
+                            {/* Conditional rendering for dropdown menu */}
+                            {showDropdown && (
+                                <ul className="dropdownMenu">
+                                    <li><NavLink to="/profile" onClick={closeNav} className='dropdownItem'>My Profile</NavLink></li>
+                                    {/* <li><NavLink to="/settings" onClick={closeNav} className='dropdownItem'>Settings</NavLink></li> */}
+                                    <li><NavLink to="/logout" onClick={closeNav} className='dropdownItem'>Logout</NavLink></li>
+                                </ul>
+                            )}
+                            <span className="dropdownArrow"></span>
                         </li>
                         
                     </ul>
