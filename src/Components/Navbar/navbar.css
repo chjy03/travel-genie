@@ -1,15 +1,15 @@
 :root {
-  --PrimaryColor:hsl(199,100%,33%);
-  --SecondaryColor:hsl(187,85%,43%);
-  --gradientColor:linear-gradient(to right,hsl(187,85%,43%),hsl(199,100%,33%));
-  --whiteColor:hsl(0,0%,100%);
-  --blackColor:hsl(201,33%,16%);
-  --textColor:hsl(240,4%,36%);
-  --whiteColorDeam:hsl(0,0%,93%);
-  --greyText:rgb(190,190,190);
-  --inputColor:rgb(239,239,239);
-  --bodyColor:rgb(240,240,246);
-  --cardBG:rgb(225,225,235);
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --gradientColor: linear-gradient(to right, hsl(187, 85%, 43%), hsl(199, 100%, 33%));
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(225, 225, 235);
 }
 
 .header {
@@ -34,14 +34,6 @@
   color: var(--PrimaryColor);
   transform: translateY(5px);
 }
-.header .personIcon {
-  font-size: 40px;
-  color: var(--PrimaryColor);
-  transform: translateY(4px);
-}
-.header .personIcon:hover {
-  color: var(--SecondaryColor);
-}
 .header .logo img {
   width: 30px; /* Set the width of the logo image */
   height: 30px; /* Set the height of the logo image */
@@ -50,8 +42,16 @@
      object-fit: cover; /* Ensure the image covers the entire circular area */
   margin-bottom: 9px;
 }
-.header h1 {
+.header .logo h1 {
   padding-left: 0.4rem;
+}
+.header .personIcon {
+  font-size: 40px;
+  color: var(--PrimaryColor);
+  transform: translateY(4px);
+}
+.header .personIcon:hover {
+  color: var(--SecondaryColor);
 }
 @media screen and (max-width: 768px) {
   .header .navBar {
@@ -100,6 +100,32 @@
     left: 50%;
     transition: width 0.15s ease;
   }
+  .header .navBar .navLists .navItem .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--whiteColor);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+    width: 100%;
+    padding: 0.5rem 0;
+    z-index: 999;
+    background-color: var(--whiteColor);
+    border: 1px solid gray;
+  }
+  .header .navBar .navLists .navItem .dropdown li {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+  .header .navBar .navLists .navItem .dropdown .navLink {
+    color: var(--textColor);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  .header .navBar .navLists .navItem .dropdown .navLink:hover {
+    color: var(--SecondaryColor);
+  }
   .header .navBar .navLists .btn {
     margin-top: 0.8rem;
   }
@@ -140,7 +166,7 @@
   font-size: 25px;
   color: var(--PrimaryColor);
 }
-.header .toggleNavbar:hover.icon {
+.header .toggleNavbar:hover .icon {
   color: var(--SecondaryColor);
 }
 
@@ -166,7 +192,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     position: relative;
-    transition: color 0.3s ease; /* Add transition for color change */
+    transition: color 0.3s ease;
   }
   .header .navBar .navLists .navItem .navLink:hover {
     color: var(--SecondaryColor);
@@ -194,6 +220,10 @@
   }
   .header .navBar .personIcon {
     margin-left: 1rem;
+  }
+  .header .navBar .dropdown {
+    top: calc(100% + 5px);
+    left: 0;
   }
 }
 @media screen and (min-width: 960px) {
