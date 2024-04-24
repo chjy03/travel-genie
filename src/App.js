@@ -11,11 +11,13 @@ import Forum from './Pages/Forum/Forum';
 import SignUp from './Pages/GeneralModule/SignUp/SignUp';
 import ForgotPassword from './Pages/GeneralModule/ForgotPassword/ForgotPassword';
 import Profile from './Pages/GeneralModule/Profile/Profile';
-
+import Login from './Pages/GeneralModule/SignUp/logIn';
 import PackageListing, { Data } from './Pages/PackageListing/PackageListing'; // Import Data
 import PackageDetail from './Pages/PackageDetail/PackageDetail';
 import BookingPage from './Pages/BookingPage/BookingPage';
 import ManagePackage from './Pages/ManagePackage/ManagePackage';
+import Report from './Pages/GeneralModule/Report/Report';
+import HomeListing from './Pages/Home/HomeListing';
 
 const App = () => {
     return (
@@ -32,11 +34,13 @@ const App = () => {
                     <Route path="/signUp" element={<SignUp/>} />
                     <Route path="/forgotPassword" element={<ForgotPassword/>} />
                     <Route path="/profile" element={<Profile/>} />
-
+                    <Route path="/logIn" element={<Login/>} />
                     <Route path="/package-listing" element={<PackageListing />} />
                     <Route path="/package/:id" element={<PackageDetail data={Data} />} />
                     <Route path="/booking/:id" element={<BookingPage />} />
                     <Route path="/manage-package" element={<ManagePackage />} />
+                    <Route path="/report" element={<Report />} />
+                    <Route path="/home-listing" element={<HomeListing />} />
                 </Routes>
                 <Footer />
             </div>

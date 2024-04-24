@@ -3,16 +3,16 @@ import './navbar.css';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { TbGridDots } from 'react-icons/tb';
 import { IoPersonCircle } from 'react-icons/io5';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import logoImage from '../../Assets/logo.jpg';
 
 const Navbar = () => {
     const [active, setActive] = useState(false);
-    // const [showDropdown, setShowDropdown] = useState(false); // State for profile dropdown
-    // const [showManagePackageDropdown, setShowManagePackageDropdown] = useState(false); // State for manage package dropdown
+    const [showDropdown, setShowDropdown] = useState(false);
     const [showPackageDropdown, setShowPackageDropdown] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false); // State for profile dropdown
-    const [showManagePackageDropdown, setShowManagePackageDropdown] = useState(false); // State for manage package dropdown
+    const [showManagePackageDropdown, setShowManagePackageDropdown] = useState(false);
+
+    const location = useLocation();
 
     const toggleNav = () => {
         setActive(!active);
@@ -30,6 +30,18 @@ const Navbar = () => {
         setShowManagePackageDropdown(!showManagePackageDropdown);
     };
 
+    const handleLogout = () => {
+        const confirmLogout = window.confirm('Are you sure you want to log out?');
+        if (confirmLogout) {
+            // Perform logout action here (e.g., clear session, redirect, etc.)
+            // Redirect to the login page ("/logIn")
+            window.location.href = '/logIn';
+        }
+    };
+
+    // Determine if we are on the signUp or logIn page
+    const isAuthPage = location.pathname === '/signUp' || location.pathname === '/logIn';
+
     return (
         <section className='navBarSection'>
             <header className="header flex">
@@ -42,72 +54,75 @@ const Navbar = () => {
 
                 <div className={`navBar ${active ? 'activeNavbar' : ''}`}>
                     <ul className="navLists flex">
-                        <li className="navItem">
-                            <NavLink to="/home" className="navLink" onClick={closeNav}>
-                                Home
-                            </NavLink>
-                        </li>
-
-              
-                        <li 
-                            className="navItem"
-                            onMouseEnter={() => setShowPackageDropdown(true)}
-                            onMouseLeave={() => setShowPackageDropdown(false)}
-                        >
-                            <NavLink to="/package" className="navLink" onClick={closeNav}>
-                                Packages
-                            </NavLink>
-                            {showPackageDropdown && (
-                                <ul className="dropdown">
-                                    <li>
-                                        <NavLink to="/manage-package" className="navLink" onClick={closeNav}>
-                                            Manage Travel Packages
-                                        </NavLink>
-                                    </li>
-                                </ul>
-                            )}
-                        </li>
-
-                        <li className="navItem">
-                            <NavLink to="/planning" className="navLink" onClick={closeNav}>
-                                Planning
-                            </NavLink>
-                        </li>
-
-                        <li className="navItem">
-                            <NavLink to="/payment" className="navLink" onClick={closeNav}>
-                                Payment
-                            </NavLink>
-                        </li>
-
-                        <li className="navItem">
-                            <NavLink to="/forum" className="navLink" onClick={closeNav}>
-                                Forum
-                            </NavLink>
-                        </li>
-
-                        <button className='btn'> 
-                            <Link to="/signUp" onClick={closeNav}>SIGN UP</Link>
+                        {/* Conditionally render navigation links */}
+                        {!isAuthPage && (
+                            <>
+                                <li className="navItem">
+                                    <NavLink to="/home" className="navLink" onClick={closeNav}>
+                                        Home
+                                    </NavLink>
+                                </li>
+                                <li 
+                                    className="navItem"
+                                    onMouseEnter={() => setShowPackageDropdown(true)}
+                                    onMouseLeave={() => setShowPackageDropdown(false)}
+                                >
+                                    <NavLink to="/package" className="navLink" onClick={closeNav}>
+                                        Packages
+                                    </NavLink>
+                                    {showPackageDropdown && (
+                                        <ul className="dropdown">
+                                            <li>
+                                                <NavLink to="/manage-package" className="navLink" onClick={closeNav}>
+                                                    Manage Travel Packages
+                                                </NavLink>
+                                            </li>
+                                        </ul>
+                                    )}
+                                </li>
+                                <li className="navItem">
+                                    <NavLink to="/planning" className="navLink" onClick={closeNav}>
+                                        Planning
+                                    </NavLink>
+                                </li>
+                                <li className="navItem">
+                                    <NavLink to="/payment" className="navLink" onClick={closeNav}>
+                                        Payment
+                                    </NavLink>
+                                </li>
+                                <li className="navItem">
+                                    <NavLink to="/forum" className="navLink" onClick={closeNav}>
+                                        Forum
+                                    </NavLink>
+                                </li>
+                                <li className="navItem" onClick={toggleDropdown}>
+                                    <IoPersonCircle className='personIcon'/>
+                                    {/* Profile dropdown */}
+                                    {showDropdown && (
+                                        <ul className="dropdownMenu">
+                                            <li><NavLink to="/profile" onClick={closeNav} className='dropdownItem'>My Profile</NavLink></li>
+                                            <li><NavLink to="/logIn" onClick={handleLogout} className='dropdownItem'>Logout</NavLink></li>
+                                        </ul>
+                                    )}
+                                    <span className="dropdownArrow"></span>
+                                </li>
+                            </>
+                        )}
+                        {/* Render only the Login button on signUp or logIn page */}
+                        {isAuthPage && (
+                            <button className='btn'> 
+                            <Link to="/signUp" onClick={closeNav}>Login</Link>
                         </button>
-
-                        <li className="navItem" onClick={toggleDropdown}>
-                            <IoPersonCircle className='personIcon'/>
-                            {/* Profile dropdown */}
-                            {showDropdown && (
-                                <ul className="dropdownMenu">
-                                    <li><NavLink to="/profile" onClick={closeNav} className='dropdownItem'>My Profile</NavLink></li>
-                                    <li><NavLink to="/logout" onClick={closeNav} className='dropdownItem'>Logout</NavLink></li>
-                                </ul>
-                            )}
-                            <span className="dropdownArrow"></span>
-                        </li>
+                        )}
                     </ul>
 
+                    {/* Close navbar button */}
                     <div onClick={toggleNav} className='closeNavbar'>
                         <AiFillCloseCircle className="icon"/>
                     </div>
                 </div>
 
+                {/* Toggle navbar button */}
                 <div onClick={toggleNav} className='toggleNavbar'>
                     <TbGridDots className="icon"/>
                 </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './forgotPassword.css';
+import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
 import forgotPasswordImage from '../../../Assets/scenery2.jpg';
 import { FaArrowLeft } from 'react-icons/fa';
 
@@ -26,10 +27,11 @@ const ForgotPassword = () => {
                             <button type='submit'>Send Reset Link</button>
                         </form>
                         <p className='backToLogin'>
-                            <a href='/login' style={{ display: 'flex', alignItems: 'center' }}>
+                            {/* Use Link component instead of anchor tag */}
+                            <Link to='/login' style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
                                 <FaArrowLeft style={{ marginRight: '5px' }} />
                                 Back to Login
-                            </a>
+                            </Link>
                         </p>
                     </div>
                     <div className='forgotPasswordImage'>

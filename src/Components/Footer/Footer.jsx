@@ -3,6 +3,7 @@ import './Footer.css'
 import { FaFacebookF } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { BsTwitter } from "react-icons/bs";
+import { Link } from 'react-router-dom'; 
 
 const Footer = () => {
     return (
@@ -24,7 +25,7 @@ const Footer = () => {
                             Helpful Links
                         </span>
                         <li>
-                            <a href="#">Report Problem</a>
+                            <Link to="/report">Report Problem</Link>
                         </li>
                         <li>
                             <a href="#">Travel & Conditions</a>

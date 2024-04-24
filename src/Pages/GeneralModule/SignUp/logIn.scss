@@ -1,0 +1,131 @@
+.login {
+    width: 600px;
+    position: relative;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 8rem;
+    padding-bottom: 55rem;
+    height: 900px;
+  }
+  
+  .login .homeCard {
+    width: 600px;
+    border-radius: 1rem;
+    background: var(--whiteColor);
+    position: relative;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  .login .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+    padding-top: 2rem;
+  }
+  
+  .login .text {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  .login .underline {
+    width: 61px;
+    height: 6px;
+    background: var(--SecondaryColor);
+    border-radius: 9px;
+  }
+  
+  .login .inputs {
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .login .input {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 480px;
+    height: 80px;
+    border-radius: 6px;
+    background: hsl(240, 4%, 89%);
+  }
+  
+  .login .input .inputIcon {
+    margin: 0px 30px;
+    font-size: 25px;
+  }
+  
+  .login .input input {
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #797979;
+    font-size: 19px;
+  }
+  
+  .login .forgot-password {
+    padding-left: 15px;
+    margin-top: 29px;
+    color: #797979;
+    font-size: 18px;
+  }
+  
+  .login .forgot-password span {
+    color: #4c00b4;
+    cursor: pointer;
+  }
+  
+  .login .submit-container {
+    display: flex;
+    flex-direction: column; /* Change to column layout */
+    align-items: center; /* Center align items */
+    gap: 30px;
+    margin: 60px auto;
+  }
+  
+  .login .submit-container .submit {
+    width: 220px;
+    height: 59px;
+    background: var(--SecondaryColor);
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: -20px;
+  }
+  
+  .login .submit-container .gray {
+    color: var(--textColor);
+    background: hsl(240, 4%, 89%);
+  }
+  
+  .login .signup-link {
+    font-size: 16px;
+    color: #797979;
+  }
+  
+  .login .signup-link a {
+    color: #4c00b4;
+    text-decoration: none;
+  }
+  
+  
