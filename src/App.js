@@ -18,6 +18,7 @@ import BookingPage from './Pages/BookingPage/BookingPage';
 import ManagePackage from './Pages/ManagePackage/ManagePackage';
 import Report from './Pages/GeneralModule/Report/Report';
 import HomeListing from './Pages/Home/HomeListing';
+// import Landing from './Pages/GeneralModule/SignUp/Landing';
 
 const App = () => {
     return (
@@ -25,7 +26,8 @@ const App = () => {
             <div className="App">
                 <Navbar />
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    {/* <Route exact path="/" component={Landing} /> */}
+                    {/* <Route exact path="/" component={Home} /> */}
                     <Route path="/home" element={<Home />} />
                     <Route path="/package" element={<Package />} />
                     <Route path="/planning" element={<Planning />} />
@@ -41,6 +43,7 @@ const App = () => {
                     <Route path="/manage-package" element={<ManagePackage />} />
                     <Route path="/report" element={<Report />} />
                     <Route path="/home-listing" element={<HomeListing />} />
+                    {/* <Route path="/landing" element={<Landing />} /> */}
                 </Routes>
                 <Footer />
             </div>

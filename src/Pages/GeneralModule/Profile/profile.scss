@@ -7,6 +7,7 @@
 }
 
 .profileContainer {
+    margin-left: 20px;
     margin-top: 9rem;
     margin-bottom: 3rem;
     max-width: 800px;
@@ -17,25 +18,27 @@
 }
 
 .profileContent {
+    margin-left: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+// 
 .profileImage {
     flex: 1;
-    padding-right: 20px;
-    height: auto;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profileImage img {
-    width: 100%;
-    height: auto;
+    margin-left: 10px;
+    max-width: 100%;
+    height: 500px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 .profileDetails {
     flex: 2;
     padding-left: 20px;

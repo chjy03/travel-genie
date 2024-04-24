@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './profile.css';
 import profileImage from '../../../Assets/scenery1.jpg';
+
 const Profile = () => {
     const [formData, setFormData] = useState({
         name: '',

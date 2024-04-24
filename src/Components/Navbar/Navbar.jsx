@@ -111,7 +111,7 @@ const Navbar = () => {
                         {/* Render only the Login button on signUp or logIn page */}
                         {isAuthPage && (
                             <button className='btn'> 
-                            <Link to="/signUp" onClick={closeNav}>Login</Link>
+                            <Link to="/logIn" onClick={closeNav}>Login</Link>
                         </button>
                         )}
                     </ul>
