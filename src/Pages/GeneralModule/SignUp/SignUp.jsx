@@ -3,13 +3,15 @@ import './signUp.css';
 import { FaCircleUser } from 'react-icons/fa6';
 import { GrMail } from 'react-icons/gr';
 import { GoPasskeyFill } from 'react-icons/go';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
 
 const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userType, setUserType] = useState('Tourist'); // Default user type
+    const [userType, setUserType] = useState('tourist'); // Default user type
+
+    const navigate = useNavigate(); // Initialize useNavigate hook for navigation
 
     // Function to handle user type selection
     const handleUserTypeChange = (e) => {
@@ -30,13 +32,10 @@ const SignUp = () => {
         setName('');
         setEmail('');
         setPassword('');
-        setUserType('Tourist'); // Reset user type to default
+        setUserType('tourist'); // Reset user type to default
 
-        // Redirect to the home page ("/home") after successful signup
-        // You can use the Link component from react-router-dom for navigation
-        // This assumes you have a route set up for the home page ("/home")
-        // Replace '/home' with the appropriate route if needed
-        window.location.href = '/home';
+        // Redirect to the landing page ("/landing") after successful signup
+        navigate('/logIn'); // Use navigate function to navigate to the landing page
     };
 
     return (
@@ -88,10 +87,10 @@ const SignUp = () => {
                     </div>
                 </div>
                 <div className="submit-container">
-                    {/* Use Link component to navigate to home page after signup */}
-                    <Link to="/home" className="submit" onClick={handleSubmit}>
+                    {/* Use button element to handle form submission */}
+                    <button className="submit" onClick={handleSubmit}>
                         Sign Up
-                    </Link>
+                    </button>
                 </div>
             </div>
         </div>

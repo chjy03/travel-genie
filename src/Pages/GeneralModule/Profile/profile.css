@@ -7,7 +7,7 @@
 }
 
 .profileContainer {
-  margin-left: 20px;
+  margin-right: 20px;
   margin-top: 9rem;
   margin-bottom: 3rem;
   max-width: 800px;
@@ -18,30 +18,31 @@
 }
 
 .profileContent {
-  margin-left: 10px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; /* Align items to the start of the container */
+  margin-left: 40px; /* Increase margin to create more space between image and content */
 }
 
 .profileImage {
-  flex: 1;
+  margin-top: 38px;
+  flex: 1; /* Take up remaining space */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .profileImage img {
-  margin-left: 10px;
-  max-width: 100%;
-  height: 500px;
+  width: 290px;
+  height: 510px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profileDetails {
-  flex: 2;
-  padding-left: 20px;
+  flex: 2; /* Take up more space */
+  padding-left: 60px;
+  display: flex;
+  flex-direction: column;
 }
 
 .profileDetails h1 {

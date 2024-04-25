@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'; // Import useState from React
 import './app.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
@@ -18,7 +18,7 @@ import BookingPage from './Pages/BookingPage/BookingPage';
 import ManagePackage from './Pages/ManagePackage/ManagePackage';
 import Report from './Pages/GeneralModule/Report/Report';
 import HomeListing from './Pages/Home/HomeListing';
-// import Landing from './Pages/GeneralModule/SignUp/Landing';
+import Landing from './Pages/GeneralModule/SignUp/Landing';
 
 const App = () => {
     return (
@@ -26,24 +26,26 @@ const App = () => {
             <div className="App">
                 <Navbar />
                 <Routes>
-                    {/* <Route exact path="/" component={Landing} /> */}
-                    {/* <Route exact path="/" component={Home} /> */}
+                    {/* Set the default route to render Landing component */}
+                    <Route path="/" element={<Home />} />
+
+                    {/* Define other routes */}
                     <Route path="/home" element={<Home />} />
                     <Route path="/package" element={<Package />} />
                     <Route path="/planning" element={<Planning />} />
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/forum" element={<Forum />} />
-                    <Route path="/signUp" element={<SignUp/>} />
-                    <Route path="/forgotPassword" element={<ForgotPassword/>} />
-                    <Route path="/profile" element={<Profile/>} />
-                    <Route path="/logIn" element={<Login/>} />
+                    <Route path="/signUp" element={<SignUp />} />
+                    <Route path="/forgotPassword" element={<ForgotPassword />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/logIn" element={<Login />} />
+
                     <Route path="/package-listing" element={<PackageListing />} />
                     <Route path="/package/:id" element={<PackageDetail data={Data} />} />
                     <Route path="/booking/:id" element={<BookingPage />} />
                     <Route path="/manage-package" element={<ManagePackage />} />
                     <Route path="/report" element={<Report />} />
                     <Route path="/home-listing" element={<HomeListing />} />
-                    {/* <Route path="/landing" element={<Landing />} /> */}
                 </Routes>
                 <Footer />
             </div>
@@ -52,7 +54,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-

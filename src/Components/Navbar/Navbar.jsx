@@ -12,7 +12,7 @@ const Navbar = () => {
     const [showPackageDropdown, setShowPackageDropdown] = useState(false);
     const [showManagePackageDropdown, setShowManagePackageDropdown] = useState(false);
 
-    const location = useLocation();
+    // const location = useLocation();
 
     const toggleNav = () => {
         setActive(!active);
@@ -39,8 +39,8 @@ const Navbar = () => {
         }
     };
 
-    // Determine if we are on the signUp or logIn page
-    const isAuthPage = location.pathname === '/signUp' || location.pathname === '/logIn';
+    // // Determine if we are on the signUp or logIn page
+    // const isAuthPage = location.pathname === '/signUp' || location.pathname === '/logIn';
 
     return (
         <section className='navBarSection'>
@@ -55,8 +55,8 @@ const Navbar = () => {
                 <div className={`navBar ${active ? 'activeNavbar' : ''}`}>
                     <ul className="navLists flex">
                         {/* Conditionally render navigation links */}
-                        {!isAuthPage && (
-                            <>
+                        {/* {!isAuthPage && (
+                            <> */}
                                 <li className="navItem">
                                     <NavLink to="/home" className="navLink" onClick={closeNav}>
                                         Home
@@ -74,7 +74,7 @@ const Navbar = () => {
                                         <ul className="dropdown">
                                             <li>
                                                 <NavLink to="/manage-package" className="navLink" onClick={closeNav}>
-                                                    Manage Travel Packages
+                                                    Add Travel Packages
                                                 </NavLink>
                                             </li>
                                         </ul>
@@ -95,6 +95,9 @@ const Navbar = () => {
                                         Forum
                                     </NavLink>
                                 </li>
+                                <button className='btn'> 
+                                    <Link to="/logIn" onClick={closeNav}>Login</Link>
+                                </button>
                                 <li className="navItem" onClick={toggleDropdown}>
                                     <IoPersonCircle className='personIcon'/>
                                     {/* Profile dropdown */}
@@ -106,14 +109,12 @@ const Navbar = () => {
                                     )}
                                     <span className="dropdownArrow"></span>
                                 </li>
-                            </>
-                        )}
+                            {/* </>
+                        )} */}
                         {/* Render only the Login button on signUp or logIn page */}
-                        {isAuthPage && (
-                            <button className='btn'> 
-                            <Link to="/logIn" onClick={closeNav}>Login</Link>
-                        </button>
-                        )}
+                        {/* {isAuthPage && ( */}
+                           
+                        {/* )} */}
                     </ul>
 
                     {/* Close navbar button */}

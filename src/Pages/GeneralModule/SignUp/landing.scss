@@ -1,71 +1,129 @@
-.landing {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f5f5f5; /* Set your desired background color */
+:root {
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --gradientColor: linear-gradient(to right, hsl(187, 85%, 43%), hsl(199, 100%, 33%));
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(225, 225, 235);
 }
 
-.homeCard {
-    width: 80%;
-    max-width: 600px;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #ffffff; /* White background for the card */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+.landing{
+  width: 100%;
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 2rem;
+}
+
+.setContainer {
+  text-align: center; /* Center align content within setContainer */
+}
+
+.homeText {
+  text-align: center;
+}
+
+.welcome {
+  color: var(--blackColor);
+  font-size: 2.8rem; /* Increase font size for welcome heading */
+  font-weight: 700;
+  line-height: 1.2;
+  padding-top: 7rem;
+  margin-bottom: 12px;
 }
 
 .title {
-    text-align: center;
-    margin-bottom: 20px;
+  color: var(--blackColor);
+  font-size: 1.8rem; /* Increase font size for title heading */
+  font-weight: 700;
+  line-height: 1.2;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
 }
 
-.text {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333333; /* Dark text color */
+.subTitle {
+  color: var(--blackColor);
+  opacity: 1;
+  font-size: 1.3rem;
+  font-weight: 400;
+  max-width: 70%;
+  text-align: center;
+  margin: auto;
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
-.underline {
-    width: 50px;
-    height: 3px;
-    background-color: #007bff; /* Blue underline color */
-    margin: 0 auto;
+.imageRow {
+  display: flex; /* Use flexbox to arrange images in a row */
+  justify-content: center; /* Center align images horizontally */
+  margin-top: 20px; /* Add spacing above the image row */
 }
 
-.imageContainer {
-    text-align: center;
-    margin-bottom: 20px;
+.homeImage {
+  padding: 3px;
+  width: auto; /* Set width of each image (adjust as needed) */
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 10px; /* Add spacing between images */
+  border-radius: 5px; /* Add rounded corners to images */
+  box-shadow: 0 2px 8px 4px rgba(178, 178, 178, 0.45); /* Add shadow effect */
+  border: 1px solid #ccc; /* Add border */
+  background-color: #aaf0ef4c; /* Set background color */
+  margin-left: 20px;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
 }
 
-.landingImage {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+.homeImage:hover {
+  transform: scale(1.1); /* Zoom in the image on hover */
+  box-shadow: 0 4px 12px 6px rgba(178, 178, 178, 0.45); /* Adjust box shadow for zoom effect */
+  opacity: 0.85;
 }
 
-.actionButtons {
-    display: flex;
-    justify-content: center;
+.videoContainer {
+  width: 100%; /* Set width of video container */
+  max-width: 600px; /* Set maximum width for the video */
+  margin: 0 auto; /* Center align the video container */
 }
 
-.actionButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffffff; /* White text color */
-    background-color: #007bff; /* Blue button background color */
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.videoElement {
+  width: 80%; /* Set width of the video element */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 100px; /* Set maximum height for the video */
 }
 
-.actionButton:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+/* Media queries for responsiveness */
+@media screen and (min-width: 480px) {
+  .homeImage {
+      width: 150px; /* Reduce image width on smaller screens */
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .imageRow {
+      flex-wrap: wrap; /* Allow images to wrap onto new lines */
+  }
+
+  .homeImage {
+      width: calc(33.33% - 20px); /* Adjust width for three images per row */
+      margin: 10px; /* Adjust margin between images */
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .homeImage {
+      width: calc(25% - 20px); /* Adjust width for four images per row */
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .homeImage {
+      width: calc(31%); /* Adjust width for five images per row */
+      margin-left: 15px;
+  }
 }
