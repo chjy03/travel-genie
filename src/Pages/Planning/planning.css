@@ -12,16 +12,19 @@
   width: -moz-max-content;
   width: max-content;
   margin: 0 auto;
-  padding-top: 3rem;
   color: var(--blackColor);
   z-index: 1;
+  font-size: 2.5rem;
+  padding: 10px;
+  margin-top: 35px;
 }
 .planning .pageTitle .pageTitleTagLine {
+  margin-top: 10px;
   position: relative;
   width: -moz-max-content;
   width: max-content;
   margin: 0 auto;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.2rem;
   padding-top: 1rem;
   font-size: medium;
   color: var(--textColor);
@@ -49,17 +52,25 @@
 .planning .container .sideContainer .filters .filter-checkbox {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 .planning .container .sideContainer .filters .filter-checkbox label {
   color: var(--textColor);
   cursor: pointer;
-  margin-right: 1rem; /* Adjust margin for label */
+  font-size: 0.9rem;
+  margin-right: 7rem;
+  color: var(--blackColor);
+  white-space: nowrap;
+  flex-grow: 1;
 }
 .planning .container .sideContainer .filters .filter-checkbox input[type=checkbox] {
-  margin-right: 1rem; /* Adjust margin for checkbox */
+  margin-top: 6px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 16px; /* Adjust the width if needed */
+  height: 16px; /* Adjust the height if needed */
 }
 .planning .container .sideContainer .selectedDest {
   margin-top: 1rem;
@@ -93,9 +104,11 @@
 }
 .planning .container .sideContainer .selectedDest .btn {
   margin-top: 1rem;
+  margin-right: 0.2rem;
 }
 .planning .container .sideContainer .selectedDest .btn .btnText {
   text-align: center;
+  display: block;
 }
 .planning .container .secContent {
   display: flex;

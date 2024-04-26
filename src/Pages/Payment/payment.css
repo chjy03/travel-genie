@@ -106,8 +106,7 @@
   margin-left: 10px;
 }
 .payment .container .total-cost h2 {
-  margin-top: 0;
-  margin-left: 10px;
+  margin-left: 0px;
 }
 .payment .container .total-cost #total-cost-value {
   font-size: 30px;
@@ -125,4 +124,4 @@
 }
 .payment .container .total-cost #checkout-btn:hover {
   background-color: #0056b3;
-}/*# sourceMappingURL=payment.css.map */
+}/*# sourceMappingURL=Payment.css.map */

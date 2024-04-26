@@ -11,16 +11,20 @@
         position: relative;
         width: max-content;
         margin: 0 auto;
-        padding-top: 3rem;
+        // padding-top: 3rem;
         color: var(--blackColor);
         z-index: 1;
+        font-size: 2.5rem;
+        padding: 10px;
+        margin-top: 35px;
       }
   
       .pageTitleTagLine {
+        margin-top: 10px;
         position: relative;
         width: max-content;
         margin: 0 auto;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.2rem;
         padding-top: 1rem;
         font-size: medium;
         color: var(--textColor);
@@ -51,18 +55,28 @@
           .filter-checkbox {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
-  
+          
+           
             label {
-              color: var(--textColor);
-              cursor: pointer;
-              margin-right: 1rem; /* Adjust margin for label */
+                color: var(--textColor);
+                cursor: pointer;
+                // justify-content: flex-start;
+                font-size: 0.9rem;
+                margin-right: 7rem;
+                color: var(--blackColor);
+                white-space: nowrap; 
+                flex-grow: 1;
             }
   
             input[type="checkbox"] {
-              margin-right: 1rem; /* Adjust margin for checkbox */
+                margin-top: 6px;
+                margin-left: 10px;
+                margin-right: 10px;
+                width: 16px; /* Adjust the width if needed */
+                height: 16px; /* Adjust the height if needed */
             }
           }
         }
@@ -104,9 +118,11 @@
   
           .btn {
             margin-top: 1rem;
+            margin-right: .2rem;
   
             .btnText {
               text-align: center;
+              display: block;
             }
           }
         }

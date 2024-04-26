@@ -31,7 +31,7 @@ const Purchases = () => {
     <section className='pastPayments'>
         <div className="container">
             <div className="pageTitle">
-                <h1 className="title">Past Purchases</h1>
+                <h1 className="title">Purchases</h1>
                 <div className='clarification'>Use the filter to find the start date of your package</div>
             </div>
             

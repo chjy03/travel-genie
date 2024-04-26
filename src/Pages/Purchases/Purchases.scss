@@ -45,7 +45,7 @@
     }
 
     .pageTitle{
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
 
         .title{
             position: center;
@@ -54,12 +54,14 @@
             padding-top: 3rem;
             color: var(--blackColor);
             z-index: 1;
+            margin-bottom: 15px;
         }
 
         .clarification{
             width: max-content;
             margin: 0 auto;
-            color: var(--blackColor);
+            color: var(--textColor);
+            font-weight: 700;
             z-index: 1;
         }
     }

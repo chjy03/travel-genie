@@ -42,7 +42,7 @@
   padding: 10px;
 }
 .pastPayments .pageTitle {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 .pastPayments .pageTitle .title {
   position: center;
@@ -52,12 +52,14 @@
   padding-top: 3rem;
   color: var(--blackColor);
   z-index: 1;
+  margin-bottom: 15px;
 }
 .pastPayments .pageTitle .clarification {
   width: -moz-max-content;
   width: max-content;
   margin: 0 auto;
-  color: var(--blackColor);
+  color: var(--textColor);
+  font-weight: 700;
   z-index: 1;
 }
 .pastPayments .container {

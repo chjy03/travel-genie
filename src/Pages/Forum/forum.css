@@ -24,6 +24,10 @@
 
 .forum-page h1 {
   font-size: 2.5rem;
+  padding: 10px;
+  margin-top: 21px;
+  color: var(--blackColor);
+  margin-bottom: 15px;
 }
 
 .forum-page h2 {
