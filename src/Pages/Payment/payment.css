@@ -1,15 +1,15 @@
 :root {
-  --PrimaryColor:hsl(199,100%,33%);
-  --SecondaryColor:hsl(187,85%,43%);
-  --gradientColor:linear-gradient(to right,hsl(187,85%,43%),hsl(199,100%,33%));
-  --whiteColor:hsl(0,0%,100%);
-  --blackColor:hsl(201,33%,16%);
-  --textColor:hsl(240,4%,36%);
-  --whiteColorDeam:hsl(0,0%,93%);
-  --greyText:rgb(190,190,190);
-  --inputColor:rgb(239,239,239);
-  --bodyColor:rgb(240,240,246);
-  --cardBG:rgb(225,225,235);
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --gradientColor: linear-gradient(to right, hsl(187, 85%, 43%), hsl(199, 100%, 33%));
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(225, 225, 235);
 }
 
 .payment {
@@ -22,6 +22,107 @@
   padding: 3rem;
 }
 .payment h1 {
-  padding-top: 6rem;
   position: relative;
-}/*# sourceMappingURL=payment.css.map */
+  font-size: 2.5rem;
+  padding: 10px;
+}
+.payment .pageTitle {
+  margin-bottom: 1rem;
+}
+.payment .pageTitle .title {
+  position: center;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+  padding-top: 5rem;
+  color: var(--blackColor);
+  z-index: 1;
+}
+.payment .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 100%;
+  margin: 10px auto;
+  padding: 0rem;
+  border: 1px solid white;
+  border-radius: 20px;
+  background: var(--whiteColor);
+}
+.payment .container .wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.payment .container .packages, .payment .container .total-cost {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.payment .container .packages h2 {
+  margin-top: 0;
+  margin-left: 10px;
+}
+.payment .container .packages #booking-list {
+  display: flex;
+  flex-direction: column;
+}
+.payment .container .packages .pkg {
+  padding: 0px;
+  margin: 5px;
+  border: 1px solid var(--greyText);
+  background: var(--cardBG);
+  border-radius: 10px;
+  width: 600px;
+}
+.payment .container .packages .pkg img {
+  border-radius: 5px;
+  margin: 10px;
+  padding-bottom: 0px;
+}
+.payment .container .packages .pkg p {
+  display: flex;
+  align-items: center;
+}
+.payment .container .packages .pkg button {
+  float: right;
+  margin: 10px;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1px solid var(--greyText);
+  border-radius: 40px;
+  background: var(--gradientColor);
+  color: var(--whiteColor);
+  cursor: pointer;
+}
+.payment .container .packages .pkg button:hover {
+  background-color: #e0f0ff;
+  border-color: #0056b3;
+}
+.payment .container .total-cost {
+  text-align: center;
+  width: 400px;
+  margin-left: 10px;
+}
+.payment .container .total-cost h2 {
+  margin-top: 0;
+  margin-left: 10px;
+}
+.payment .container .total-cost #total-cost-value {
+  font-size: 30px;
+  margin-top: 20px;
+}
+.payment .container .total-cost #checkout-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background: var(--gradientColor);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+}
+.payment .container .total-cost #checkout-btn:hover {
+  background-color: #0056b3;
+}/*# sourceMappingURL=Payment.css.map */

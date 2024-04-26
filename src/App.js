@@ -18,7 +18,9 @@ import BookingPage from './Pages/BookingPage/BookingPage';
 import ManagePackage from './Pages/ManagePackage/ManagePackage';
 import Report from './Pages/GeneralModule/Report/Report';
 import HomeListing from './Pages/Home/HomeListing';
-import Landing from './Pages/GeneralModule/SignUp/Landing';
+
+import Card from './Pages/Card/Card';
+import Purchases from './Pages/Purchases/Purchases';
 
 const App = () => {
     return (
@@ -46,6 +48,10 @@ const App = () => {
                     <Route path="/manage-package" element={<ManagePackage />} />
                     <Route path="/report" element={<Report />} />
                     <Route path="/home-listing" element={<HomeListing />} />
+
+                    <Route path="/card" element={<Card />} />
+                    <Route path="/purchases" element={<Purchases />} />
+
                 </Routes>
                 <Footer />
             </div>
