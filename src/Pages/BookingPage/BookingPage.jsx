@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import './bookingPage.css';
 
 const BookingPage = () => {
@@ -156,7 +156,8 @@ const BookingPage = () => {
           </div>
         )}
 
-        <button type="submit">Book Now</button>
+        <Link to={`/payment`} className="bookNowBtn">Submit</Link>
+        {/* <button type="submit">Book Now</button> */}
       </form>
     </div>
   );

@@ -1,0 +1,54 @@
+// Define variables
+$gradientColor: linear-gradient(to right, #ff9966, #ff5e62);
+
+// Base styles
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    display: block;
+    margin: 100px auto 0;
+    font-size: 18px;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.overlay {
+    background: rgba(49, 49, 49, 0.8);
+}
+
+.modal-content {
+    position: absolute;
+    margin-top: 100px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 300px;
+    min-width: 200px;
+}
+
+#close-modal {
+    float: right; // Adjusted to right from inline-end
+    margin-top: 10px;
+    padding: 5px 15px;
+    border-radius: 40px;
+    background: $gradientColor; // Using variable
+}

@@ -85,11 +85,11 @@ const Navbar = () => {
                                         Planning
                                     </NavLink>
                                 </li>
-                                <li className="navItem">
+                                {/* <li className="navItem">
                                     <NavLink to="/payment" className="navLink" onClick={closeNav}>
                                         Payment
                                     </NavLink>
-                                </li>
+                                </li> */}
                                 <li className="navItem">
                                     <NavLink to="/purchases" className="navLink" onClick={closeNav}>
                                         My Purchases

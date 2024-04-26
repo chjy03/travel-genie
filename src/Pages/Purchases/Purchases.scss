@@ -55,6 +55,13 @@
             color: var(--blackColor);
             z-index: 1;
         }
+
+        .clarification{
+            width: max-content;
+            margin: 0 auto;
+            color: var(--blackColor);
+            z-index: 1;
+        }
     }
 
   .container {
@@ -66,7 +73,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-inline-start: 100px;
       margin-bottom: 20px;
+      width: 800px;
 
       label {
         margin-right: 10px;
@@ -75,6 +84,7 @@
       input {
         padding: 5px;
         margin: 10px;
+        margin-left: 0px;
         border: 1px solid #ccc;
         border-radius: 5px;
         outline: none;
@@ -98,14 +108,11 @@
           background-color: #0056b3;
         }
     }
-    }
-
     #all-btn{
+        width: 300px;
         padding: 5px 10px;
         margin-top: 0px;
-        margin-bottom: 5px;
-        margin-inline-start: 700px;
-        width: 100px;
+        margin-left: 10px;
         border: none;
         border-radius: 5px;
         background: var(--gradientColor);
@@ -115,6 +122,7 @@
         &:hover {
           background-color: #0056b3;
         }
+    }
     }
 
     #past-purchases-table {

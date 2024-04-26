@@ -1,27 +1,8 @@
-:root {
-  --PrimaryColor:hsl(199,100%,33%);
-  --SecondaryColor:hsl(187,85%,43%);
-  --gradientColor:linear-gradient(to right,hsl(187,85%,43%),hsl(199,100%,33%));
-  --whiteColor:hsl(0,0%,100%);
-  --blackColor:hsl(201,33%,16%);
-  --textColor:hsl(240,4%,36%);
-  --whiteColorDeam:hsl(0,0%,93%);
-  --greyText:rgb(190,190,190);
-  --inputColor:rgb(239,239,239);
-  --bodyColor:rgb(240,240,246);
-  --cardBG:rgb(225,225,235);
-  --cardHover:rgb(225,225,255);
-}
-
 .planning {
   align-items: center;
   justify-content: center;
   margin: auto;
   padding: 5rem;
-}
-.planning h1 {
-  position: relative;
-  font-size: 2.5rem;
 }
 .planning .pageTitle {
   margin-bottom: 1rem;
@@ -47,7 +28,7 @@
 }
 .planning .container {
   display: grid;
-  grid-template-columns: auto 1fr; /* Search bar width is auto, card list takes remaining space */
+  grid-template-columns: auto 1fr;
   align-items: start;
 }
 .planning .container .sideContainer {
@@ -66,9 +47,19 @@
   border-radius: 5px;
 }
 .planning .container .sideContainer .filters .filter-checkbox {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 0.5rem;
-  margin-right: 1rem; /* Adjust spacing between filter checkboxes */
+  margin-bottom: 0.5rem;
+}
+.planning .container .sideContainer .filters .filter-checkbox label {
+  color: var(--textColor);
+  cursor: pointer;
+  margin-right: 1rem; /* Adjust margin for label */
+}
+.planning .container .sideContainer .filters .filter-checkbox input[type=checkbox] {
+  margin-right: 1rem; /* Adjust margin for checkbox */
 }
 .planning .container .sideContainer .selectedDest {
   margin-top: 1rem;
@@ -91,10 +82,10 @@
 }
 .planning .container .sideContainer .selectedDest .selectedList .selectedItem span {
   margin-right: 1rem;
-  flex-grow: 1; /* Allow the name to take up remaining space */
-  overflow: hidden; /* Prevent text from overflowing */
-  text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
-  white-space: nowrap; /* Prevent text from wrapping */
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .planning .container .sideContainer .selectedDest .selectedList .selectedItem .iconRemove {
   margin-left: 1rem;
@@ -107,8 +98,8 @@
   text-align: center;
 }
 .planning .container .secContent {
-  display: flex; /* Use flex display */
-  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
 }
@@ -126,7 +117,7 @@
 }
 .planning .container .secContent .singleDestination:hover {
   background: var(--cardHover);
-  box-shadow: 1 4px 4px rgba(140, 140, 114, 0.549);
+  box-shadow: 1px 4px 4px rgba(140, 140, 141, 0.549);
   transition: 0.3s ease;
 }
 .planning .container .secContent .singleDestination .imageDiv {
@@ -149,10 +140,10 @@
 .planning .container .secContent .singleDestination .cardInfo .destTitle {
   color: var(--blackColor);
   font-size: 1.25rem;
-  max-width: 220px; /* Adjust the width as needed */
+  max-width: 220px;
   overflow: hidden;
-  text-overflow: ellipsis; /* Add ellipsis for long titles */
-  white-space: nowrap; /* Prevent line breaks */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .planning .container .secContent .singleDestination .cardInfo .continent {
   gap: 0.5rem;

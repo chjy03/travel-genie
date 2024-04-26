@@ -30,17 +30,21 @@
       width: 100%;
     }
 
-    button {
+    .bookNowBtn {
+      display: block;
+      text-align: center;
+      background-color: var(--PrimaryColor);
+      color: white;
       padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
       border-radius: 5px;
-      font-size: 16px;
+      text-decoration: none;
+      margin-top: 20px;
+      font-weight: bold;
+      transition: background-color 0.3s;
       cursor: pointer;
 
       &:hover {
-        background-color: #0056b3;
+        background-color: var(--SecondaryColor);
       }
     }
 

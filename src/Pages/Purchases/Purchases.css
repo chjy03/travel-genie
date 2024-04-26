@@ -53,6 +53,13 @@
   color: var(--blackColor);
   z-index: 1;
 }
+.pastPayments .pageTitle .clarification {
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+  color: var(--blackColor);
+  z-index: 1;
+}
 .pastPayments .container {
   display: grid;
   grid-template-columns: auto 1fr; /* Search bar width is auto, card list takes remaining space */
@@ -62,7 +69,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-inline-start: 100px;
   margin-bottom: 20px;
+  width: 800px;
 }
 .pastPayments .container .filter-section label {
   margin-right: 10px;
@@ -70,6 +79,7 @@
 .pastPayments .container .filter-section input {
   padding: 5px;
   margin: 10px;
+  margin-left: 0px;
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
@@ -90,19 +100,18 @@
 .pastPayments .container .filter-section #filter-btn:hover {
   background-color: #0056b3;
 }
-.pastPayments .container #all-btn {
+.pastPayments .container .filter-section #all-btn {
+  width: 300px;
   padding: 5px 10px;
   margin-top: 0px;
-  margin-bottom: 5px;
-  margin-inline-start: 700px;
-  width: 100px;
+  margin-left: 10px;
   border: none;
   border-radius: 5px;
   background: var(--gradientColor);
   color: #fff;
   cursor: pointer;
 }
-.pastPayments .container #all-btn:hover {
+.pastPayments .container .filter-section #all-btn:hover {
   background-color: #0056b3;
 }
 .pastPayments .container #past-purchases-table {
