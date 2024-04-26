@@ -1,24 +1,21 @@
 .login {
-  width: 600px;
+  width: 500px;
   position: relative;
   display: grid;
   align-items: center;
   justify-content: center;
   margin: auto;
   padding: 8rem;
-  padding-bottom: 55rem;
-  height: 900px;
+  height: 800px;
 }
 
 .login .homeCard {
-  width: 600px;
+  width: 550px;
   border-radius: 1rem;
   background: var(--whiteColor);
   position: relative;
   gap: 1rem;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -28,8 +25,6 @@
   align-items: center;
   gap: 9px;
   width: 100%;
-  margin-top: 30px;
-  padding-top: 2rem;
 }
 
 .login .text {
@@ -45,7 +40,7 @@
 }
 
 .login .inputs {
-  margin-top: 55px;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -55,8 +50,8 @@
   display: flex;
   align-items: center;
   margin: auto;
-  width: 480px;
-  height: 80px;
+  width: 400px;
+  height: 70px;
   border-radius: 6px;
   background: hsl(240, 4%, 89%);
 }
@@ -93,12 +88,12 @@
   flex-direction: column; /* Change to column layout */
   align-items: center; /* Center align items */
   gap: 30px;
-  margin: 60px auto;
+  margin: 45px auto;
 }
 
 .login .submit-container .submit {
-  width: 220px;
-  height: 59px;
+  width: 180px;
+  height: 50px;
   background: var(--SecondaryColor);
   border-radius: 50px;
   font-size: 19px;

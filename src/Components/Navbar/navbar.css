@@ -100,9 +100,6 @@
     left: 50%;
     transition: width 0.15s ease;
   }
-  .header .navBar .navLists .btn {
-    margin-top: 0.8rem;
-  }
   .header .navBar .navLists .btn a {
     color: rgb(255, 255, 255);
     transition: color 0.15s ease-in-out;
