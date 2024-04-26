@@ -1,7 +1,7 @@
 import React from 'react';
 import './forgotPassword.css';
 import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
-import forgotPasswordImage from '../../../Assets/scenery2.jpg';
+import forgotPasswordImage from '../../../Assets/image1.png';
 import { FaArrowLeft } from 'react-icons/fa';
 
 const ForgotPassword = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './report.css';
-import reportImage from '../../../Assets/scenery1.jpg'; 
+import reportImage from '../../../Assets/image2.jpg'; 
 
 const Report = () => {
     const [issueText, setIssueText] = useState(''); // State to hold the textarea value

@@ -155,4 +155,8 @@ textarea:focus {
 
 .post {
   font-size: 20px;
+}
+.post h2 {
+  text-align: left;
+  margin-left: 0;
 }/*# sourceMappingURL=forum.css.map */
