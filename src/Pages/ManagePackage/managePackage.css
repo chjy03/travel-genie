@@ -63,6 +63,11 @@
 .managePackage form button[type=submit]:hover {
   background-color: var(--SecondaryColor);
 }
+.managePackage .success-message {
+  color: rgb(49, 49, 159);
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
 @media screen and (max-width: 768px) {
   .managePackage {
     width: 90%;
