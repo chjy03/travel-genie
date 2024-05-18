@@ -93,6 +93,10 @@ const BookingPage = () => {
     return icPassportRegex.test(icPassport);
   };
 
+  const handleReadMoreClick = () => {
+    setShowPolicyDetails(!showPolicyDetails);
+  };
+
   return (
     <div className="bookingPage">
       <h2>Booking Page for Package ID: {id}</h2>
@@ -170,10 +174,33 @@ const BookingPage = () => {
           />
           <label htmlFor="policyCheck">
             I have read and accept the booking policy. By clicking this, you agree to our booking policy.{' '}
-            <span style={{ color: 'blue' }}>Read more</span>
+            <span style={{ color: 'blue', cursor: 'pointer' }} onClick={handleReadMoreClick}>
+              {showPolicyDetails ? 'Hide details' : 'Read more'}
+            </span>
           </label>
+          {showPolicyDetails && (
+            <div className="policyDetails">
+              <p>
+                <strong>Booking Policy</strong>
+                <br /><br/>
+                <strong>Booking Confirmation:</strong> Your booking is confirmed only after full payment has been received and a confirmation email has been sent to the email address provided during the booking process.
+                <br />
+                <strong>Payment:</strong> We accept payment via credit/debit card, PayPal, and other approved payment methods as indicated on our website. Full payment is required at the time of booking unless stated otherwise.
+                <br />
+                <strong>Cancellation Policy:</strong> Cancellation fees may apply depending on the type of booking, the time of cancellation, and the terms and conditions of the service provider (airline, hotel, etc.). Please refer to your booking confirmation email for specific cancellation policies.
+                <br />
+                <strong>Refunds:</strong> Refunds, if applicable, will be processed according to the cancellation policy and will be credited to the original payment method used during the booking. Refund processing times may vary depending on the payment method and the service provider's policy.
+                <br />
+                <strong>Changes to Bookings:</strong> Changes to your booking may be allowed depending on availability and the terms and conditions of the service provider. Additional charges may apply for booking changes. Please refer to your booking confirmation email for more information.
+                <br />
+              <strong>Travel Documents:</strong> It is the responsibility of the traveler to ensure that all travel documents (passport, visa, etc.) are valid and up-to-date. TravelGenie is not responsible for any issues arising due to invalid or missing travel documents.
+              <br />
+              <strong>Travel Insurance:</strong> We highly recommend that you purchase travel insurance to protect yourself against unforeseen circumstances such as trip cancellations, medical emergencies, and lost luggage. TravelGenie does not provide travel insurance, but we can assist you in finding suitable coverage.
+              <br /><br/>
+            </p>
+          </div>
+        )}
         </div>
-
         <button type="submit">Book Now</button>
       </form>
     </div>
