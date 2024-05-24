@@ -1,3 +1,5 @@
+//models
+//ManagePackage.js
 const mongoose = require('mongoose');
 
 const managePackageSchema = new mongoose.Schema({
@@ -21,10 +23,18 @@ const managePackageSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  duration: {
-    type: String,
+  dayDuration: {
+    type: Number,
     required: true
   },
+  nightDuration: {
+    type: Number,
+    required: true
+  },
+  // duration: {
+  //   type: String,
+  //   required: true
+  // },
   location: {
     type: String,
     required: true
@@ -42,7 +52,11 @@ const managePackageSchema = new mongoose.Schema({
       type: Date,
       required: true
     }
-  }]
+  }],
+  itinerary: {
+    type: [String],
+    required: true
+  }
 });
 
 module.exports = mongoose.model('ManagePackage', managePackageSchema);
