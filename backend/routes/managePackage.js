@@ -1,10 +1,12 @@
+//routes
+//managePackage.js
 const express = require('express');
 const router = express.Router();
 const ManagePackage = require('../models/ManagePackage');
 
 // Add a travel package
 router.post('/', async (req, res) => {
-  const { id, imgSrc, title, description, price, duration, location, numberOfDates, dateRanges } = req.body;
+  const { id, imgSrc, title, description, price, dayDuration, nightDuration, location, numberOfDates, dateRanges, itinerary } = req.body;
 
   const managePackage = new ManagePackage({
     id,
@@ -12,10 +14,12 @@ router.post('/', async (req, res) => {
     title,
     description,
     price,
-    duration,
+    dayDuration,
+    nightDuration,
     location,
     numberOfDates,
-    dateRanges
+    dateRanges,
+    itinerary
   });
 
   try {
@@ -23,6 +27,16 @@ router.post('/', async (req, res) => {
     res.status(201).json(newManagePackage);
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+});
+
+// Fetch all manage packages with specific fields
+router.get('/', async (req, res) => {
+  try {
+    const managePackages = await ManagePackage.find().select('id imgSrc title location description price dayDuration nightDuration numberOfDates dateRanges itinerary');
+    res.json(managePackages);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
