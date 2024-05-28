@@ -131,7 +131,7 @@ import axios from 'axios';
 
 const ManagePackage = () => {
     const [formData, setFormData] = useState({
-        id: '',
+        // id: '',
         imgSrc: '',
         title: '',
         description: '',
@@ -209,7 +209,7 @@ const ManagePackage = () => {
             console.log('Manage package added successfully!');
             alert('Package submitted successfully! Please wait for admin approval.');
             setFormData({
-                id: '',
+                // id: '',
                 imgSrc: '',
                 title: '',
                 description: '',
@@ -239,7 +239,7 @@ const ManagePackage = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="id">ID:</label>
-                    <input type="text" id="id" name="id" value={formData.id} onChange={handleChange} required />
+                    <input type="number" id="id" name="id" value={formData.id} onChange={handleChange} required />
                 </div>
                 <div>
                     <label htmlFor="imgSrc">Image URL:</label>

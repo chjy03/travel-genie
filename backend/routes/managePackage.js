@@ -6,10 +6,10 @@ const ManagePackage = require('../models/ManagePackage');
 
 // Add a travel package
 router.post('/', async (req, res) => {
-  const { id, imgSrc, title, description, price, dayDuration, nightDuration, location, numberOfDates, dateRanges, itinerary } = req.body;
+  const { imgSrc, title, description, price, dayDuration, nightDuration, location, numberOfDates, dateRanges, itinerary } = req.body;
 
   const managePackage = new ManagePackage({
-    id,
+    // id,
     imgSrc,
     title,
     description,
@@ -39,5 +39,31 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// Fetch a single manage package by ID
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const managePackage = await ManagePackage.findById(req.params.id);
+//     if (!managePackage) {
+//       return res.status(404).json({ message: 'Package not found' });
+//     }
+//     res.json(managePackage);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
+router.get('/:id', async (req, res) => {
+  try {
+    const managePackage = await ManagePackage.findOne({ id: req.params.id });
+    if (!managePackage) {
+      return res.status(404).json({ message: 'Package not found' });
+    }
+    res.json(managePackage);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
 
 module.exports = router;
