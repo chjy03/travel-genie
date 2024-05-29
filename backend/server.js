@@ -97,6 +97,7 @@ mongoose.connect('mongodb://localhost:27017/TravelGenie', {
 // Use route files
 app.use('/api/manage-package', require('./routes/managePackage'));
 app.use('/api/bookingPage', require('./routes/bookingPage'));
+app.use('/api/report', require('./routes/report'));
 
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
