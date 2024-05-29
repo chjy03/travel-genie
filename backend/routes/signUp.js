@@ -32,7 +32,7 @@ const User = require('../models/User'); // Ensure this path is correct
 //     }
 // });
 
-// Route to handle signUp submission
+// POST new users
 router.post('/', async (req, res) => {
     try {
         // Destructuring the data from the request body
@@ -40,32 +40,24 @@ router.post('/', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ name, email, password: hashedPassword, userType});
         await newUser.save();
+        console.log('New user created successfully:', newUser);
         res.status(201).json({ message: "User created successfully" });
     }catch(error){
         res.status(500).json({error: "Error signing up"});
     }
 });
 
-//     if (!name || !email ||!password || !userType) {
-//       return res.status(400).send({ error: 'Please fill in all the details' });
-//     }
 
-//     // Create a new Report instance
-//     const newUser = new User({
-//       name, email, password: hashedPassword, userType // Use consistent field name
-//     });
+// GET registered users
+router.get('/', async (req, res) => {
+    try{
+        const users = await User.find();
+        console.log('Existing Users:', users);
+        res.status(201).json(users);
+    }catch(error){
+        res.status(500).json({error: "Unable to get users"});
+    }
+});
 
-//     // Save the report to the database
-//     await newUser.save();
-
-//     console.log('User created successfully:', newUser);
-
-//     // Send response
-//     res.status(201).send(newUser);
-//   } catch (error) {
-//     console.error('Error register:', error);
-//     res.status(500).send({ error: 'Error register. Please try again later.' });
-//   }
-// });
 
 module.exports = router;
