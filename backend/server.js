@@ -119,7 +119,7 @@ app.use('/api/manage-package', require('./routes/managePackage'));
 app.use('/api/bookingPage', require('./routes/bookingPage'));
 app.use('/api/report', require('./routes/report'));
 app.use('/api/signUp', require('./routes/signUp'));
-
+app.use('/api/login', require('./routes/login'));
 
 
 

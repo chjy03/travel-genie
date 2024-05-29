@@ -3,7 +3,8 @@ import './navbar.css';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { TbGridDots } from 'react-icons/tb';
 import { IoPersonCircle } from 'react-icons/io5';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+// import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logoImage from '../../Assets/logo.jpg';
 
 const Navbar = () => {
@@ -11,7 +12,9 @@ const Navbar = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [showPackageDropdown, setShowPackageDropdown] = useState(false);
     const [showManagePackageDropdown, setShowManagePackageDropdown] = useState(false);
-
+    
+    const navigate = useNavigate();
+    
     // const location = useLocation();
 
     const toggleNav = () => {
@@ -33,14 +36,11 @@ const Navbar = () => {
     const handleLogout = () => {
         const confirmLogout = window.confirm('Are you sure you want to log out?');
         if (confirmLogout) {
-            // Perform logout action here (e.g., clear session, redirect, etc.)
-            // Redirect to the login page ("/logIn")
-            window.location.href = '/logIn';
+            localStorage.removeItem('token');
+            navigate('/logIn');
+            // window.location.href = '/logIn';
         }
     };
-
-    // // Determine if we are on the signUp or logIn page
-    // const isAuthPage = location.pathname === '/signUp' || location.pathname === '/logIn';
 
     return (
         <section className='navBarSection'>

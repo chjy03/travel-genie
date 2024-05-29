@@ -84,6 +84,8 @@ import Card from './Pages/Card/Card';
 import Purchases from './Pages/Purchases/Purchases';
 
 const App = () => {
+    const isUserSignedIn = !!localStorage.getItem('token');
+
     return (
         <Router>
             <div className="App">
@@ -111,7 +113,8 @@ const App = () => {
                     <Route path="/home-listing" element={<HomeListing />} />
 
                     <Route path="/card" element={<Card />} />
-                    <Route path="/purchases" element={<Purchases />} />
+                    {isUserSignedIn && <Route path="/purchases" element={<Purchases />} />}
+                    
                 </Routes>
                 <Footer />
             </div>
