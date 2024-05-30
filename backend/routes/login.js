@@ -9,11 +9,11 @@ const SECRET_KEY = 'secret';
 // POST LOGIN
 router.post('/', async (req, res) => {
     try {
-        const { name, password } = req.body;
+        const { email, password } = req.body;
 
-        console.log('Login attempt:', { name, password });
+        console.log('Login attempt:', { email, password });
 
-        const user = await User.findOne({ name });
+        const user = await User.findOne({ email });
         if (!user) {
             console.log('User not found');
             return res.status(401).json({ error: "Invalid credentials" });
@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: "1h" });
-        console.log('Login successful:', { userId: user._id });
+        console.log('Login successful:', { userId: user._id, token });
 
         res.json({ message: "Login successfully", token });
     } catch (error) {

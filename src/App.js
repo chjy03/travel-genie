@@ -74,7 +74,7 @@ import SignUp from './Pages/GeneralModule/SignUp/SignUp';
 import ForgotPassword from './Pages/GeneralModule/ForgotPassword/ForgotPassword';
 import Profile from './Pages/GeneralModule/Profile/Profile';
 import Login from './Pages/GeneralModule/SignUp/logIn';
-import PackageListing from './Pages/PackageListing/PackageListing'; // Remove Data import
+import PackageListing from './Pages/PackageListing/PackageListing'; 
 import PackageDetail from './Pages/PackageDetail/PackageDetail';
 import BookingPage from './Pages/BookingPage/BookingPage';
 import ManagePackage from './Pages/ManagePackage/ManagePackage';
@@ -82,6 +82,7 @@ import Report from './Pages/GeneralModule/Report/Report';
 import HomeListing from './Pages/Home/HomeListing';
 import Card from './Pages/Card/Card';
 import Purchases from './Pages/Purchases/Purchases';
+import ResetPassword from './Pages/GeneralModule/ResetPassword/ResetPassword';
 
 const App = () => {
     const isUserSignedIn = !!localStorage.getItem('token');
@@ -104,7 +105,7 @@ const App = () => {
                     <Route path="/forgotPassword" element={<ForgotPassword />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/logIn" element={<Login />} />
-
+                    <Route path="/resetPassword/:token" element={<ResetPassword />} />
                     <Route path="/package-listing" element={<PackageListing />} />
                     <Route path="/package/:id" element={<PackageDetail />} /> {/* Remove data prop */}
                     <Route path="/booking/:id" element={<BookingPage />} />

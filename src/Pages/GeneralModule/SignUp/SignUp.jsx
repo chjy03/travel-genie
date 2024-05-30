@@ -45,7 +45,7 @@ const SignUp = () => {
                 console.log(result);
                 if (result.status === 201) {
                     console.log('User registered successfully. Redirecting to login page.');
-                    alert('User registered successfully. Redirecting to login page.');
+                    alert('User registered successfully.');
                     navigate('/logIn');
                 } else {
                     console.error('Failed to sign up');
