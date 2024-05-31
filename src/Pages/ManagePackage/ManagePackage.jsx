@@ -202,39 +202,13 @@ const ManagePackage = () => {
         return Array.from({ length: days }, () => '');
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await axios.post('http://localhost:5000/api/manage-package', formData);
-    //         console.log('Manage package added successfully!');
-    //         alert('Package submitted successfully! Please wait for admin approval.');
-    //         setFormData({
-    //             id: '',
-    //             imgSrc: '',
-    //             title: '',
-    //             description: '',
-    //             price: '',
-    //             dayDuration: '',
-    //             nightDuration: '',
-    //             location: '',
-    //             numberOfDates: '',
-    //             dateRanges: [],
-    //             itinerary: [],
-    //         });
-    //     } catch (error) {
-    //         console.error('Error adding manage package:', error);
-    //     }
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
     
         try {
-            const response = await axios.post('http://localhost:5000/api/manage-package', formData);
-            console.log('Manage package added successfully!', response.data);
+            await axios.post('http://localhost:5000/api/manage-package', formData);
+            console.log('Manage package added successfully!');
             alert('Package submitted successfully!');
-            
-            // Reset form data after successful submission
             setFormData({
                 id: '',
                 imgSrc: '',
