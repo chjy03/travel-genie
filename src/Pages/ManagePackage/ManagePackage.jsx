@@ -131,7 +131,7 @@ import axios from 'axios';
 
 const ManagePackage = () => {
     const [formData, setFormData] = useState({
-        // id: '',
+        id: '',
         imgSrc: '',
         title: '',
         description: '',
@@ -202,14 +202,41 @@ const ManagePackage = () => {
         return Array.from({ length: days }, () => '');
     };
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         await axios.post('http://localhost:5000/api/manage-package', formData);
+    //         console.log('Manage package added successfully!');
+    //         alert('Package submitted successfully! Please wait for admin approval.');
+    //         setFormData({
+    //             id: '',
+    //             imgSrc: '',
+    //             title: '',
+    //             description: '',
+    //             price: '',
+    //             dayDuration: '',
+    //             nightDuration: '',
+    //             location: '',
+    //             numberOfDates: '',
+    //             dateRanges: [],
+    //             itinerary: [],
+    //         });
+    //     } catch (error) {
+    //         console.error('Error adding manage package:', error);
+    //     }
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
         try {
-            await axios.post('http://localhost:5000/api/manage-package', formData);
-            console.log('Manage package added successfully!');
-            alert('Package submitted successfully! Please wait for admin approval.');
+            const response = await axios.post('http://localhost:5000/api/manage-package', formData);
+            console.log('Manage package added successfully!', response.data);
+            alert('Package submitted successfully!');
+            
+            // Reset form data after successful submission
             setFormData({
-                // id: '',
+                id: '',
                 imgSrc: '',
                 title: '',
                 description: '',
@@ -222,9 +249,25 @@ const ManagePackage = () => {
                 itinerary: [],
             });
         } catch (error) {
-            console.error('Error adding manage package:', error);
+            if (error.response) {
+                // The server responded with a status other than 2xx
+                console.error('Error response data:', error.response.data);
+                console.error('Error response status:', error.response.status);
+                console.error('Error response headers:', error.response.headers);
+                alert('Failed to submit package. Server responded with an error.');
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error('Error request data:', error.request);
+                alert('Failed to submit package. No response from server.');
+            } else {
+                // Something happened in setting up the request that triggered an error
+                console.error('Error message:', error.message);
+                alert('Failed to submit package. An error occurred while setting up the request.');
+            }
+            console.error('Error config:', error.config);
         }
     };
+    
 
     const getTomorrowDate = () => {
         const today = new Date();

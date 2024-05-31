@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     const bookingPage = new BookingPage({
       packageId,
       selectedDate,
-      formData: persons // Here, `persons` is the array of form data
+      persons
     });
 
     // Save the booking to the database
