@@ -3,19 +3,37 @@ const router = express.Router();
 const Report = require('../models/Report'); // Ensure this path is correct
 
 // Function to get the current date and time in Malaysia's timezone
-const getMalaysiaDateTime = () => {
-    const date = new Date();
-    const options = {
-        timeZone: 'Asia/Kuala_Lumpur',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-    };
-    return new Intl.DateTimeFormat('en-GB', options).format(date);
+const getFormattedDate = (timestamp) => {
+  let date = new Date(timestamp);
+  // If hour is 24 or greater, set it to 00
+  if (date.getHours() >= 24) {
+      date.setHours(0);
+  }
+
+  const options = {
+      weekday: 'short',
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric',
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZoneName: 'short',
+      timeZone: 'Asia/Kuala_Lumpur'
+  };
+
+  let malaysiaTime = date.toLocaleString('en-US', options);
+  malaysiaTime = malaysiaTime.replace(/,/g, ''); 
+  malaysiaTime = malaysiaTime.replace(/\sGMT\+8/g, '');
+
+  const timezoneOffset = date.getTimezoneOffset();
+  const offsetSign = timezoneOffset > 0 ? '-' : '+';
+  const offsetHours = Math.abs(Math.floor(timezoneOffset / 60)).toString().padStart(2, '0');
+  const offsetMinutes = Math.abs(timezoneOffset % 60).toString().padStart(2, '0');
+  const timezoneOffsetStr = `${offsetSign}${offsetHours}${offsetMinutes.replace(':', '')}`;
+
+  return `${malaysiaTime} GMT${timezoneOffsetStr} (Malaysia Time)`;
 };
 
 // Route to handle report submission
@@ -31,7 +49,7 @@ router.post('/', async (req, res) => {
     // Create a new Report instance with the current Malaysia date and time
     const report = new Report({
       issueText,
-      date: getMalaysiaDateTime()
+      issueDate: getFormattedDate(Date.now())
     });
 
     // Save the report to the database

@@ -5,7 +5,7 @@ const ReportSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    date: {
+    issueDate: {
         type: String,
         required: true
     }

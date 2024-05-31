@@ -3,31 +3,6 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User'); 
 const router = express.Router();
 
-// Function to get the current date and time in Malaysia's timezone
-const getFormattedDate = (date) => {
-    const options = {
-        weekday: 'short',
-        month: 'short',
-        day: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        timeZone: 'Asia/Kuala_Lumpur',
-        timeZoneName: 'short',
-        hour12: true
-    };
-
-    const malaysiaTime = new Intl.DateTimeFormat('en-US', options).format(date);
-    const timezoneOffset = date.getTimezoneOffset();
-    const offsetSign = timezoneOffset > 0 ? '-' : '+';
-    const offsetHours = Math.abs(Math.floor(timezoneOffset / 60)).toString().padStart(2, '0');
-    const offsetMinutes = Math.abs(timezoneOffset % 60).toString().padStart(2, '0');
-    const timezoneOffsetStr = `${offsetSign}${offsetHours}:${offsetMinutes}`;
-
-    return `${malaysiaTime} GMT${timezoneOffsetStr} (Malaysia Time)`;
-};
-
 // Reset Password Route
 router.post('/:token', async (req, res) => {
     try {
@@ -53,11 +28,6 @@ router.post('/:token', async (req, res) => {
         // Clear the reset token and expiration
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
-
-        // Update the updatedAt field explicitly and log formatted date
-        const updatedAtTimeStamp = new Date();
-        user.updatedAt = updatedAtTimeStamp; // Store as Date object
-        console.log("Updated At: " + getFormattedDate(updatedAtTimeStamp)); // Log formatted date
 
         await user.save();
 
