@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     email: {
         type: String,
@@ -20,7 +19,23 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['tourist', 'travelAgency'],
         default: 'tourist'
+    },
+    createdAt: {
+        type: String, 
+        required: true
+    },
+    updatedAt: {
+        type: String, 
+        required: true
+    },
+    resetPasswordToken: {
+        type: String
+    },
+    resetPasswordExpires: {
+        type: String
     }
+}, {
+    timestamps: true
 });
 
 // Create user model

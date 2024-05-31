@@ -1,63 +1,77 @@
 const express = require('express');
-const router = express.Router();
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Ensure this path is correct
+const User = require('../models/User');
+const router = express.Router();
 
+// Function to get the current date and time in Malaysia's timezone
+const getFormattedDate = (date) => {
+    const options = {
+        weekday: 'short',
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short',
+        timeZone: 'Asia/Kuala_Lumpur'
+    };
 
-// router.post('/', async (req, res) => {
-//     try {
-//         // Extract user information from request body
-//         const { name, email, password, userType } = req.body;
-    
-//         // Check if the email already exists
-//         const existingUser = await User.findOne({ email: req.body.email });
-//         if (existingUser) {
-//             // If user already exists, return an error response
-//             return res.status(400).json({ error: 'Email already exists' });
-//         }
+    const malaysiaTime = new Intl.DateTimeFormat('en-US', options).format(date);
+    const timezoneOffset = date.getTimezoneOffset();
+    const offsetSign = timezoneOffset > 0 ? '-' : '+';
+    const offsetHours = Math.abs(Math.floor(timezoneOffset / 60)).toString().padStart(2, '0');
+    const offsetMinutes = Math.abs(timezoneOffset % 60).toString().padStart(2, '0');
+    const timezoneOffsetStr = `${offsetSign}${offsetHours}:${offsetMinutes}`;
 
-//         // If email is unique, create a new user
-//         const newUser = await User.create(req.body);
-
-//         // Save the new user to the database
-//         await newUser.save();
-
-//         console.log('User registered successfully:', newUser);
-//         res.status(201).json(newUser);    
-
-//     } catch (error) {
-//         console.error('Error registering user:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+    return `${malaysiaTime} GMT${timezoneOffsetStr} (Malaysia Time)`;
+};
 
 // POST new users
 router.post('/', async (req, res) => {
     try {
-        // Destructuring the data from the request body
-        const { name, email, password, userType } = req.body; // Keep the field name consistent
+        const { name, email, password, userType } = req.body;
+
+        if (!name || !email || !password || !userType) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        // Validate password
+        const validatePassword = (password) => {
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+            return passwordRegex.test(password);
+        };
+
+        if (!validatePassword(password)) {
+            return res.status(400).json({
+                error: 'Password must be at least 6 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.'
+            });
+        }
+
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Email already exists' });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ name, email, password: hashedPassword, userType});
+
+        const newUser = new User({
+            name,
+            email,
+            password: hashedPassword,
+            userType,
+            createdAt: getFormattedDate(new Date()),  // Format date as string
+            updatedAt: getFormattedDate(new Date())   // Format date as string
+        });
+
         await newUser.save();
+
         console.log('New user created successfully:', newUser);
-        res.status(201).json({ message: "User created successfully" });
-    }catch(error){
-        res.status(500).json({error: "Error signing up"});
+        res.status(201).json({ message: "User created successfully", user: newUser });
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).json({ error: 'Error signing up' });
     }
 });
-
-
-// GET registered users
-router.get('/', async (req, res) => {
-    try{
-        const users = await User.find();
-        console.log('Existing Users:', users);
-        res.status(201).json(users);
-    }catch(error){
-        res.status(500).json({error: "Unable to get users"});
-    }
-});
-
 
 module.exports = router;
