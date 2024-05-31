@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Function to get the current date and time in Malaysia's timezone
+// Function to format the date
 const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     const options = {
@@ -24,18 +24,23 @@ const formatDate = (timestamp) => {
         month: 'short',
         day: '2-digit',
         year: 'numeric',
+        hour12: false,
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        timeZoneName: 'short'
+        timeZoneName: 'short',
+        timeZone: 'Asia/Kuala_Lumpur'
     };
 
-    const malaysiaTime = new Intl.DateTimeFormat('en-US', options).format(date);
+    let malaysiaTime = date.toLocaleString('en-US', options);
+    malaysiaTime = malaysiaTime.replace(/,/g, ''); // Remove commas
+    malaysiaTime = malaysiaTime.replace(/\sGMT\+8/g, '');
+
     const timezoneOffset = date.getTimezoneOffset();
     const offsetSign = timezoneOffset > 0 ? '-' : '+';
     const offsetHours = Math.abs(Math.floor(timezoneOffset / 60)).toString().padStart(2, '0');
     const offsetMinutes = Math.abs(timezoneOffset % 60).toString().padStart(2, '0');
-    const timezoneOffsetStr = `${offsetSign}${offsetHours}:${offsetMinutes}`;
+    const timezoneOffsetStr = `${offsetSign}${offsetHours}${offsetMinutes.replace(':', '')}`;
 
     return `${malaysiaTime} GMT${timezoneOffsetStr} (Malaysia Time)`;
 };
@@ -58,13 +63,12 @@ router.post('/', async (req, res) => {
         const resetPasswordExpiresTimestamp = Date.now() + 3600000; // 1 hour
         user.resetPasswordToken = token;
         user.resetPasswordExpires = formatDate(resetPasswordExpiresTimestamp);
-        console.log("Reset Password Expires: " + user.resetPasswordExpires); 
 
         // Update the updatedAt field explicitly
         const updatedAtTimeStamp = Date.now();
-        user.updatedAt = formatDate(updatedAtTimeStamp); // Store as Date object
+        user.updatedAt = formatDate(updatedAtTimeStamp); // Format the date
         console.log("Updated At: " + user.updatedAt); // Log formatted date
-        
+
         await user.save();
 
         const mailOptions = {
@@ -75,7 +79,9 @@ router.post('/', async (req, res) => {
             Please click on the following link, or paste this into your browser to complete the process:\n\n
             http://localhost:3000/resetPassword/${token}\n\n
             If you did not request this, please ignore this email and your password will remain unchanged.\n`
+            
         };
+
 
         transporter.sendMail(mailOptions, (err, response) => {
             if (err) {
@@ -92,6 +98,8 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: 'Error processing your request' });
     }
 });
+
+module.exports = router;
 
 
 

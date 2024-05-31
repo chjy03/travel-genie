@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './resetPassword.css';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import resetPasswordImage from '../../../Assets/RP4.jpg';
 import { FaArrowLeft } from 'react-icons/fa';
 import axios from 'axios';
 
@@ -73,6 +74,9 @@ const ResetPassword = () => {
                                 Back to Login
                             </Link>
                         </p>
+                    </div>
+                    <div className='resetPasswordImage'>
+                        <img src={resetPasswordImage} alt='Reset Password' />
                     </div>
                 </div>
             </div>
