@@ -121,7 +121,7 @@ app.use('/api/report', require('./routes/report'));
 app.use('/api/signUp', require('./routes/signUp'));
 app.use('/api/login', require('./routes/login'));
 app.use('/api/forgotPassword', require('./routes/forgotPassword'));
-app.use('/api/resetPassword/:token', require('./routes/resetPassword'));
+app.use('/api/resetPassword', require('./routes/resetPassword'));
 
 
 

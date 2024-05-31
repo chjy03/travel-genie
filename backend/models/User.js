@@ -21,15 +21,19 @@ const userSchema = new mongoose.Schema({
         default: 'tourist'
     },
     createdAt: {
-        type: String, // You can also use Date type if preferred
+        type: String, 
         required: true
     },
     updatedAt: {
-        type: String, // You can also use Date type if preferred
+        type: String, 
         required: true
     },
-    resetPasswordToken: String,
-    resetPasswordExpires: Date
+    resetPasswordToken: {
+        type: String
+    },
+    resetPasswordExpires: {
+        type: String
+    }
 }, {
     timestamps: true
 });

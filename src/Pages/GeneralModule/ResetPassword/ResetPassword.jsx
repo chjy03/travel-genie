@@ -24,7 +24,11 @@ const ResetPassword = () => {
             navigate('/login');
         } catch (error) {
             console.error('Error resetting password:', error);
-            alert('Error resetting password. Please try again.');
+            if (error.response && error.response.data && error.response.data.error) {
+                alert(error.response.data.error);
+            } else {
+                alert('Error resetting password. Please try again.');
+            }
         }
     };
 

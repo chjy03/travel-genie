@@ -13,7 +13,8 @@ const ForgotPassword = () => {
 
         try {
             const response = await axios.post('http://localhost:5000/api/forgotPassword', { email });
-            alert("Check your email for reset password link")
+            //alert("Check your email for reset password link");
+            console.log("Email sent successful");
             alert(response.data.message);
         } catch (error) {
             console.error('Error sending reset link:', error);
@@ -29,7 +30,7 @@ const ForgotPassword = () => {
                         <h1>Forgot Password?</h1>
                         <div className="underline"></div>
                         <p>Enter your email address below to receive a password reset link.</p>
-                        <form className='forgotPasswordForm'>
+                        <form className='forgotPasswordForm' onSubmit={handleSubmit}>
                             <div className='formGroup'>
                                 <input
                                     type='email'
@@ -38,12 +39,13 @@ const ForgotPassword = () => {
                                     placeholder='Enter your email'
                                     required
                                     className='emailInput'
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <button type='submit'>Send Reset Link</button>
                         </form>
                         <p className='backToLogin'>
-                            {/* Use Link component instead of anchor tag */}
                             <Link to='/login' style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
                                 <FaArrowLeft style={{ marginRight: '5px' }} />
                                 Back to Login
@@ -60,6 +62,7 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
+
 
 
 

@@ -16,10 +16,35 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// Function to get the current date and time in Malaysia's timezone
+const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const options = {
+        weekday: 'short',
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short'
+    };
+
+    const malaysiaTime = new Intl.DateTimeFormat('en-US', options).format(date);
+    const timezoneOffset = date.getTimezoneOffset();
+    const offsetSign = timezoneOffset > 0 ? '-' : '+';
+    const offsetHours = Math.abs(Math.floor(timezoneOffset / 60)).toString().padStart(2, '0');
+    const offsetMinutes = Math.abs(timezoneOffset % 60).toString().padStart(2, '0');
+    const timezoneOffsetStr = `${offsetSign}${offsetHours}:${offsetMinutes}`;
+
+    return `${malaysiaTime} GMT${timezoneOffsetStr} (Malaysia Time)`;
+};
+
 // Forgot Password Route
 router.post('/', async (req, res) => {
     try {
         const { email } = req.body;
+        
         const user = await User.findOne({ email });
 
         if (!user) {
@@ -30,9 +55,16 @@ router.post('/', async (req, res) => {
         const token = crypto.randomBytes(20).toString('hex');
 
         // Set the token and its expiration date on the user object
+        const resetPasswordExpiresTimestamp = Date.now() + 3600000; // 1 hour
         user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        user.resetPasswordExpires = formatDate(resetPasswordExpiresTimestamp);
+        console.log("Reset Password Expires: " + user.resetPasswordExpires); 
 
+        // Update the updatedAt field explicitly
+        const updatedAtTimeStamp = Date.now();
+        user.updatedAt = formatDate(updatedAtTimeStamp); // Store as Date object
+        console.log("Updated At: " + user.updatedAt); // Log formatted date
+        
         await user.save();
 
         const mailOptions = {
@@ -50,13 +82,19 @@ router.post('/', async (req, res) => {
                 console.error('Error sending email:', err);
                 return res.status(500).json({ error: 'Error sending email' });
             }
-            res.status(200).json({ message: 'An email has been sent to ' + user.email + ' with further instructions.' });
+            console.log("An email was successfully sent to " + user.email);
+            res.status(200).json({ 
+                message: 'An email has been sent to ' + user.email + ' with further instructions.',
+            });
         });
     } catch (error) {
         console.error('Error in forgot password process:', error);
         res.status(500).json({ error: 'Error processing your request' });
     }
 });
+
+
+
 
 // Reset Password Route
 // router.post('/', async (req, res) => {
