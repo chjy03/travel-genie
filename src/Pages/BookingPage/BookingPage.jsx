@@ -462,22 +462,18 @@ const BookingPage = () => {
     const fetchPackageData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/manage-package/${id}`);
-        console.log('Package data:', response.data); // Log the response data
+        console.log('Package data:', response.data);
         setPackageData(response.data);
-        
-        // Check if dateRanges array exists in the response data
+
         if (response.data.dateRanges && Array.isArray(response.data.dateRanges)) {
-          // If dateRanges array exists, set it as availableDates
           setAvailableDates(response.data.dateRanges);
         } else {
-          // If dateRanges array doesn't exist or is not an array, set availableDates as an empty array
           setAvailableDates([]);
         }
       } catch (error) {
         console.error('Error fetching package data:', error);
       }
     };
-    
 
     fetchPackageData();
   }, [id]);
@@ -523,12 +519,11 @@ const BookingPage = () => {
         persons: formData
       };
 
-      console.log('Booking data to be sent:', bookingData);
-      
+      console.log('Booking data to be sent:', bookingData); // Log the data being sent
+
       await axios.post('http://localhost:5000/api/bookingPage', bookingData);
       console.log('Booking submitted successfully!');
       alert('Booking submitted successfully!');
-      // Clear form after successful submission
       setSelectedDate('');
       setTotalPersons(1);
       setFormData([
@@ -539,19 +534,17 @@ const BookingPage = () => {
           icPassport: ''
         }
       ]);
-      window.location.href = "/payment"; // Redirect to payment page
+      window.location.href = "/payment";
     } catch (error) {
       console.error('Error submitting booking:', error);
     }
   };
 
-  // Function to validate phone number format
   const isValidPhoneNumber = (phoneNumber) => {
     const phoneRegex = /^\+?\d{8,15}$/;
     return phoneRegex.test(phoneNumber);
   };
 
-  // Function to validate IC/Passport format
   const isValidICPassport = (icPassport) => {
     const icPassportRegex = /^[A-Za-z0-9]{6,}$/;
     return icPassportRegex.test(icPassport);
@@ -564,7 +557,7 @@ const BookingPage = () => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  };  
+  };
 
   return (
     <div className="bookingPage">
@@ -673,15 +666,20 @@ const BookingPage = () => {
                 <br />
                 <strong>Changes to Bookings:</strong> Changes to your booking may be allowed depending on availability and the terms and conditions of the service provider. Additional charges may apply for booking changes. Please refer to your booking confirmation email for more information.
                 <br />
-                <strong>Travel Documents:</strong> It is the responsibility of the traveler to ensure that all travel documents (passport, visa, etc.) are valid and up-to-date. TravelGenie is not responsible for any issues arising due to invalid or missing travel documents.
+                <strong>Travel Documents:</strong> It is the responsibility of the traveler to ensure that all travel documents (passport, visa, etc.) are valid and up-to-date. We are not liable for any issues or delays caused by incomplete or incorrect travel documentation.
                 <br />
-                <strong>Travel Insurance:</strong> We highly recommend that you purchase travel insurance to protect yourself against unforeseen circumstances such as trip cancellations, medical emergencies, and lost luggage. TravelGenie does not provide travel insurance, but we can assist you in finding suitable coverage.
-                <br /><br/>
+                <strong>Liability:</strong> We act as an intermediary between you and the service providers (airlines, hotels, etc.) and are not liable for any loss, damage, or injury resulting from the actions or omissions of these providers. Our liability is limited to the amount paid for the booking.
+                <br />
+                <strong>Travel Insurance:</strong> We strongly recommend purchasing travel insurance to cover unforeseen events such as trip cancellations, medical emergencies, and lost luggage. Travel insurance is not included in the booking unless specified.
+                <br />
+                <strong>Governing Law:</strong> These booking terms and conditions are governed by the laws of Malaysia. Any disputes arising from the booking will be subject to the exclusive jurisdiction of the courts of Malaysia.
+                <br /><br />
+                <strong>Contact Information:</strong> If you have any questions or need assistance with your booking, please contact our customer support team at <strong>booking@travelflix.com</strong>.
               </p>
             </div>
           )}
         </div>
-        <button type="submit">Book Now</button>
+        <button type="submit">Submit Booking</button>
       </form>
     </div>
   );
