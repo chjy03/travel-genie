@@ -31,10 +31,6 @@ const managePackageSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  // duration: {
-  //   type: String,
-  //   required: true
-  // },
   location: {
     type: String,
     required: true

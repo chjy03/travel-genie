@@ -172,6 +172,84 @@
 
 
 //connect using _id
+// import React, { useEffect, useState } from 'react';
+// import { Link, useParams } from 'react-router-dom';
+// import './packageDetail.css';
+// import { HiOutlineLocationMarker } from "react-icons/hi";
+
+// const PackageDetail = () => {
+//   const { id } = useParams();
+//   const [packageData, setPackageData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     fetch(`http://localhost:5000/api/manage-package/${id}`)
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('Failed to fetch package');
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         setPackageData(data);
+//         setLoading(false);
+//       })
+//       .catch(error => {
+//         console.error('Error fetching data:', error);
+//         setError(error.message);
+//         setLoading(false);
+//       });
+//   }, [id]);
+
+//   if (loading) {
+//     return <div>Loading...</div>; // You can replace this with a loading spinner or animation
+//   }
+
+//   if (error) {
+//     return <div>Error: {error}</div>; // You can customize the error message or UI here
+//   }
+
+//   if (!packageData) {
+//     return <h2>Package not found</h2>;
+//   }
+
+//   const { imgSrc, title, location, description, price, dayDuration, nightDuration, itinerary } = packageData;
+
+//   return (
+//     <div className="packageDetail">
+//       <div className="detailHeader">
+//         <img src={imgSrc} alt={title} />
+//         <h2>{title}</h2>
+//         <div className='location flex'>
+//           <HiOutlineLocationMarker className="icon"/>
+//           <h3>{location}</h3>
+//         </div>
+//       </div>
+//       <div className="detailContent">
+//         <p>{description}</p>
+//         <div className="price">Price: RM {price}</div>
+//         <div className="duration">
+//           <div>Duration: {dayDuration} Days / {nightDuration} Nights</div>
+//         </div>
+//         <div className="itinerary">
+//           <h4>Itinerary:</h4>
+//           <ul>
+//             {itinerary && itinerary.map((item, index) => (
+//               <li key={index}>{item}</li>
+//             ))}
+//           </ul>
+//         </div>
+//         <Link to={`/booking/${id}`} className="bookNowBtn">Book Now</Link>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PackageDetail;
+
+
+//update version fetch from mongodb
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './packageDetail.css';
@@ -236,7 +314,7 @@ const PackageDetail = () => {
           <h4>Itinerary:</h4>
           <ul>
             {itinerary && itinerary.map((item, index) => (
-              <li key={index}>{item}</li>
+              <li key={index}>{`Day ${index + 1}: ${item}`}</li>
             ))}
           </ul>
         </div>
