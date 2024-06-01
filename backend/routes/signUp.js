@@ -85,4 +85,16 @@ router.post('/', async (req, res) => {
     }
 });
 
+// GET registered users
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find();
+        console.log('Existing Users:', users);
+        res.status(200).json(users);
+    } catch (error) {
+        console.error('Unable to get users:', error);
+        res.status(500).json({ error: 'Unable to get users' });
+    }
+});
+
 module.exports = router;
