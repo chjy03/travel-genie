@@ -26,9 +26,15 @@ const bookingPageSchema = new mongoose.Schema({
       type: String,
       required: true
     }
-  }]
+  }],
+  status: {
+    type: String,
+    enum: ['unpaid', 'paid'],
+    default: 'unpaid'
+  }
 });
 
 const BookingPage = mongoose.model('BookingPage', bookingPageSchema);
 
 module.exports = BookingPage;
+
