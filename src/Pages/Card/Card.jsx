@@ -78,25 +78,71 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Card.css'
-
+import './Card.css';
 
 const Card = () => {
   const [paymentMessage, setPaymentMessage] = useState('');
-  const navigate = useNavigate(); // Use the `useNavigate` hook for navigation
+  const [bookingId, setBookingId] = useState('');
+  const navigate = useNavigate();
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    alert('Payment Successful!');
+  useEffect(() => {
+    // Fetch the booking ID with unpaid status when the component mounts
+    const fetchUnpaidBookingId = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/bookingPage');
+        const bookingData = await response.json();
+
+        // Filter the booking with unpaid status
+        const unpaidBooking = bookingData.find(booking => booking.status === 'unpaid');
+        
+        if (unpaidBooking) {
+          setBookingId(unpaidBooking._id);
+        } else {
+          setPaymentMessage('No unpaid booking found.');
+        }
+      } catch (error) {
+        console.error('Error fetching booking ID:', error);
+        setPaymentMessage('Error fetching booking ID. Please try again later.');
+      }
+    };
+
+    fetchUnpaidBookingId();
+  }, []);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!bookingId) {
+      setPaymentMessage('No unpaid booking found.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/bookingPage/${bookingId}/status`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'paid' }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update payment status');
+      }
+
+      alert('Payment Successful!');
+      setTimeout(() => {
+        navigate('/purchases'); // Navigate to purchases page
+      }, 2000);
+    } catch (error) {
+      console.error('Error updating payment status:', error);
+      alert('Error processing payment. Please try again.');
+    }
   };
 
   const handleBack = () => {
     navigate('/payment'); // Navigate back to the payment route
   };
-
-  useEffect(() => {
-    // Run when the component is mounted
-  }, []); // Empty dependency array to run only once when the component mounts
 
   return (
     <section className='card'>
@@ -130,12 +176,12 @@ const Card = () => {
                 <input type='text' placeholder="3 digits" required />
               </div>
             </div>
-            <div class="button-container">
-                <button id="back-btn" onClick={handleBack}>Back</button>
-                <button id='pay-btn'type="submit">Pay Now</button>
+            <div className="button-container">
+              <button id="back-btn" onClick={handleBack}>Back</button>
+              <button id='pay-btn' type="submit">Pay Now</button>
             </div>
+            <div id="message">{paymentMessage}</div>
           </form>
-            
         </div>
       </div>
     </section>
@@ -143,3 +189,4 @@ const Card = () => {
 };
 
 export default Card;
+
