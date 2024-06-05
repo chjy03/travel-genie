@@ -6,13 +6,14 @@ const BookingPage = require('../models/BookingPage');
 router.post('/', async (req, res) => {
   try {
     // Destructuring the data from the request body
-    const { packageId, selectedDate, persons } = req.body;
+    const { packageId, selectedDate, persons, status = 'unpaid' } = req.body;
     
     // Create a new BookingPage instance
     const bookingPage = new BookingPage({
       packageId,
       selectedDate,
-      persons
+      persons, // Here, `persons` is the array of form data
+      status   // Default to 'unpaid' if not provided
     });
 
     // Save the booking to the database
@@ -28,5 +29,27 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+// Route to get all bookings
+router.get('/', async (req, res) => {
+  try {
+    const bookingPage = await BookingPage.find().select('packageId selectedDate status');
+    res.json(bookingPage);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
+// Route to get a booking by packageId
+router.get('/:packageId', async (req, res) => {
+  try {
+    const bookingPage = await BookingPage.findOne({ packageId: req.params.packageId });
+    if (!bookingPage) {
+      return res.status(404).json({ message: 'Package not found' });
+    }
+    res.json(bookingPage);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+module.exports = router;
