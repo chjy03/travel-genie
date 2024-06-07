@@ -42,7 +42,7 @@
   padding: 10px;
 }
 .pastPayments .pageTitle {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .pastPayments .pageTitle .title {
   position: center;
@@ -52,14 +52,13 @@
   padding-top: 3rem;
   color: var(--blackColor);
   z-index: 1;
-  margin-bottom: 15px;
 }
 .pastPayments .pageTitle .clarification {
   width: -moz-max-content;
   width: max-content;
   margin: 0 auto;
-  color: var(--textColor);
-  font-weight: 700;
+  font-size: 12px;
+  color: var(--blackColor);
   z-index: 1;
 }
 .pastPayments .container {
@@ -71,17 +70,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-inline-start: 100px;
-  margin-bottom: 20px;
+  margin-inline-start: 120px;
+  margin-bottom: 10px;
   width: 800px;
 }
 .pastPayments .container .filter-section label {
   margin-right: 10px;
 }
 .pastPayments .container .filter-section input {
-  padding: 5px;
-  margin: 10px;
-  margin-left: 0px;
+  width: 300px;
+  padding: 20px;
+  margin-left: 90px;
+  margin-bottom: 25px;
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
@@ -91,7 +91,8 @@
 }
 .pastPayments .container .filter-section #filter-btn {
   padding: 5px 10px;
-  margin-left: px;
+  margin-left: 0px;
+  margin-bottom: 24px;
   width: 60px;
   border: none;
   border-radius: 5px;
@@ -103,10 +104,11 @@
   background-color: #0056b3;
 }
 .pastPayments .container .filter-section #all-btn {
-  width: 300px;
-  padding: 5px 10px;
+  width: 110px;
+  padding: 5px;
   margin-top: 0px;
-  margin-left: 10px;
+  margin-right: 210px;
+  margin-bottom: 24px;
   border: none;
   border-radius: 5px;
   background: var(--gradientColor);
@@ -114,14 +116,15 @@
   cursor: pointer;
 }
 .pastPayments .container .filter-section #all-btn:hover {
-  background-color: #0056b3;
+  background-color: #004186;
 }
 .pastPayments .container #past-purchases-table {
+  margin-left: 10px;
   width: 100%;
   border-collapse: collapse;
 }
 .pastPayments .container #past-purchases-table th, .pastPayments .container #past-purchases-table td {
-  padding: 10px;
+  padding: 20px;
   text-align: center;
   border: 1px solid #ddd;
 }
