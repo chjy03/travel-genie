@@ -68,6 +68,12 @@
     }
   }
 
+  .success-message{
+    color: rgb(49, 49, 159);
+    margin-top: 6px;
+    margin-bottom: 10px;
+  }
+
   @media screen and (max-width: 768px) {
     width: 90%;
   }

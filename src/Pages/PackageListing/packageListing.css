@@ -39,7 +39,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 .packageListing .secContent .singleDestination {
   width: 300px;
@@ -101,11 +101,8 @@
   justify-content: space-between;
   padding: 1rem;
   margin: 1rem 0;
-}
-.packageListing .secContent .singleDestination .cardInfo .description {
   border-top: 1.5px solid var(--greyText);
   border-bottom: 1.5px solid var(--greyText);
-  padding: 1rem 0;
 }
 .packageListing .secContent .singleDestination .cardInfo .btn {
   margin-top: 1rem;
@@ -113,9 +110,4 @@
   font-weight: 600;
   justify-content: space-between;
   gap: 5rem;
-}
-@media screen and (max-width: 768px) {
-  .packageListing .secContent .singleDestination {
-    width: calc(50% - 1rem);
-  }
 }/*# sourceMappingURL=packageListing.css.map */

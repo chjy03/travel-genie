@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import './report.css';
 import reportImage from '../../../Assets/image2.jpg'; 
+import axios from 'axios';
 
 const Report = () => {
-    const [issueText, setIssueText] = useState(''); // State to hold the textarea value
+    const [issueText, setIssueText] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Handle form submission logic here
 
-        // Display alert box with a message
-        alert('Submitted!');
-
-        // Clear the textarea by resetting the state
-        setIssueText('');
+        try {
+            const response = await axios.post('http://localhost:5000/api/report', { issueText });
+            if (response.status === 201) {
+                alert('Submitted!');
+                setIssueText('');
+            }
+        } catch (error) {
+            console.error('Error submitting report:', error);
+            alert('Error submitting report. Please try again.');
+        }
     };
 
     return (

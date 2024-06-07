@@ -1,41 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import './payment.css';
 import Modal from '../../Components/Modal/Modal';
-import { useNavigate } from 'react-router-dom';
-import Langkawi from '../../Assets/img2.jpg';
-import KualaLumpur from '../../Assets/img1.jpg';
-import Penang from '../../Assets/img3.jpg';
 
 const Payment = () => {
-  const navigate = useNavigate();
-  const [bookedPackages, setBookedPackages] = useState([
-    { id: 1, image: KualaLumpur, name: 'Kuala Lumpur', cost: 500, quantity: 1, startDate: '01-05-2024', endDate: '05-05-2024'},
-    { id: 2, image: Langkawi, name: 'Langkawi', cost: 700, quantity: 1, startDate: '15-06-2024', endDate: '19-06-2024'},
-    { id: 3, image: Penang, name: 'Penang', cost: 600, quantity: 1, startDate: '10-07-2024', endDate: '14-07-2024'},
-  ]);
-
+  const [bookingPackages, setBookingPackages] = useState([]);
+  const [packages, setPackages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
 
-  const calculateTotalCost = () => {
-    const total = bookedPackages.reduce(
-      (acc, pkg) => acc + pkg.cost * pkg.quantity,
-      0
-    );
-    setTotalCost(total.toFixed(2));
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const bookingResponse = await fetch('http://localhost:5000/api/bookingPage');
+        if (!bookingResponse.ok) {
+          throw new Error('Failed to fetch booking packages');
+        }
+        const bookingData = await bookingResponse.json();
+        setBookingPackages(bookingData);
+
+        const packagesResponse = await fetch('http://localhost:5000/api/manage-package');
+        if (!packagesResponse.ok) {
+          throw new Error('Failed to fetch packages');
+        }
+        const packagesData = await packagesResponse.json();
+
+        // Filter packages based on booking packages and unpaid status
+        const filteredPackages = packagesData.filter(pkg => 
+          bookingData.some(bp => (bp.packageId === pkg.id && bp.status === 'unpaid'))
+        );
+        setPackages(filteredPackages);
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    calculateTotalCost(); // Update total cost when bookedPackages changes
-  }, [bookedPackages]);
+    const total = packages.reduce((acc, pkg) => acc + pkg.price, 0);
+    setTotalCost(total.toFixed(2));
+  }, [packages]);
 
-  const handleDelete = (packageId) => {
-    setBookedPackages((prevPackages) =>
-      prevPackages.filter((pkg) => pkg.id !== packageId)
-    );
-    calculateTotalCost(); // Recalculate total after deleting
-  };
+  if (loading) {
+    return <div>Loading...</div>; // You can replace this with a loading spinner or animation
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>; // You can customize the error message or UI here
+  }
 
   const toggleModal = (content = '') => {
     setIsModalOpen(!isModalOpen);
@@ -43,7 +63,7 @@ const Payment = () => {
   };
 
   const handleCheckout = () => {
-    navigate('/card'); // Navigate to the checkout page
+    window.location.href = "/card"; // Navigate to the checkout page
   };
 
   return (
@@ -55,19 +75,17 @@ const Payment = () => {
         <div className="packages">
           <h2>Travel Packages</h2>
           <div id="booking-list">
-            {bookedPackages.map((pkg) => (
+            {packages.map((pkg) => (
               <div key={pkg.id} className='pkg'>
                 <div className='wrapper'>
-                <img src={pkg.image} alt={pkg.name} style={{ height: 120, width: 150 }} />&nbsp;&nbsp;
-                <p>
-                  {pkg.name}: RM{pkg.cost.toFixed(2)} x {pkg.quantity}
-                </p>
+                  <img src={pkg.imgSrc} alt={pkg.title} style={{ height: 120, width: 150 }} />&nbsp;&nbsp;
+                  <p>
+                    {pkg.title}: RM{pkg.price}
+                  </p>
                 </div>
-                <button onClick={() => handleDelete(pkg.id)}>Delete</button>
-                <button onClick={() => toggleModal(`Destination: ${pkg.name}\nCost: RM${pkg.cost.toFixed(2)}\nQuantity: ${pkg.quantity}\nStart Date: ${pkg.startDate}\nEnd Date: ${pkg.endDate}`)}>
-                Details
+                <button onClick={() => toggleModal(`Destination: ${pkg.location}\nCost: RM${pkg.price}\nDescription: ${pkg.description}`)}>
+                  Details
                 </button>
-
               </div>
             ))}
           </div>
