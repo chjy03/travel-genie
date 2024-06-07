@@ -10,10 +10,11 @@ import img6 from '../../Assets/imgKL.jpg'
 import img7 from '../../Assets/imgKL.jpg'
 import img8 from '../../Assets/imgKL.jpg'
 import { HiOutlineLocationMarker, HiXCircle } from "react-icons/hi";
+import PlanModal from "../../Components/Modal/PlanModal";
 
 const Planning = () => {
   const [selectedDestinations, setSelectedDestinations] = useState([]);
-  const [newDestination, setNewDestination] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
 
   const addToItinerary = (destination) => {
     if (!selectedDestinations.includes(destination)) {
@@ -35,6 +36,15 @@ const Planning = () => {
     // Navigate to the page showing full details of the destination
     console.log(`Navigating to details page of ${destination}`);
   };
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
 
   return (
     <section className="planning">
@@ -90,9 +100,19 @@ const Planning = () => {
 
             {/* Conditionally render the Plan button */}
             {selectedDestinations.length > 0 && (
-              <div className="btn">
+              <div className="btn" onClick={handleModalOpen}>
                 <a className="btnText">PLAN</a>
               </div>
+            )}
+
+            {/* Conditionally render the modal*/}
+            {modalOpen && (
+              <PlanModal
+                onClose={handleModalClose}
+                onSubmit={(duration) => {
+                  console.log("Duration: ", duration);
+                }}
+              />
             )}
 
           </div>
@@ -188,7 +208,7 @@ const Data = [
     imgSrc:img7,
     destTitle: 'KLCC visits',
     location: 'KualaLumpur',
-
+  
   },
 
   {
