@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './Purchases.css'; // Assuming there's a CSS file for styling
+import './Purchases.css'; 
 
 const Purchases = () => {
   const [pastPurchases, setPastPurchases] = useState([]);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [filterMonth, setFilterMonth] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -36,7 +35,8 @@ const Purchases = () => {
             image: matchingPackage?.imgSrc || '',
             package: matchingPackage?.title || '',
             cost: matchingPackage?.price || 0,
-            startDate: new Date(booking.selectedDate).toLocaleDateString()
+            startDate: new Date(booking.selectedDate).toLocaleDateString(),
+            month: new Date(booking.selectedDate).toISOString().slice(0, 7)
           };
         });
 
@@ -52,9 +52,9 @@ const Purchases = () => {
     fetchPurchases();
   }, []);
 
-    const handleFilter = () => {
+  const handleFilter = () => {
     const filteredPurchases = pastPurchases.filter((purchase) => {
-      return startDate <= purchase.startDate && purchase.startDate <= endDate;
+      return purchase.month === filterMonth;
     });
     setPastPurchases(filteredPurchases);
   };
@@ -84,7 +84,8 @@ const Purchases = () => {
             image: matchingPackage?.imgSrc || '',
             package: matchingPackage?.title || '',
             cost: matchingPackage?.price || 0,
-            startDate: new Date(booking.selectedDate).toLocaleDateString()
+            startDate: new Date(booking.selectedDate).toLocaleDateString(),
+            month: new Date(booking.selectedDate).toISOString().slice(0, 7)
           };
         });
 
@@ -111,8 +112,19 @@ const Purchases = () => {
       <div className="container">
         <div className="pageTitle">
           <h1 className="title">Purchases</h1>
-      </div>&nbsp;&nbsp;
-        
+          <div className='clarification'>Please click on the Display All button before using the Filter function again.</div>
+        </div>&nbsp;&nbsp;
+        <div className="wrapper">
+          <div className="filter-section">
+            <input
+              type="month"
+              value={filterMonth}
+              onChange={(e) => setFilterMonth(e.target.value)}
+            />
+            <button id="filter-btn" onClick={handleFilter}>Filter</button>
+            <button id="all-btn" onClick={handleAll}>Display All</button>
+          </div>
+        </div>&nbsp;&nbsp;
         <table id="past-purchases-table">
           <thead>
             <tr>
