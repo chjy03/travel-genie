@@ -50,11 +50,11 @@ const Payment = () => {
   }, [packages]);
 
   if (loading) {
-    return <div>Loading...</div>; // You can replace this with a loading spinner or animation
+    return <div>Loading...</div>; 
   }
 
   if (error) {
-    return <div>Error: {error}</div>; // You can customize the error message or UI here
+    return <div>Error: {error}</div>; 
   }
 
   const toggleModal = (pkgId = '') => {
@@ -75,7 +75,7 @@ const Payment = () => {
   };
 
   const handleCheckout = () => {
-    window.location.href = "/card"; // Navigate to the checkout page
+    window.location.href = "/card"; 
   };
 
   return (
