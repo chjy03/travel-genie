@@ -57,9 +57,21 @@ const Payment = () => {
     return <div>Error: {error}</div>; // You can customize the error message or UI here
   }
 
-  const toggleModal = (content = '') => {
+  const toggleModal = (pkgId = '') => {
+    if (pkgId) {
+      const booking = bookingPackages.find(bp => bp.packageId === pkgId && bp.status === 'unpaid');
+      const pkg = packages.find(p => p.id === pkgId);
+
+      if (pkg && booking) {
+        const content = `Destination: ${pkg.location || 'N/A'}\nSelected Date: ${new Date(booking.selectedDate).toLocaleDateString()}`;
+        setModalContent(content);
+      } else {
+        setModalContent('Details not available');
+      }
+    } else {
+      setModalContent('');
+    }
     setIsModalOpen(!isModalOpen);
-    setModalContent(content.toString());
   };
 
   const handleCheckout = () => {
@@ -83,7 +95,7 @@ const Payment = () => {
                     {pkg.title}: RM{pkg.price}
                   </p>
                 </div>
-                <button onClick={() => toggleModal(`Destination: ${pkg.location}\nCost: RM${pkg.price}\nDescription: ${pkg.description}`)}>
+                <button onClick={() => toggleModal(pkg.id)}>
                   Details
                 </button>
               </div>
