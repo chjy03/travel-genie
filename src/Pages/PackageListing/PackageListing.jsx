@@ -81,44 +81,204 @@
 
 // export default PackageListing;
 
+//cannot delete this version
+// import React, { useEffect, useState } from "react";
+// import './packageListing.css';
+// import { HiOutlineLocationMarker } from "react-icons/hi";
+// import { Link } from 'react-router-dom';
 
-import React, { useEffect, useState } from "react";
+// const PackageListing = () => {
+//   const [packages, setPackages] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     fetch('http://localhost:5000/api/manage-package')
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('Failed to fetch packages');
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         setPackages(data);
+//         setLoading(false);
+//       })
+//       .catch(error => {
+//         console.error('Error fetching data:', error);
+//         setError(error.message);
+//         setLoading(false);
+//       });
+//   }, []);
+
+//   if (loading) {
+//     return <div>Loading...</div>; // You can replace this with a loading spinner or animation
+//   }
+
+//   if (error) {
+//     return <div>Error: {error}</div>; // You can customize the error message or UI here
+//   }
+
+//   return (
+//     <section className="packageListing container section">
+//       <div className="secTitle">
+//         <h3 className="title">
+//           Most visited destinations
+//         </h3>
+//       </div>
+
+//       <div className="secContent grid">
+//         {packages.map(({id, imgSrc, title, location, description, price }) => (
+//           <div key={id} className="singleDestination">
+//             <div className="imageDiv">
+//               <img src={imgSrc} alt={title} />
+//             </div>
+
+//             <div className="cardInfo">
+//               <h4 className="location">{title}</h4>
+//               <div className="fees flex">
+//                 <div className="price">
+//                   <h5>RM {price}</h5>
+//                 </div>
+//                 <span className="continent flex">
+//                   <HiOutlineLocationMarker className="icon" />
+//                   <span className="name">{location}</span>
+//                 </span>
+//               </div>
+//               <div className="description">
+//                 <span>{description}</span>
+//               </div>
+
+//               <Link to={`/package/${id}`} className="btn flex">
+//                 DETAILS
+//               </Link>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default PackageListing;
+
+
+//version for search
+// import React from "react";
+// import './packageListing.css';
+// import { HiOutlineLocationMarker } from "react-icons/hi";
+// import { Link } from 'react-router-dom';
+
+// const PackageListing = ({ packages }) => {
+//   if (packages.length === 0) {
+//     return <div>No packages found</div>; // You can customize this message or UI
+//   }
+
+//   return (
+//     <section className="packageListing container section">
+//       <div className="secTitle">
+//         <h3 className="title">
+//           Most visited destinations
+//         </h3>
+//       </div>
+
+//       <div className="secContent grid">
+//         {packages.map(({ id, imgSrc, title, location, description, price }) => (
+//           <div key={id} className="singleDestination">
+//             <div className="imageDiv">
+//               <img src={imgSrc} alt={title} />
+//             </div>
+
+//             <div className="cardInfo">
+//               <h4 className="location">{title}</h4>
+//               <div className="fees flex">
+//                 <div className="price">
+//                   <h5>RM {price}</h5>
+//                 </div>
+//                 <span className="continent flex">
+//                   <HiOutlineLocationMarker className="icon" />
+//                   <span className="name">{location}</span>
+//                 </span>
+//               </div>
+//               <div className="description">
+//                 <span>{description}</span>
+//               </div>
+
+//               <Link to={`/package/${id}`} className="btn flex">
+//                 DETAILS
+//               </Link>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default PackageListing;
+
+
+//second version
+// import React from "react";
+// import './packageListing.css';
+// import { HiOutlineLocationMarker } from "react-icons/hi";
+// import { Link } from 'react-router-dom';
+
+// const PackageListing = ({ packages }) => {
+//   return (
+//     <section className="packageListing container section">
+//       <div className="secTitle">
+//         <h3 className="title">
+//           Most visited destinations
+//         </h3>
+//       </div>
+
+//       <div className="secContent grid">
+//         {packages.length === 0 ? (
+//           <div className="noResultsMessage">No packages found for your search criteria. You can view other packages.</div>
+//         ) : (
+//           packages.map(({ id, imgSrc, title, location, description, price }) => (
+//             <div key={id} className="singleDestination">
+//               <div className="imageDiv">
+//                 <img src={imgSrc} alt={title} />
+//               </div>
+
+//               <div className="cardInfo">
+//                 <h4 className="location">{title}</h4>
+//                 <div className="fees flex">
+//                   <div className="price">
+//                     <h5>RM {price}</h5>
+//                   </div>
+//                   <span className="continent flex">
+//                     <HiOutlineLocationMarker className="icon" />
+//                     <span className="name">{location}</span>
+//                   </span>
+//                 </div>
+//                 <div className="description">
+//                   <span>{description}</span>
+//                 </div>
+
+//                 <Link to={`/package/${id}`} className="btn flex">
+//                   DETAILS
+//                 </Link>
+//               </div>
+//             </div>
+//           ))
+//         )}
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default PackageListing;
+
+
+import React from "react";
 import './packageListing.css';
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link } from 'react-router-dom';
 
-const PackageListing = () => {
-  const [packages, setPackages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/manage-package')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch packages');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setPackages(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>; // You can replace this with a loading spinner or animation
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>; // You can customize the error message or UI here
-  }
-
+const PackageListing = ({ packages }) => {
   return (
     <section className="packageListing container section">
       <div className="secTitle">
@@ -128,33 +288,37 @@ const PackageListing = () => {
       </div>
 
       <div className="secContent grid">
-        {packages.map(({id, imgSrc, title, location, description, price }) => (
-          <div key={id} className="singleDestination">
-            <div className="imageDiv">
-              <img src={imgSrc} alt={title} />
-            </div>
+        {packages.length === 0 ? (
+          <div className="noResultsMessage">No travel packages found. Please have a look at other travel packages.</div>
+        ) : (
+          packages.map(({ id, imgSrc, title, location, description, price }) => (
+            <div key={id} className="singleDestination">
+              <div className="imageDiv">
+                <img src={imgSrc} alt={title} />
+              </div>
 
-            <div className="cardInfo">
-              <h4 className="location">{title}</h4>
-              <div className="fees flex">
-                <div className="price">
-                  <h5>RM {price}</h5>
+              <div className="cardInfo">
+                <h4 className="location">{title}</h4>
+                <div className="fees flex">
+                  <div className="price">
+                    <h5>RM {price}</h5>
+                  </div>
+                  <span className="continent flex">
+                    <HiOutlineLocationMarker className="icon" />
+                    <span className="name">{location}</span>
+                  </span>
                 </div>
-                <span className="continent flex">
-                  <HiOutlineLocationMarker className="icon" />
-                  <span className="name">{location}</span>
-                </span>
-              </div>
-              <div className="description">
-                <span>{description}</span>
-              </div>
+                <div className="description">
+                  <span>{description}</span>
+                </div>
 
-              <Link to={`/package/${id}`} className="btn flex">
-                DETAILS
-              </Link>
+                <Link to={`/package/${id}`} className="btn flex">
+                  DETAILS
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </section>
   );

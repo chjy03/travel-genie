@@ -1,0 +1,41 @@
+const mongoose = require('mongoose');
+
+// Define user schema
+const ProfileSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'user'
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true // Ensures email is unique
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    userType: {
+        type: String,
+        enum: ['tourist', 'travelAgency'],
+        default: 'tourist'
+    },
+    createdAt: {
+        type: String, 
+        // required: true
+    },
+    updatedAt: {
+        type: String, 
+    },
+}, {
+    timestamps: true
+});
+
+// Create user model
+const Profile = mongoose.model('profile', ProfileSchema);
+
+module.exports = Profile;

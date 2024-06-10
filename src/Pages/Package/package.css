@@ -79,6 +79,7 @@
   background: var(--whiteColor);
   border-radius: 10px;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 .package .packageContent .cardDiv label {
   display: block;
@@ -123,6 +124,19 @@
 }
 .package .packageContent .cardDiv .input .input[type=range] {
   background: blue;
+}
+.package .packageContent .cardDiv .searchBtn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--PrimaryColor);
+  color: var(--whiteColor);
+  border: none;
+  border-radius: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
 }
 @media screen and (max-width: 768px) {
   .package .packageContent {

@@ -41,6 +41,16 @@
   justify-content: center;
   gap: 1.5rem;
 }
+.packageListing .secContent .noResultsMessage {
+  padding: 20px;
+  background-color: var(--cardBG);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(140, 140, 141, 0.549);
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--textColor);
+}
 .packageListing .secContent .singleDestination {
   width: 300px;
   height: 100%;

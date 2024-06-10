@@ -82,6 +82,7 @@
             background: var(--whiteColor);
             border-radius: 10px;
             gap: 1rem;
+            margin-bottom: 2rem; // Add a margin-bottom to maintain gap
 
             label {
                 display: block;
@@ -129,6 +130,19 @@
                 .input[type=range] {
                     background: blue;
                 }
+            }
+            .searchBtn {
+                display: block;
+                width: 100%;
+                padding: 0.75rem;
+                background: var(--PrimaryColor);
+                color: var(--whiteColor);
+                border: none;
+                border-radius: 3rem;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                margin-top: 1rem; // Ensure the button has a top margin
             }
         }
     }
