@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './payment.css';
 import Modal from '../../Components/Modal/Modal';
 
@@ -10,6 +11,9 @@ const Payment = () => {
   const [totalCost, setTotalCost] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
+  const [cancelMessage, setCancelMessage] = useState('');
+  const [bookingId, setBookingId] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +31,6 @@ const Payment = () => {
         }
         const packagesData = await packagesResponse.json();
 
-        // Filter packages based on booking packages and unpaid status
         const filteredPackages = packagesData.filter(pkg => 
           bookingData.some(bp => (bp.packageId === pkg.id && bp.status === 'unpaid'))
         );
@@ -49,13 +52,26 @@ const Payment = () => {
     setTotalCost(total.toFixed(2));
   }, [packages]);
 
-  if (loading) {
-    return <div>Loading...</div>; 
-  }
+  useEffect(() => {
+    const fetchUnpaidBookingId = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/bookingPage');
+        const bookingData = await response.json();
 
-  if (error) {
-    return <div>Error: {error}</div>; 
-  }
+        const unpaidBooking = bookingData.find(booking => booking.status === 'unpaid');
+        
+        if (unpaidBooking) {
+          setBookingId(unpaidBooking._id);
+        } else {
+          setCancelMessage('No unpaid booking found.');
+        }
+      } catch (error) {
+        console.error('Error fetching booking ID:', error);
+        setCancelMessage('Error fetching booking ID. Please try again later.');
+      }
+    };
+    fetchUnpaidBookingId();
+  }, []);
 
   const toggleModal = (pkgId = '') => {
     if (pkgId) {
@@ -76,6 +92,32 @@ const Payment = () => {
 
   const handleCheckout = () => {
     window.location.href = "/card"; 
+  };
+
+  const handleCancel = async () => {
+    console.log(`Attempting to cancel booking with ID: ${bookingId}`);
+    try {
+      const response = await fetch(`http://localhost:5000/api/bookingPage/${bookingId}/cancel`, {
+        method: 'PUT',
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Booking cancellation response:', data);
+        alert('Booking cancelled successfully.');
+        setBookingPackages(prev => prev.filter(bp => bp._id !== bookingId));
+        setPackages(prev => prev.filter(pkg => bookingPackages.some(bp => bp.packageId !== pkg.id)));
+        setTotalCost(0);
+        navigate('/package');
+      } else {
+        const responseText = await response.text();
+        console.error('Failed to cancel the booking:', responseText);
+        setCancelMessage('Failed to cancel the booking. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error cancelling booking:', error);
+      setCancelMessage('Error cancelling booking. Please try again later.');
+    }
   };
 
   return (
@@ -107,8 +149,11 @@ const Payment = () => {
           <h2>Total Cost</h2>
           <div id="total-cost-value">RM{totalCost}</div>
           <button id="checkout-btn" onClick={handleCheckout}>Checkout</button>
+          <button id="cancel-btn" onClick={handleCancel}>Cancel</button>
         </div>
       </div>
+
+      {cancelMessage && <div className="cancel-message">{cancelMessage}</div>}
 
       <Modal 
         isOpen={isModalOpen}
