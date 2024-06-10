@@ -3,7 +3,7 @@ import './signUp.css';
 import { FaCircleUser } from 'react-icons/fa6';
 import { GrMail } from 'react-icons/gr';
 import { GoPasskeyFill } from 'react-icons/go';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const SignUp = () => {
@@ -11,7 +11,6 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('tourist');
-    const [users, setUsers] = useState([]); // State to store existing users
 
     const navigate = useNavigate();
 
@@ -19,7 +18,6 @@ const SignUp = () => {
         // Fetch existing users when the component mounts
         axios.get('http://localhost:5000/api/signUp')
             .then(response => {
-                setUsers(response.data);
                 console.log('Existing Users:', response.data);
             })
             .catch(error => {

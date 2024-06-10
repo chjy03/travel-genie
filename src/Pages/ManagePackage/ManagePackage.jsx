@@ -125,14 +125,575 @@
 
 
 //upgrade version
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import './managePackage.css';
+// import axios from 'axios';
+
+// const ManagePackage = () => {
+//     const [formData, setFormData] = useState({
+//         id: '',
+//         imgSrc: '',
+//         title: '',
+//         description: '',
+//         price: '',
+//         dayDuration: '',
+//         nightDuration: '',
+//         location: '',
+//         numberOfDates: '',
+//         dateRanges: [],
+//         itinerary: [],
+//     });
+
+//     const handleChange = (e) => {
+//         const { name, value } = e.target;
+//         if (name === "numberOfDates") {
+//             setFormData({
+//                 ...formData,
+//                 [name]: value,
+//                 dateRanges: Array.from({ length: parseInt(value, 10) }, () => ({
+//                     startDate: '',
+//                     endDate: ''
+//                 }))
+//             });
+//         } else if (name.includes('startDate')) {
+//             const index = parseInt(name.split('-')[1]);
+//             const updatedDateRanges = [...formData.dateRanges];
+//             updatedDateRanges[index] = {
+//                 ...updatedDateRanges[index],
+//                 startDate: value,
+//                 endDate: calculateEndDate(value, formData.dayDuration)
+//             };
+//             setFormData({
+//                 ...formData,
+//                 dateRanges: updatedDateRanges
+//             });
+//         } else if (name === 'dayDuration' || name === 'nightDuration') {
+//             const updatedData = { ...formData, [name]: value };
+//             const updatedDateRanges = formData.dateRanges.map(range => ({
+//                 ...range,
+//                 endDate: calculateEndDate(range.startDate, updatedData.dayDuration)
+//             }));
+//             setFormData({
+//                 ...updatedData,
+//                 dateRanges: updatedDateRanges,
+//                 itinerary: generateItinerary(parseInt(updatedData.dayDuration, 10))
+//             });
+//         } else if (name.includes('itinerary')) {
+//             const index = parseInt(name.split('-')[1]);
+//             const updatedItinerary = [...formData.itinerary];
+//             updatedItinerary[index] = value;
+//             setFormData({
+//                 ...formData,
+//                 itinerary: updatedItinerary
+//             });
+//         } else {
+//             setFormData({ ...formData, [name]: value });
+//         }
+//     };
+
+//     const calculateEndDate = (startDate, days) => {
+//         if (!startDate || !days) return '';
+//         const start = new Date(startDate);
+//         start.setDate(start.getDate() + parseInt(days, 10) - 1);
+//         return start.toISOString().split('T')[0];
+//     };
+
+//     const generateItinerary = (days) => {
+//         return Array.from({ length: days }, () => '');
+//     };
+
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+    
+//         try {
+//             await axios.post('http://localhost:5000/api/manage-package', formData);
+//             console.log('Manage package added successfully!');
+//             alert('Package submitted successfully!');
+//             setFormData({
+//                 id: '',
+//                 imgSrc: '',
+//                 title: '',
+//                 description: '',
+//                 price: '',
+//                 dayDuration: '',
+//                 nightDuration: '',
+//                 location: '',
+//                 numberOfDates: '',
+//                 dateRanges: [],
+//                 itinerary: [],
+//             });
+//         } catch (error) {
+//             if (error.response) {
+//                 // The server responded with a status other than 2xx
+//                 console.error('Error response data:', error.response.data);
+//                 console.error('Error response status:', error.response.status);
+//                 console.error('Error response headers:', error.response.headers);
+//                 alert('Failed to submit package. Server responded with an error.');
+//             } else if (error.request) {
+//                 // The request was made but no response was received
+//                 console.error('Error request data:', error.request);
+//                 alert('Failed to submit package. No response from server.');
+//             } else {
+//                 // Something happened in setting up the request that triggered an error
+//                 console.error('Error message:', error.message);
+//                 alert('Failed to submit package. An error occurred while setting up the request.');
+//             }
+//             console.error('Error config:', error.config);
+//         }
+//     };
+    
+
+//     const getTomorrowDate = () => {
+//         const today = new Date();
+//         const tomorrow = new Date(today);
+//         tomorrow.setDate(today.getDate() + 1);
+//         return tomorrow.toISOString().split('T')[0];
+//     };
+
+//     return (
+//         <div className="managePackage">
+//             <h2>Add Manage Package</h2>
+//             <form onSubmit={handleSubmit}>
+//                 <div>
+//                     <label htmlFor="id">ID:</label>
+//                     <input type="number" id="id" name="id" value={formData.id} onChange={handleChange} required />
+//                 </div>
+//                 <div>
+//                     <label htmlFor="imgSrc">Image URL:</label>
+//                     <input type="text" id="imgSrc" name="imgSrc" value={formData.imgSrc} onChange={handleChange} required />
+//                 </div>
+//                 <div>
+//                     <label htmlFor="title">Title:</label>
+//                     <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+//                 </div>
+//                 <div>
+//                     <label htmlFor="description">Description:</label>
+//                     <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
+//                 </div>
+//                 <div>
+//                     <label htmlFor="price">Price (RM):</label>
+//                     <input type="number" id="price" name="price" value={formData.price} onChange={handleChange} required />
+//                 </div>
+//                 <div>
+//                     <label htmlFor="dayDuration">Duration:</label>
+//                     <div className="durationInput">
+//                         <select id="dayDuration" name="dayDuration" value={formData.dayDuration} onChange={handleChange} required>
+//                             <option value="">Days</option>
+//                             {[...Array(31).keys()].map(num => (
+//                                 <option key={num + 1} value={num + 1}>{num + 1}</option>
+//                             ))}
+//                         </select>
+//                         <select id="nightDuration" name="nightDuration" value={formData.nightDuration} onChange={handleChange} required>
+//                             <option value="">Nights</option>
+//                             {[...Array(Math.max(0, parseInt(formData.dayDuration || 0, 10) - 1)).keys()].map(num => (
+//                                 <option key={num + 1} value={num + 1}>{num + 1}</option>
+//                             ))}
+//                         </select>
+//                     </div>
+//                 </div>
+//                 <div>
+//                     <label htmlFor="location">Location:</label>
+//                     <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required />
+//                 </div>
+//                 <div>
+//                     <label htmlFor="numberOfDates">Number of Dates Available:</label>
+//                     <select id="numberOfDates" name="numberOfDates" value={formData.numberOfDates} onChange={handleChange} required>
+//                         <option value="">Select number of dates</option>
+//                         {[1, 2, 3, 4, 5].map((num) => (
+//                             <option key={num} value={num}>{num}</option>
+//                         ))}
+//                     </select>
+//                 </div>
+//                 {formData.dateRanges.map((dateRange, index) => (
+//                     <div key={index}>
+//                         <label htmlFor={`startDate-${index}`}>Start Date:</label>
+//                         <input type="date" id={`startDate-${index}`} name={`startDate-${index}`} min={getTomorrowDate()} value={dateRange.startDate} onChange={handleChange} required />
+//                         <label htmlFor={`endDate-${index}`}>End Date:</label>
+//                         <input type="date" id={`endDate-${index}`} name={`endDate-${index}`} value={dateRange.endDate} readOnly />
+//                     </div>
+//                 ))}
+//                 <div>
+//                     <label>Itinerary:</label>
+//                     {formData.itinerary.map((_, index) => (
+//                         <div key={index}>
+//                             <label htmlFor={`itinerary-${index}`}>Day {index + 1}:</label>
+//                             <textarea id={`itinerary-${index}`} name={`itinerary-${index}`} value={formData.itinerary[index]} onChange={handleChange} required />
+//                         </div>
+//                     ))}
+//                 </div>
+//                 <button type="submit">Add Package</button>
+//             </form>
+//         </div>
+//     );
+// };
+
+// export default ManagePackage;
+
+// import React, { useState } from "react";
+// import './managePackage.css';
+// import axios from 'axios';
+
+// const ManagePackage = () => {
+//   const [formData, setFormData] = useState({
+//     id: '',
+//     imgSrc: [''],
+//     title: '',
+//     description: '',
+//     price: '',
+//     dayDuration: '',
+//     nightDuration: '',
+//     location: '',
+//     numberOfDates: '',
+//     dateRanges: [],
+//     itinerary: [],
+//   });
+  
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+
+//     if (name.startsWith('imgSrc')) {
+//       const index = parseInt(name.split('-')[1], 10);
+//       const newImgSrc = [...formData.imgSrc];
+//       newImgSrc[index] = value;
+//       setFormData({
+//         ...formData,
+//         imgSrc: newImgSrc
+//       });
+//     } else if (name === "numberOfDates") {
+//       setFormData({
+//         ...formData,
+//         [name]: value,
+//         dateRanges: Array.from({ length: parseInt(value, 10) }, () => ({
+//           startDate: '',
+//           endDate: ''
+//         }))
+//       });
+//     } else if (name.includes('startDate')) {
+//       const index = parseInt(name.split('-')[1], 10);
+//       const updatedDateRanges = [...formData.dateRanges];
+//       updatedDateRanges[index] = {
+//         ...updatedDateRanges[index],
+//         startDate: value,
+//         endDate: calculateEndDate(value, formData.dayDuration)
+//       };
+//       setFormData({
+//         ...formData,
+//         dateRanges: updatedDateRanges
+//       });
+//     } else if (name === 'dayDuration' || name === 'nightDuration') {
+//       const updatedData = { ...formData, [name]: value };
+//       const updatedDateRanges = formData.dateRanges.map(range => ({
+//         ...range,
+//         endDate: calculateEndDate(range.startDate, updatedData.dayDuration)
+//       }));
+//       setFormData({
+//         ...updatedData,
+//         dateRanges: updatedDateRanges,
+//         itinerary: generateItinerary(parseInt(updatedData.dayDuration, 10))
+//       });
+//     } else if (name.includes('itinerary')) {
+//       const index = parseInt(name.split('-')[1], 10);
+//       const updatedItinerary = [...formData.itinerary];
+//       updatedItinerary[index] = value;
+//       setFormData({
+//         ...formData,
+//         itinerary: updatedItinerary
+//       });
+//     } else {
+//       setFormData({ ...formData, [name]: value });
+//     }
+//   };
+
+//   const calculateEndDate = (startDate, days) => {
+//     if (!startDate || !days) return '';
+//     const start = new Date(startDate);
+//     start.setDate(start.getDate() + parseInt(days, 10) - 1);
+//     return start.toISOString().split('T')[0];
+//   };
+
+//   const generateItinerary = (days) => {
+//     return Array.from({ length: days }, () => '');
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       await axios.post('http://localhost:5000/api/manage-package', formData);
+//       console.log('Manage package added successfully!');
+//       alert('Package submitted successfully!');
+//       setFormData({
+//         id: '',
+//         imgSrc: [''],
+//         title: '',
+//         description: '',
+//         price: '',
+//         dayDuration: '',
+//         nightDuration: '',
+//         location: '',
+//         numberOfDates: '',
+//         dateRanges: [],
+//         itinerary: [],
+//       });
+//     } catch (error) {
+//       console.error('Error submitting package:', error);
+//       alert('Failed to submit package.');
+//     }
+//   };
+
+//   const addImageField = () => {
+//     setFormData({
+//       ...formData,
+//       imgSrc: [...formData.imgSrc, '']
+//     });
+//   };
+
+//   const getTomorrowDate = () => {
+//     const today = new Date();
+//     const tomorrow = new Date(today);
+//     tomorrow.setDate(today.getDate() + 1);
+//     return tomorrow.toISOString().split('T')[0];
+//   };
+
+//   return (
+//     <div className="managePackage">
+//       <h2>Add Manage Package</h2>
+//       <form onSubmit={handleSubmit}>
+//         <div>
+//           <label htmlFor="id">ID:</label>
+//           <input type="number" id="id" name="id" value={formData.id} onChange={handleChange} required />
+//         </div>
+//         <div>
+//           <label>Image URLs:</label>
+//           {formData.imgSrc.map((src, index) => (
+//             <div key={index}>
+//               <input
+//                 type="text"
+//                 id={`imgSrc-${index}`}
+//                 name={`imgSrc-${index}`}
+//                 value={src}
+//                 onChange={handleChange}
+//                 required
+//               />
+//             </div>
+//           ))}
+//           <button type="button" onClick={addImageField}>Add Image</button>
+//         </div>
+//         <div>
+//           <label htmlFor="title">Title:</label>
+//           <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+//         </div>
+//         <div>
+//           <label htmlFor="description">Description:</label>
+//           <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
+//         </div>
+//         <div>
+//           <label htmlFor="price">Price (RM):</label>
+//           <input type="number" id="price" name="price" value={formData.price} onChange={handleChange} required />
+//         </div>
+//         <div>
+//           <label htmlFor="dayDuration">Duration:</label>
+//           <div className="durationInput">
+//             <select id="dayDuration" name="dayDuration" value={formData.dayDuration} onChange={handleChange} required>
+//               <option value="">Days</option>
+//               {[...Array(31).keys()].map(num => (
+//                 <option key={num + 1} value={num + 1}>{num + 1}</option>
+//               ))}
+//             </select>
+//             <select id="nightDuration" name="nightDuration" value={formData.nightDuration} onChange={handleChange} required>
+//               <option value="">Nights</option>
+//               {[...Array(Math.max(0, parseInt(formData.dayDuration || 0, 10) - 1)).keys()].map(num => (
+//                 <option key={num + 1} value={num + 1}>{num + 1}</option>
+//               ))}
+//             </select>
+//           </div>
+//         </div>
+//         <div>
+//           <label htmlFor="location">Location:</label>
+//           <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required />
+//         </div>
+//         <div>
+//           <label htmlFor="numberOfDates">Number of Dates Available:</label>
+//           <select id="numberOfDates" name="numberOfDates" value={formData.numberOfDates} onChange={handleChange} required>
+//             <option value="">Select number of dates</option>
+//             {[1, 2, 3, 4, 5].map((num) => (
+//               <option key={num} value={num}>{num}</option>
+//             ))}
+//           </select>
+//         </div>
+//         {formData.dateRanges.map((dateRange, index) => (
+//           <div key={index}>
+//             <label htmlFor={`startDate-${index}`}>Start Date:</label>
+//             <input type="date" id={`startDate-${index}`} name={`startDate-${index}`} min={getTomorrowDate()} value={dateRange.startDate} onChange={handleChange} required />
+//             <label htmlFor={`endDate-${index}`}>End Date:</label>
+//             <input type="date" id={`endDate-${index}`} name={`endDate-${index}`} value={dateRange.endDate} readOnly />
+//           </div>
+//         ))}
+//         <div>
+//           <label>Itinerary:</label>
+//           {formData.itinerary.map((_, index) => (
+//             <div key={index}>
+//               <label htmlFor={`itinerary-${index}`}>Day {index + 1}:</label>
+//               <textarea id={`itinerary-${index}`} name={`itinerary-${index}`} value={formData.itinerary[index]} onChange={handleChange} required />
+//             </div>
+//           ))}
+//         </div>
+//         <button type="submit">Add Package</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default ManagePackage;
+
+
+import React, { useState, useEffect } from "react";
 import './managePackage.css';
 import axios from 'axios';
 
 const ManagePackage = () => {
-    const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
+    id: '',
+    imgSrc: [''],
+    title: '',
+    description: '',
+    price: '',
+    dayDuration: '',
+    nightDuration: '',
+    location: '',
+    numberOfDates: '',
+    dateRanges: [],
+    itinerary: [],
+  });
+
+  const [existingIds, setExistingIds] = useState([]);
+  const [idError, setIdError] = useState('');
+
+  useEffect(() => {
+    const fetchExistingIds = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/manage-package/ids');
+        setExistingIds(response.data);
+      } catch (error) {
+        console.error('Error fetching existing IDs:', error);
+      }
+    };
+
+    fetchExistingIds();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'id') {
+      if (existingIds.includes(value)) {
+        setIdError('ID already exists. Please enter a unique ID.');
+      } else {
+        setIdError('');
+      }
+    }
+
+    if (name.startsWith('imgSrc')) {
+      const index = parseInt(name.split('-')[1], 10);
+      const newImgSrc = [...formData.imgSrc];
+      newImgSrc[index] = value;
+      setFormData({
+        ...formData,
+        imgSrc: newImgSrc
+      });
+    } else if (name === "numberOfDates") {
+      setFormData({
+        ...formData,
+        [name]: value,
+        dateRanges: Array.from({ length: parseInt(value, 10) }, () => ({
+          startDate: '',
+          endDate: ''
+        }))
+      });
+    } else if (name.includes('startDate')) {
+      const index = parseInt(name.split('-')[1], 10);
+      const updatedDateRanges = [...formData.dateRanges];
+      updatedDateRanges[index] = {
+        ...updatedDateRanges[index],
+        startDate: value,
+        endDate: calculateEndDate(value, formData.dayDuration)
+      };
+      setFormData({
+        ...formData,
+        dateRanges: updatedDateRanges
+      });
+    } else if (name === 'dayDuration' || name === 'nightDuration') {
+      const updatedData = { ...formData, [name]: value };
+      const updatedDateRanges = formData.dateRanges.map(range => ({
+        ...range,
+        endDate: calculateEndDate(range.startDate, updatedData.dayDuration)
+      }));
+      setFormData({
+        ...updatedData,
+        dateRanges: updatedDateRanges,
+        itinerary: generateItinerary(parseInt(updatedData.dayDuration, 10))
+      });
+    } else if (name.includes('itinerary')) {
+      const index = parseInt(name.split('-')[1], 10);
+      const updatedItinerary = [...formData.itinerary];
+      updatedItinerary[index] = value;
+      setFormData({
+        ...formData,
+        itinerary: updatedItinerary
+      });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const calculateEndDate = (startDate, days) => {
+    if (!startDate || !days) return '';
+    const start = new Date(startDate);
+    start.setDate(start.getDate() + parseInt(days, 10) - 1);
+    return start.toISOString().split('T')[0];
+  };
+
+  const generateItinerary = (days) => {
+    return Array.from({ length: days }, () => '');
+  };
+
+  // Function to check if ID already exists
+  const isIdUnique = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/manage-package/ids`);
+      const existingIds = response.data;
+      console.log('Existing IDs:', existingIds);
+      return !existingIds.includes(id);
+    } catch (error) {
+      console.error('Error checking ID uniqueness:', error);
+      return false; // Return false by default if there's an error
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check if ID is unique
+  const isUnique = await isIdUnique(formData.id);
+  if (!isUnique) {
+    alert('ID already exists. Please choose a different ID.');
+    return;
+  }
+
+    try {
+      // If dayDuration is 1, set nightDuration to 0
+      const packageData = {
+        ...formData,
+        nightDuration: parseInt(formData.dayDuration, 10) === 1 ? 0 : formData.nightDuration
+      };
+      
+      await axios.post('http://localhost:5000/api/manage-package', formData);
+      console.log('Manage package added successfully!');
+      alert('Package submitted successfully!');
+      setFormData({
         id: '',
-        imgSrc: '',
+        imgSrc: [''],
         title: '',
         description: '',
         price: '',
@@ -142,189 +703,133 @@ const ManagePackage = () => {
         numberOfDates: '',
         dateRanges: [],
         itinerary: [],
+      });
+    } catch (error) {
+      console.error('Error submitting package:', error);
+      if (error.response && error.response.data && error.response.data.message) {
+        alert(`Failed to submit package: ${error.response.data.message}`);
+      } else {
+        alert('Failed to submit package.');
+      }
+    }
+  };
+
+  const addImageField = () => {
+    setFormData({
+      ...formData,
+      imgSrc: [...formData.imgSrc, '']
     });
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "numberOfDates") {
-            setFormData({
-                ...formData,
-                [name]: value,
-                dateRanges: Array.from({ length: parseInt(value, 10) }, () => ({
-                    startDate: '',
-                    endDate: ''
-                }))
-            });
-        } else if (name.includes('startDate')) {
-            const index = parseInt(name.split('-')[1]);
-            const updatedDateRanges = [...formData.dateRanges];
-            updatedDateRanges[index] = {
-                ...updatedDateRanges[index],
-                startDate: value,
-                endDate: calculateEndDate(value, formData.dayDuration)
-            };
-            setFormData({
-                ...formData,
-                dateRanges: updatedDateRanges
-            });
-        } else if (name === 'dayDuration' || name === 'nightDuration') {
-            const updatedData = { ...formData, [name]: value };
-            const updatedDateRanges = formData.dateRanges.map(range => ({
-                ...range,
-                endDate: calculateEndDate(range.startDate, updatedData.dayDuration)
-            }));
-            setFormData({
-                ...updatedData,
-                dateRanges: updatedDateRanges,
-                itinerary: generateItinerary(parseInt(updatedData.dayDuration, 10))
-            });
-        } else if (name.includes('itinerary')) {
-            const index = parseInt(name.split('-')[1]);
-            const updatedItinerary = [...formData.itinerary];
-            updatedItinerary[index] = value;
-            setFormData({
-                ...formData,
-                itinerary: updatedItinerary
-            });
-        } else {
-            setFormData({ ...formData, [name]: value });
-        }
-    };
+  const getTomorrowDate = () => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    return tomorrow.toISOString().split('T')[0];
+  };
 
-    const calculateEndDate = (startDate, days) => {
-        if (!startDate || !days) return '';
-        const start = new Date(startDate);
-        start.setDate(start.getDate() + parseInt(days, 10) - 1);
-        return start.toISOString().split('T')[0];
-    };
-
-    const generateItinerary = (days) => {
-        return Array.from({ length: days }, () => '');
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-    
-        try {
-            await axios.post('http://localhost:5000/api/manage-package', formData);
-            console.log('Manage package added successfully!');
-            alert('Package submitted successfully!');
-            setFormData({
-                id: '',
-                imgSrc: '',
-                title: '',
-                description: '',
-                price: '',
-                dayDuration: '',
-                nightDuration: '',
-                location: '',
-                numberOfDates: '',
-                dateRanges: [],
-                itinerary: [],
-            });
-        } catch (error) {
-            if (error.response) {
-                // The server responded with a status other than 2xx
-                console.error('Error response data:', error.response.data);
-                console.error('Error response status:', error.response.status);
-                console.error('Error response headers:', error.response.headers);
-                alert('Failed to submit package. Server responded with an error.');
-            } else if (error.request) {
-                // The request was made but no response was received
-                console.error('Error request data:', error.request);
-                alert('Failed to submit package. No response from server.');
-            } else {
-                // Something happened in setting up the request that triggered an error
-                console.error('Error message:', error.message);
-                alert('Failed to submit package. An error occurred while setting up the request.');
-            }
-            console.error('Error config:', error.config);
-        }
-    };
-    
-
-    const getTomorrowDate = () => {
-        const today = new Date();
-        const tomorrow = new Date(today);
-        tomorrow.setDate(today.getDate() + 1);
-        return tomorrow.toISOString().split('T')[0];
-    };
-
-    return (
-        <div className="managePackage">
-            <h2>Add Manage Package</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="id">ID:</label>
-                    <input type="number" id="id" name="id" value={formData.id} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="imgSrc">Image URL:</label>
-                    <input type="text" id="imgSrc" name="imgSrc" value={formData.imgSrc} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="title">Title:</label>
-                    <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="description">Description:</label>
-                    <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="price">Price (RM):</label>
-                    <input type="number" id="price" name="price" value={formData.price} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="dayDuration">Duration:</label>
-                    <div className="durationInput">
-                        <select id="dayDuration" name="dayDuration" value={formData.dayDuration} onChange={handleChange} required>
-                            <option value="">Days</option>
-                            {[...Array(31).keys()].map(num => (
-                                <option key={num + 1} value={num + 1}>{num + 1}</option>
-                            ))}
-                        </select>
-                        <select id="nightDuration" name="nightDuration" value={formData.nightDuration} onChange={handleChange} required>
-                            <option value="">Nights</option>
-                            {[...Array(Math.max(0, parseInt(formData.dayDuration || 0, 10) - 1)).keys()].map(num => (
-                                <option key={num + 1} value={num + 1}>{num + 1}</option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label htmlFor="location">Location:</label>
-                    <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="numberOfDates">Number of Dates Available:</label>
-                    <select id="numberOfDates" name="numberOfDates" value={formData.numberOfDates} onChange={handleChange} required>
-                        <option value="">Select number of dates</option>
-                        {[1, 2, 3, 4, 5].map((num) => (
-                            <option key={num} value={num}>{num}</option>
-                        ))}
-                    </select>
-                </div>
-                {formData.dateRanges.map((dateRange, index) => (
-                    <div key={index}>
-                        <label htmlFor={`startDate-${index}`}>Start Date:</label>
-                        <input type="date" id={`startDate-${index}`} name={`startDate-${index}`} min={getTomorrowDate()} value={dateRange.startDate} onChange={handleChange} required />
-                        <label htmlFor={`endDate-${index}`}>End Date:</label>
-                        <input type="date" id={`endDate-${index}`} name={`endDate-${index}`} value={dateRange.endDate} readOnly />
-                    </div>
-                ))}
-                <div>
-                    <label>Itinerary:</label>
-                    {formData.itinerary.map((_, index) => (
-                        <div key={index}>
-                            <label htmlFor={`itinerary-${index}`}>Day {index + 1}:</label>
-                            <textarea id={`itinerary-${index}`} name={`itinerary-${index}`} value={formData.itinerary[index]} onChange={handleChange} required />
-                        </div>
-                    ))}
-                </div>
-                <button type="submit">Add Package</button>
-            </form>
+  return (
+    <div className="managePackage">
+      <h2>Add Manage Package</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="id">ID:</label>
+          <input
+            type="number"
+            id="id"
+            name="id"
+            value={formData.id}
+            onChange={handleChange}
+            required
+          />
+          {idError && <span className="error">{idError}</span>}
         </div>
-    );
+        <div>
+          <label>Image URLs:</label>
+          {formData.imgSrc.map((src, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                id={`imgSrc-${index}`}
+                name={`imgSrc-${index}`}
+                value={src}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          ))}
+          <button type="button" onClick={addImageField}>Add Image</button>
+        </div>
+        <div>
+          <label htmlFor="title">Title:</label>
+          <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+        </div>
+        <div>
+          <label htmlFor="description">Description:</label>
+          <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
+        </div>
+        <div>
+          <label htmlFor="price">Price (RM):</label>
+          <input type="number" id="price" name="price" value={formData.price} onChange={handleChange} required />
+        </div>
+        <div>
+          <label htmlFor="dayDuration">Duration:</label>
+          <div className="durationInput">
+            <select id="dayDuration" name="dayDuration" value={formData.dayDuration} onChange={handleChange} required>
+              <option value="">Days</option>
+              {[...Array(31).keys()].map(num => (
+                <option key={num + 1} value={num + 1}>{num + 1}</option>
+              ))}
+            </select>
+            <select id="nightDuration" name="nightDuration" value={formData.nightDuration} onChange={handleChange} required>
+              {parseInt(formData.dayDuration, 10) === 1 ? (
+                <option value="0">0 Nights</option>
+              ) : (
+                <>
+                  <option value="">Nights</option>
+                  {[...Array(Math.max(0, parseInt(formData.dayDuration || 0, 10) - 1)).keys()].map(num => (
+                    <option key={num + 1} value={num + 1}>{num + 1}</option>
+                  ))}
+                </>
+              )}
+            </select>
+
+          </div>
+        </div>
+        <div>
+          <label htmlFor="location">Location:</label>
+          <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required />
+        </div>
+        <div>
+          <label htmlFor="numberOfDates">Number of Dates Available:</label>
+          <select id="numberOfDates" name="numberOfDates" value={formData.numberOfDates} onChange={handleChange} required>
+            <option value="">Select number of dates</option>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <option key={num} value={num}>{num}</option>
+            ))}
+          </select>
+        </div>
+        {formData.dateRanges.map((dateRange, index) => (
+          <div key={index}>
+            <label htmlFor={`startDate-${index}`}>Start Date:</label>
+            <input type="date" id={`startDate-${index}`} name={`startDate-${index}`} min={getTomorrowDate()} value={dateRange.startDate} onChange={handleChange} required />
+            <label htmlFor={`endDate-${index}`}>End Date:</label>
+            <input type="date" id={`endDate-${index}`} name={`endDate-${index}`} value={dateRange.endDate} readOnly />
+          </div>
+        ))}
+        <div>
+          <label>Itinerary:</label>
+          {formData.itinerary.map((_, index) => (
+            <div key={index}>
+              <label htmlFor={`itinerary-${index}`}>Day {index + 1}:</label>
+              <textarea id={`itinerary-${index}`} name={`itinerary-${index}`} value={formData.itinerary[index]} onChange={handleChange} required />
+            </div>
+          ))}
+        </div>
+        <button type="submit">Add Package</button>
+      </form>
+    </div>
+  );
 };
 
 export default ManagePackage;
