@@ -1,110 +1,74 @@
-.slider{
-    width: 100%;
-    height: 110vh;
+.slider {
     position: relative;
-    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slide {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
-    transform: translateX(-50%);
-    transition: all 0.5s ease;
-    pointer-events: none; /* Important to ensure clicks do not register on non-visible slides */
-  }
-
-@media screen and (min-width: 600px) {
-    .slide img{
-        width: 100%;
-        height: 100%;
-    }
+    transition: opacity 0.5s ease;
 }
 
-.slide img{
-    height: 100%;
-    padding-top:px;
-
+.slide.current {
+    display: block;
+    opacity: 1;
 }
 
-.content{
+.slide-image {
+    width: 100%; /* Adjust as needed */
+    height: auto; /* Ensure aspect ratio is maintained */
+}
+
+.content {
     position: absolute;
-    top: 23rem;
-    margin-top: -2.5rem;
-    left: 5rem;
-    // opacity: 0;
-    width: 50%;
-    padding: 3rem;
-    background: rgba(182, 202, 241, 0.3);
-    animation: slide-up 1s ease .5s;
-    animation-fill-mode: forwards;
-    //visibility:hidden;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: white;
 }
 
-@keyframes slide-up{
-    0%{
-        visibility: visible;
-        top: 23rem;
-    }
-    100%{
-        visibility: visible;
-        top: 17rem;
-    }
-}
-
-@media screen and (max-width:600px) {
-    .content{
-        width: 80%;
-    }
-}
-.content > * {
-    color: #fff;
+.content h2 {
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
-
-.current {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto; /* Re-enable pointer events on the current slide */
-    z-index: 10; /* Ensure the current slide is above others */
-  }
-
-.current .content{
-    opacity: 1;
+.content p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
-.arrow{
-    border: 2px solid #fff;
-    border-radius: 50%;
-    background: transparent;
-    color: #fff;
-    width: 2rem;
-    height: 2rem;
-    cursor: pointer;
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.arrow {
     position: absolute;
-    top: 35%;
-    z-index: 999;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 2rem;
+    color: white;
 }
 
-.arrow:hover{
-    background: #fff;
-    color: #777;
+.prev {
+    left: 1%;
 }
 
-.next{
-    right: 1.5rem;
-}
-
-.prev{
-    left: 1.5rem;
-}
-
-hr{
-    height: 2px;
-    background: #fff;
-    width: 50%;
+.next {
+    right: 1%;
 }

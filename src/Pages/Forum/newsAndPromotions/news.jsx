@@ -1,71 +1,87 @@
-import {useState, useEffect} from 'react';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
-import {newsData} from "./news-data"
+import React, { useState, useEffect } from 'react';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import './news.css';
-import { clear } from '@testing-library/user-event/dist/clear';
+import axios from 'axios';
 
 const NewsAndPromotions = () => {
-    const [currentSlide, setCurrentSlide] = useState(0)
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [newsData, setNewsData] = useState([]);
     const slideLength = newsData.length;
-    //slideLength = 1 2 3
-    // current Slide = 0 1 2
-
     const autoScroll = true;
     let slideInterval;
-    let intervalTime = 5000;
+    const intervalTime = 5000;
 
+    // Function to fetch news data from backend
+    const fetchNewsData = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/news');
+            console.log(response.data); // Add this line for debugging
+            setNewsData(response.data);
+        } catch (error) {
+            console.error('Error fetching news:', error);
+        }
+    };
+
+    // Function to handle next slide
     const nextSlide = () => {
         setCurrentSlide(currentSlide === slideLength - 1 ? 0 : currentSlide + 1);
     };
 
+    // Function to handle previous slide
     const prevSlide = () => {
         setCurrentSlide(currentSlide === 0 ? slideLength - 1 : currentSlide - 1);
     };
 
-    function auto(){
-        slideInterval = setInterval(nextSlide, intervalTime)
-    }
+    // Function to start auto scrolling
+    const auto = () => {
+        slideInterval = setInterval(nextSlide, intervalTime);
+    };
 
     useEffect(() => {
-        setCurrentSlide(0);
-    },[]);
+        fetchNewsData(); // Fetch news data when component mounts
 
-    useEffect(() => {
-        if(autoScroll){
-            auto();
+        setCurrentSlide(0); // Initialize current slide index
+
+        if (autoScroll) {
+            auto(); // Start auto scrolling if enabled
         }
-        return() => clearInterval(slideInterval);
-    },[currentSlide]);
-    
+
+        return () => {
+            clearInterval(slideInterval); // Clean up interval on component unmount
+        };
+    }, []); // Empty dependency array means this effect runs only once, on mount
 
     return (
-        <div className="slider">
-            <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide}/>
-            <AiOutlineArrowRight className="arrow next" onClick={nextSlide}/>
-        
-            {newsData.map((slide, index) => {
-                return (
-                    <div className = {index === currentSlide ?
-                    "slide current" : "slide"} key = {index}>
-                        {index === currentSlide && (
-                            <>
-                                <img src={slide.image} alt="slide" />
-                                <div className='content'>
-                                    <h2>{slide.heading}</h2>
-                                    <p>{slide.desc}</p>
-                                    <hr/>
-                                    <button className='btn' onClick={() => window.location.href = slide.url}>
-                                        Get Started
-                                    </button>
-                                </div>
-                            </>
-                        )}
+        <div className="slider-container">
+            <div className="slider">
+                <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide} />
+                <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
+
+                {newsData.length === 0 ? (
+                    <div className="slide current">
+                        <p>Loading...</p>
                     </div>
-                )
-            })}
+                ) : (
+                    newsData.map((slide, index) => (
+                        <div className={index === currentSlide ? 'slide current' : 'slide'} key={index}>
+                            {index === currentSlide && (
+                                <>
+                                    <img src={slide.image} alt="slide" className="slide-image" />
+                                    <div className="content">
+                                        <h2>{slide.heading}</h2>
+                                        <p>{slide.desc}</p>
+                                        <a className="btn" href={slide.url} target="_blank" rel="noopener noreferrer">
+                                            Get Started
+                                        </a>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    ))
+                )}
+            </div>
         </div>
     );
-
-}
+};
 
 export default NewsAndPromotions;

@@ -23,9 +23,9 @@
     height: 100%;
   }
 }
-.slide img {
+.slide-image {
   height: 100%;
-  padding-top: px;
+  width: auto;
 }
 
 .content {
