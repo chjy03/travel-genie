@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://cindyhii007:q5aVWp8wMHAScEoV@cluster30.nbbark2.mongodb.net/TravelGenie?retryWrites=true&w=majority&appName=Cluster30",
+    "jwtSecret": "secret"
+}
