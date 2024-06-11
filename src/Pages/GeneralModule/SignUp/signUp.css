@@ -139,8 +139,7 @@
 
 .signUp .submit-container {
   display: flex;
-  gap: 30px;
-  margin: 60px auto;
+  margin: 30px auto;
 }
 
 .signUp .submit-container .submit {
@@ -161,6 +160,37 @@
 .signUp .submit-container .gray {
   color: var(--textColor);
   background: hsl(240, 4%, 89%);
+}
+
+.signUp .login-link {
+  margin-top: -20px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: #797979;
+  display: flex; /* Add display flex */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.signUp .login-link a {
+  color: #4c00b4;
+  text-decoration: none;
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: 35px;
+}
+
+.spinnerContainer .icon {
+  display: none;
+}
+
+.spinnerContainer .icon.visible {
+  display: block;
 }
 
 /*# sourceMappingURL=signUp.css.map */

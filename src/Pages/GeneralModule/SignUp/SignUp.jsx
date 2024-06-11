@@ -3,7 +3,7 @@ import './signUp.css';
 import { FaCircleUser } from 'react-icons/fa6';
 import { GrMail } from 'react-icons/gr';
 import { GoPasskeyFill } from 'react-icons/go';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const SignUp = () => {
@@ -11,6 +11,7 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('tourist');
+    const [users, setUsers] = useState([]); // State to store existing users
 
     const navigate = useNavigate();
 
@@ -18,6 +19,7 @@ const SignUp = () => {
         // Fetch existing users when the component mounts
         axios.get('http://localhost:5000/api/signUp')
             .then(response => {
+                setUsers(response.data);
                 console.log('Existing Users:', response.data);
             })
             .catch(error => {
@@ -44,6 +46,8 @@ const SignUp = () => {
                 if (result.status === 201) {
                     console.log('User registered successfully. Redirecting to login page.');
                     alert('User registered successfully.');
+                    localStorage.setItem('userId', result.data.userId);
+                    console.log(result.data.userId);
                     navigate('/logIn');
                 } else {
                     console.error('Failed to sign up');
@@ -198,6 +202,9 @@ const SignUp = () => {
                     <button className="submit" onClick={handleSubmit}>
                         Sign Up
                     </button>
+                </div>
+                <div className="login-link">
+                        Already have account?  <Link to="/login"> Click Here to Log In!</Link>
                 </div>
             </div>
         </div>

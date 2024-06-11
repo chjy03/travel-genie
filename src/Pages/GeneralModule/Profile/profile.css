@@ -98,7 +98,21 @@ input {
   margin-bottom: 0.3rem;
 }
 
+button.submit {
+  margin-left: 30px;
+  padding: 8px 20px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--whiteColor);
+  background-color: var(--PrimaryColor);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 button {
+  margin-right: 10px;
   padding: 8px 20px;
   font-size: 14px;
   line-height: 1.8;
@@ -112,4 +126,30 @@ button {
 
 button:hover {
   background-color: var(--SecondaryColor);
+}
+
+/* profile.css */
+@keyframes fadeInMoveRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.8); /* Start slightly smaller */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1); /* End at normal size */
+  }
+}
+.tourist, .travel-agency {
+  animation: fadeInMoveRight 0.5s ease-in-out;
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 30px;
+}
+
+.tourist {
+  color: #1E90FF; /* Dodger Blue */
+}
+
+.travel-agency {
+  color: #32CD32; /* Lime Green */
 }/*# sourceMappingURL=profile.css.map */
