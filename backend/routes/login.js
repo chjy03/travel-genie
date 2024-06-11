@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Ensure this path is correct
+const User = require('../models/User'); 
 
 const SECRET_KEY = 'secret';
 
@@ -20,13 +20,13 @@ router.post('/', async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) {
             console.log('User not found');
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(404).json({ error: 'Invalid email or password' }); // Changed error message
         }
 
         const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword) {
-            return res.status(401).json({ error: 'Invalid password' });
+            return res.status(401).json({ error: 'Invalid email or password' }); // Changed error message
         }
 
         // Fetch additional user information (e.g., userType) from the database

@@ -31,6 +31,10 @@ const SignUp = () => {
         setUserType(e.target.value);
     };
 
+    const validateEmail = (email) => {
+        return email.includes('@') && email.includes('gmail');
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -40,14 +44,20 @@ const SignUp = () => {
             return;
         }
     
-        axios.post('http://localhost:5000/api/signUp', {name, email, password, userType})
+        if (!validateEmail(email)) {
+            console.log('Invalid email format. Please include "@" and "gmail" in your email.');
+            alert('Invalid email format. Please include "@" and "gmail" in your email.');
+            return;
+        }
+    
+        axios.post('http://localhost:5000/api/signUp', { name, email, password, userType })
             .then(result => {
                 console.log(result);
                 if (result.status === 201) {
                     console.log('User registered successfully. Redirecting to login page.');
                     alert('User registered successfully.');
                     localStorage.setItem('userId', result.data.userId);
-                    console.log(result.data.userId);
+                    console.log('Registered userId : ', result.data.userId);
                     navigate('/logIn');
                 } else {
                     console.error('Failed to sign up');
@@ -56,98 +66,13 @@ const SignUp = () => {
             })
             .catch(error => {
                 console.error('Error signing up:', error);
-                alert('Error signing up. Please try again.');
+                if (error.response && error.response.data && error.response.data.error) {
+                    alert(error.response.data.error);
+                } else {
+                    alert('Error signing up. Please try again.');
+                }
             });
     };
-
-
-// import React, { useState } from 'react';
-// import './signUp.css';
-// import { FaCircleUser } from 'react-icons/fa6';
-// import { GrMail } from 'react-icons/gr';
-// import { GoPasskeyFill } from 'react-icons/go';
-// import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
-// import axios from 'axios';
-
-// const SignUp = () => {
-//     const [name, setName] = useState('');
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [userType, setUserType] = useState('tourist'); // Default user type
-
-//     const navigate = useNavigate(); // Initialize useNavigate hook for navigation
-
-//     // Function to handle user type selection
-//     const handleUserTypeChange = (e) => {
-//         setUserType(e.target.value);
-//     };
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-    
-//         if (!name || !email || !password) {
-//             console.log('Please fill all required fields.');
-//             alert('Please fill all required fields.');
-//             return;
-//         }
-    
-//         axios.post('http://localhost:5000/api/signUp', {name, email, password, userType})
-//             .then(result => {
-//                 console.log(result);
-//                 if (result.status === 201) { // Check for success status code
-//                     console.log('User registered successfully. Redirecting to login page.');
-//                     alert('User registered successfully. Redirecting to login page.');
-//                     navigate('/logIn');
-//                 } else {
-//                     console.error('Failed to sign up');
-//                     alert('Failed to sign up. Please try again.');
-//                 }
-//             })
-//             .catch(error => {
-//                 console.error('Error signing up:', error);
-//                 alert('Error signing up. Please try again.');
-//             });
-//     };
-    
-
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-
-    //     try {
-    //         const response = await axios.post('http://localhost:5000/api/signUp', {name, email, password, userType});
-    //         if (response.status === 201) {
-    //             alert('User Created Successfully');
-    //             setName('');
-    //             setEmail('');
-    //             setPassword('');
-    //             setUserType('tourist');
-    //             navigate('/logIn');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error signing up:', error);
-    //         alert('Error signing up ahh. Please try again.');
-    //     }
-    // };
-
-    // Function to handle form submission
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-
-    //     // Perform form validation and submission logic here
-    //     console.log('Name:', name);
-    //     console.log('Email:', email);
-    //     console.log('Password:', password);
-    //     console.log('User Type:', userType);
-
-    //     // Clear form fields after submission (optional)
-    //     setName('');
-    //     setEmail('');
-    //     setPassword('');
-    //     setUserType('tourist'); // Reset user type to default
-
-    //     // Redirect to the landing page ("/landing") after successful signup
-    //     navigate('/logIn'); // Use navigate function to navigate to the landing page
-    // };
 
     return (
         <div className="signUp">
