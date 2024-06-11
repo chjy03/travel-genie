@@ -29,7 +29,7 @@ const bookingPageSchema = new mongoose.Schema({
   }],
   status: {
     type: String,
-    enum: ['unpaid', 'paid'],
+    enum: ['unpaid', 'paid', 'cancelled'],
     default: 'unpaid'
   }
 });
@@ -37,4 +37,3 @@ const bookingPageSchema = new mongoose.Schema({
 const BookingPage = mongoose.model('BookingPage', bookingPageSchema);
 
 module.exports = BookingPage;
-

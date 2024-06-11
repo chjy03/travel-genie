@@ -328,6 +328,121 @@
 // export default PackageDetail;
 
 //photo slideshow
+// import React, { useEffect, useState } from 'react';
+// import { Link, useParams } from 'react-router-dom';
+// import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+// import './packageDetail.css';
+// import { HiOutlineLocationMarker } from "react-icons/hi";
+
+// const PackageDetail = () => {
+//   const { id } = useParams();
+//   const [packageData, setPackageData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [currentSlide, setCurrentSlide] = useState(0);
+//   const autoScroll = true;
+//   let slideInterval;
+//   const intervalTime = 5000;
+
+//   useEffect(() => {
+//     fetch(`http://localhost:5000/api/manage-package/${id}`)
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('Failed to fetch package');
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         setPackageData(data);
+//         setLoading(false);
+//       })
+//       .catch(error => {
+//         console.error('Error fetching data:', error);
+//         setError(error.message);
+//         setLoading(false);
+//       });
+//   }, [id]);
+
+//   useEffect(() => {
+//     if (autoScroll) {
+//       slideInterval = setInterval(nextSlide, intervalTime);
+//     }
+//     return () => clearInterval(slideInterval);
+//   }, [currentSlide]);
+
+//   const nextSlide = () => {
+//     setCurrentSlide(currentSlide === (packageData?.imgSrc?.length || 1) - 1 ? 0 : currentSlide + 1);
+//   };
+
+//   const prevSlide = () => {
+//     setCurrentSlide(currentSlide === 0 ? (packageData?.imgSrc?.length || 1) - 1 : currentSlide - 1);
+//   };
+
+//   if (loading) {
+//     return <div>Loading...</div>;
+//   }
+
+//   if (error) {
+//     return <div>Error: {error}</div>;
+//   }
+
+//   if (!packageData) {
+//     return <h2>Package not found</h2>;
+//   }
+
+//   const { imgSrc, title, location, description, price, dayDuration, nightDuration, itinerary, dateRanges } = packageData;
+
+//   return (
+//     <div className="packageDetail">
+//       <div className="detailHeader">
+//         <div className="slider">
+//           <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide} />
+//           <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
+//           {imgSrc && imgSrc.map((src, index) => (
+//             <div className={index === currentSlide ? "slide current" : "slide"} key={index}>
+//               {index === currentSlide && <img src={src} alt={`Slide ${index}`} />}
+//             </div>
+//           ))}
+//         </div>
+//         <h2>{title}</h2>
+//         <div className='location flex'>
+//           <HiOutlineLocationMarker className="icon" />
+//           <h3>{location}</h3>
+//         </div>
+//       </div>
+//       <div className="detailContent">
+//         <p>{description}</p>
+//         <div className="price">Price: RM {price}</div>
+//         <div className="duration">
+//           <div>Duration: {dayDuration} Days / {nightDuration} Nights</div>
+//         </div>
+//         <div className="itinerary">
+//           <h4>Itinerary:</h4>
+//           <ul>
+//             {itinerary && itinerary.map((item, index) => (
+//               <li key={index}>{`Day ${index + 1}: ${item}`}</li>
+//             ))}
+//           </ul>
+//           </div>
+//         <div className="availableDates">
+//           <h4>Available Dates:</h4>
+//           <ul>
+//             {dateRanges && dateRanges.map((dateRange, index) => (
+//               <li key={index}>
+//                 {new Date(dateRange.startDate).toLocaleDateString()} - {new Date(dateRange.endDate).toLocaleDateString()}
+//               </li>
+//             ))}
+//           </ul>
+//         </div>
+//         <Link to={`/booking/${id}`} className="bookNowBtn">Book Now</Link>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PackageDetail;
+
+
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
@@ -343,6 +458,7 @@ const PackageDetail = () => {
   const autoScroll = true;
   let slideInterval;
   const intervalTime = 5000;
+  const isLoggedIn = !!localStorage.getItem('token'); // Check if user is logged in
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/manage-package/${id}`)
@@ -390,7 +506,7 @@ const PackageDetail = () => {
     return <h2>Package not found</h2>;
   }
 
-  const { imgSrc, title, location, description, price, dayDuration, nightDuration, itinerary } = packageData;
+  const { imgSrc, title, location, description, price, dayDuration, nightDuration, itinerary, dateRanges } = packageData;
 
   return (
     <div className="packageDetail">
@@ -424,11 +540,24 @@ const PackageDetail = () => {
             ))}
           </ul>
         </div>
-        <Link to={`/booking/${id}`} className="bookNowBtn">Book Now</Link>
+        <div className="availableDates">
+          <h4>Available Dates:</h4>
+          <ul>
+            {dateRanges && dateRanges.map((dateRange, index) => (
+              <li key={index}>
+                {new Date(dateRange.startDate).toLocaleDateString()} - {new Date(dateRange.endDate).toLocaleDateString()}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {isLoggedIn ? (
+          <Link to={`/booking/${id}`} className="bookNowBtn">Book Now</Link>
+        ) : (
+          <p>Please <Link to="/logIn">log in</Link> to book this package.</p>
+        )}
       </div>
     </div>
   );
 };
 
 export default PackageDetail;
-
