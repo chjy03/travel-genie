@@ -144,6 +144,24 @@ const Card = () => {
     navigate('/payment'); // Navigate back to the payment route
   };
 
+  const handleExpiryChange = (e) => {
+    const value = e.target.value.trim();
+    if (!/^\d{2}\/\d{2}$/.test(value)) {
+      setPaymentMessage('Please enter Expiry Date in MM/YY format.');
+    } else {
+      setPaymentMessage('');
+    }
+  };
+
+  const handleCVVChange = (e) => {
+    const value = e.target.value.trim();
+    if (value.length > 3 || !/^\d{3}$/.test(value)) {
+      setPaymentMessage('CVV must be exactly 3 digits.');
+    } else {
+      setPaymentMessage('');
+    }
+  };
+
   return (
     <section className='card'>
       <div className="overlay"></div>
@@ -166,21 +184,31 @@ const Card = () => {
             <div className='dateInput'>
               <label htmlFor='date'>Expiry date:</label>
               <div className='input flex'>
-                <input type='text' placeholder="MM/YY" required />
+                <input
+                  type='text'
+                  placeholder="MM/YY"
+                  onChange={handleExpiryChange}
+                  required
+                />
               </div>
             </div>
 
             <div className='CVVInput'>
               <label htmlFor='CVV'>CVV:</label>
               <div className='input flex'>
-                <input type='text' placeholder="3 digits" required />
+                <input
+                  type='text'
+                  placeholder="3 digits"
+                  onChange={handleCVVChange}
+                  required
+                />
               </div>
             </div>
             <div className="button-container">
               <button id="back-btn" onClick={handleBack}>Back</button>
               <button id='pay-btn' type="submit">Pay Now</button>
             </div>
-            <div id="message">{paymentMessage}</div>
+            {paymentMessage && <div id="message">{paymentMessage}</div>}
           </form>
         </div>
       </div>
