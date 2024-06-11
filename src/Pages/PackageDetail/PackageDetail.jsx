@@ -390,7 +390,7 @@ const PackageDetail = () => {
     return <h2>Package not found</h2>;
   }
 
-  const { imgSrc, title, location, description, price, dayDuration, nightDuration, itinerary } = packageData;
+  const { imgSrc, title, location, description, price, dayDuration, nightDuration, itinerary, dateRanges } = packageData;
 
   return (
     <div className="packageDetail">
@@ -421,6 +421,16 @@ const PackageDetail = () => {
           <ul>
             {itinerary && itinerary.map((item, index) => (
               <li key={index}>{`Day ${index + 1}: ${item}`}</li>
+            ))}
+          </ul>
+          </div>
+        <div className="availableDates">
+          <h4>Available Dates:</h4>
+          <ul>
+            {dateRanges && dateRanges.map((dateRange, index) => (
+              <li key={index}>
+                {new Date(dateRange.startDate).toLocaleDateString()} - {new Date(dateRange.endDate).toLocaleDateString()}
+              </li>
             ))}
           </ul>
         </div>
