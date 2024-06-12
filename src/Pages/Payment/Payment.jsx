@@ -85,7 +85,7 @@ const Payment = () => {
       const pkg = packages.find(p => p.id === pkgId);
 
       if (pkg && booking) {
-        const content = `Destination: ${pkg.location || 'N/A'}\nSelected Date: ${new Date(booking.selectedDate).toLocaleDateString()}`;
+        const content = `Destination: ${pkg.location || 'N/A'}\nSelected Date: ${new Date(booking.selectedDate).toLocaleDateString()}\nTotal Person(s): ${booking.totalPersons}`;
         setModalContent(content);
       } else {
         setModalContent('Details not available');
