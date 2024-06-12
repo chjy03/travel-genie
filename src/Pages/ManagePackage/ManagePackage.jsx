@@ -653,11 +653,9 @@ const ManagePackage = () => {
     start.setDate(start.getDate() + parseInt(days, 10) - 1);
     return start.toISOString().split('T')[0];
   };
-
   const generateItinerary = (days) => {
     return Array.from({ length: days }, () => '');
   };
-
   // Function to check if ID already exists
   const isIdUnique = async (id) => {
     try {
@@ -670,6 +668,18 @@ const ManagePackage = () => {
       return false; // Return false by default if there's an error
     }
   };
+  const addImageField = () => {
+    setFormData({
+      ...formData,
+      imgSrc: [...formData.imgSrc, '']
+    });
+  };
+  const getTomorrowDate = () => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    return tomorrow.toISOString().split('T')[0];
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -680,7 +690,6 @@ const ManagePackage = () => {
     alert('ID already exists. Please choose a different ID.');
     return;
   }
-
     try {
       // If dayDuration is 1, set nightDuration to 0
       const packageData = {
@@ -712,20 +721,6 @@ const ManagePackage = () => {
         alert('Failed to submit package.');
       }
     }
-  };
-
-  const addImageField = () => {
-    setFormData({
-      ...formData,
-      imgSrc: [...formData.imgSrc, '']
-    });
-  };
-
-  const getTomorrowDate = () => {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    return tomorrow.toISOString().split('T')[0];
   };
 
   return (
@@ -793,7 +788,6 @@ const ManagePackage = () => {
                 </>
               )}
             </select>
-
           </div>
         </div>
         <div>
