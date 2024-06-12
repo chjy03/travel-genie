@@ -34,7 +34,7 @@ const SignUp = () => {
     };
 
     const validateEmail = (email) => {
-        return email.includes('@') && email.includes('gmail');
+        return email.includes('@') && email.includes('gmail.com');
     };
 
     const handleSubmit = async (e) => {
