@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Purchases.css'; 
+import './Purchases.css'; // Assuming there's a CSS file for styling
 
 const Purchases = () => {
   const [pastPurchases, setPastPurchases] = useState([]);
@@ -34,8 +34,9 @@ const Purchases = () => {
             date: new Date(booking.selectedDate).toLocaleDateString(),
             image: matchingPackage?.imgSrc || '',
             package: matchingPackage?.title || '',
-            cost: matchingPackage?.price || 0,
+            cost: booking.totalCost || 0,
             startDate: new Date(booking.selectedDate).toLocaleDateString(),
+            totalPersons: booking.totalPersons || 0,
             month: new Date(booking.selectedDate).toISOString().slice(0, 7)
           };
         });
@@ -83,8 +84,9 @@ const Purchases = () => {
             date: new Date(booking.selectedDate).toLocaleDateString(),
             image: matchingPackage?.imgSrc || '',
             package: matchingPackage?.title || '',
-            cost: matchingPackage?.price || 0,
+            cost: booking.totalCost || 0,
             startDate: new Date(booking.selectedDate).toLocaleDateString(),
+            totalPersons: booking.totalPersons || 0,
             month: new Date(booking.selectedDate).toISOString().slice(0, 7)
           };
         });
@@ -131,6 +133,7 @@ const Purchases = () => {
               <th>Image</th>
               <th>Travel Package</th>
               <th>Start Date</th>
+              <th>Total Person(s)</th>
               <th>Cost</th>
             </tr>
           </thead>
@@ -146,6 +149,7 @@ const Purchases = () => {
                 </td>
                 <td>{purchase.package}</td>
                 <td>{purchase.startDate}</td>
+                <td>{purchase.totalPersons}</td>
                 <td>RM{purchase.cost.toFixed(2)}</td>
               </tr>
             ))}
