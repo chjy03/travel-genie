@@ -41,12 +41,20 @@
         display: flex;
         flex-direction: column;
   
+        .search-bar {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+          }
+
         .filters {
           display: flex;
           flex-direction: column;
   
-          .search-bar {
-            margin-bottom: 1rem;
+          .rating-filter{
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
             padding: 0.5rem;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -63,7 +71,6 @@
             label {
                 color: var(--textColor);
                 cursor: pointer;
-                // justify-content: flex-start;
                 font-size: 0.9rem;
                 margin-right: 7rem;
                 color: var(--blackColor);
