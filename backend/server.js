@@ -36,6 +36,8 @@ app.use('/api/signUp', require('./routes/signUp'));
 app.use('/api/login', require('./routes/login'));
 app.use('/api/forgotPassword', require('./routes/forgotPassword'));
 app.use('/api/resetPassword', require('./routes/resetPassword'));
+app.use('/api/planning', require('./routes/planning'));
+app.use("/api/schedule", require("./routes/schedule"));
 
 
 

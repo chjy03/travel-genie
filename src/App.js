@@ -80,7 +80,7 @@ import BookingPage from './Pages/BookingPage/BookingPage';
 import ManagePackage from './Pages/ManagePackage/ManagePackage';
 import Report from './Pages/GeneralModule/Report/Report';
 import HomeListing from './Pages/Home/HomeListing';
-import Detail from "./Pages/Planning/Detail";
+import PlanningDetail from "./Pages/Planning/PlanningDetails/PlanningDetail";
 import Schedule from "./Pages/Planning/Schedule/Schedule";
 import Card from './Pages/Card/Card';
 import Purchases from './Pages/Purchases/Purchases';
@@ -114,7 +114,7 @@ const App = () => {
                     <Route path="/manage-package" element={<ManagePackage />} />
                     <Route path="/report" element={<Report />} />
                     <Route path="/home-listing" element={<HomeListing />} />
-                    <Route path="/detail" element={<Detail />} />
+                    <Route path="/detail/:id" element={<PlanningDetail />} />
                     <Route path="/schedule" element={<Schedule />} />
 
                     <Route path="/card" element={<Card />} />

@@ -1,25 +1,30 @@
 import React, { useState } from "react";
+import axios from "axios";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import "./PlanModal.css";
 
-const PlanModal = ({onClose, onSubmit }) => {
+const PlanModal = ({ onClose, onSubmit, selectedDestinations }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+    const f_startDate = startDate? startDate.toLocaleDateString("en-GB"): null;
+    const f_endDate = endDate ? endDate.toLocaleDateString("en-GB") : null;
     const duration = calculateDuration(startDate, endDate);
-    onSubmit(duration);
-    onClose(); // Close the modal
+    onSubmit(f_startDate, f_endDate, duration, selectedDestinations);
+    onClose();
     navigate("/schedule");
   };
+
 
   const calculateDuration = (start, end) => {
     if (!start || !end) return null;
     const diffTime = Math.abs(end - start);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))+1;
     return diffDays;
   };
 
@@ -29,7 +34,9 @@ const PlanModal = ({onClose, onSubmit }) => {
         <div className="modal-header"></div>
 
         <div className="modal-content">
-          <span className="close" onClick={onClose}>&times;</span>
+          <span className="close" onClick={onClose}>
+            &times;
+          </span>
           <h3>Enter Travel Dates</h3>
           <br />
           <div className="date-picker-container">

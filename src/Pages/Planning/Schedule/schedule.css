@@ -14,7 +14,7 @@
   margin: 100px auto;
 }
 
-.container {
+.dest-container {
   padding: 10px 50px;
   position: relative;
   width: 50%;
@@ -48,7 +48,7 @@
   left: 50%;
 }
 
-.container .circle {
+.dest-container .circle {
   position: absolute;
   width: 40px;
   font-size: 100px;
