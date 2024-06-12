@@ -2,34 +2,47 @@ import React, { useState } from 'react';
 import './forgotPassword.css';
 import { Link } from 'react-router-dom';
 import forgotPasswordImage from '../../../Assets/image1.png';
-import { FaArrowLeft, FaCheckCircle } from 'react-icons/fa'; 
+import { FaArrowLeft } from 'react-icons/fa'; 
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import ClipLoader from 'react-spinners/ClipLoader'; 
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false); // State to manage loading spinner
-    const [message, setMessage] = useState(''); // State to manage the response message
-    const [success, setSuccess] = useState(false); // State to manage success flag
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true); // Start loading spinner
-        setMessage(''); // Clear previous messages
-        setSuccess(false); // Reset success state
 
         try {
             const response = await axios.post('http://localhost:5000/api/forgotPassword', { email });
             setLoading(false); // Stop loading spinner
-            setMessage(response.data.message); // Set success message
-            setSuccess(true); // Set success state to true
-            window.alert(response.data.message); // Show alert with success message
+
+            Swal.fire({
+                title: 'Success!',
+                text: response.data.message,
+                icon: 'success',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
+
+            setEmail(''); // Clear the email input field
         } catch (error) {
             setLoading(false); // Stop loading spinner
+
             console.error('Error sending reset link:', error);
-            setMessage('Error sending reset link. Please try again.'); // Set error message
-            setSuccess(false); // Ensure success state is false on error
-            window.alert('Error sending reset link. Please try again.'); // Show alert with error message
+            Swal.fire({
+                title: 'Error!',
+                text: 'Error sending reset link. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
         }
     };
 
@@ -56,8 +69,7 @@ const ForgotPassword = () => {
                             </div>
                             <button type='submit' disabled={loading}>Send Reset Link</button>
                         </form>
-                        {loading && !success && <ClipLoader size={35} color={"#123abc"} />} {/* Loading spinner */}
-                        {!loading && success && <FaCheckCircle size={35} color={"#28a745"} />} {/* Tick icon */}
+                        {loading && <ClipLoader size={35} color={"#123abc"} />} {/* Loading spinner */}
                         <p className='backToLogin'>
                             <Link to='/login' style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
                                 <FaArrowLeft style={{ marginRight: '5px' }} />
@@ -75,6 +87,3 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
-
-
-

@@ -120,4 +120,15 @@
 .login .signup-link a {
   color: #4c00b4;
   text-decoration: none;
+}
+
+.custom-swal-button {
+  background-color: #1E90FF !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  width: 90px !important;
 }/*# sourceMappingURL=logIn.css.map */

@@ -258,7 +258,7 @@
             .navLists {
                 display: flex;
                 align-items: center;
-                justify-Menu: center;
+                justify-menu: center;
                 flex-direction: row;
 
                 .navItem {
@@ -372,4 +372,15 @@
         border-left: 1px solid gray;
         border-top: 1px solid gray;
     }
+}
+
+.custom-swal-button {
+    background-color: #1E90FF !important; 
+    color: white !important; 
+    border: none !important; 
+    padding: 10px 20px !important;
+    font-size: 40px !important; 
+    border-radius: 5px !important; 
+    cursor: pointer !important; 
+    width: 90px !important;
 }

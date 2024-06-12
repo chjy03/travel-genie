@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GrMail } from 'react-icons/gr';
 import { GoPasskeyFill } from 'react-icons/go';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -12,31 +13,60 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (!email || !password) {
-            alert('Please fill all required fields.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill all required fields.',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
             return;
         }
-
+    
         try {
             const result = await axios.post('http://localhost:5000/api/login', { email, password });
             const { token, userId, userType, name } = result.data;
             if (result.data.message === "Login successfully") {
-                alert('Login successful.');
-                localStorage.setItem('token', token);
-                localStorage.setItem('userType', userType);
-                localStorage.setItem('userId', userId);
-                localStorage.setItem('name', name);
-                localStorage.setItem('email', email);
-                navigate('/home');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login successful.',
+                    customClass: {
+                        confirmButton: 'custom-swal-button'
+                    }
+                }).then(() => {
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('userType', userType);
+                    localStorage.setItem('userId', userId);
+                    localStorage.setItem('name', name);
+                    localStorage.setItem('email', email);
+                    navigate('/home');
+                });
             } else {
-                alert('Invalid email or password. Please try again.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: 'Invalid email or password. <br>Please try again.',
+                    customClass: {
+                        confirmButton: 'custom-swal-button'
+                    }
+                });
             }
         } catch (error) {
             console.error('Error login:', error);
-            alert('Invalid email or password. Please try again.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: 'Invalid email or password. <br>Please try again.',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
         }
     };
+    
 
     return (
         <div className="login">

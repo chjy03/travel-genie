@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './report.css';
 import reportImage from '../../../Assets/image2.jpg'; 
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Report = () => {
     const [issueText, setIssueText] = useState('');
@@ -12,12 +13,28 @@ const Report = () => {
         try {
             const response = await axios.post('http://localhost:5000/api/report', { issueText });
             if (response.status === 201) {
-                alert('Submitted!');
+                Swal.fire({
+                    title: 'Submission Successful!',
+                    html: 'Issue reported! We’ll address it promptly.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        confirmButton: 'custom-swal-button'
+                    }
+                });
                 setIssueText('');
             }
         } catch (error) {
             console.error('Error submitting report:', error);
-            alert('Error submitting report. Please try again.');
+            Swal.fire({
+                title: 'Error!',
+                text: 'Error submitting report. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
         }
     };
 
@@ -27,8 +44,7 @@ const Report = () => {
                 <div className="reportContent">
                     <div className="reportText">
                         <h1>Report a Problem</h1>
-                        <p>If you have encountered any issues/problems, please use the form below to report them to us:</p>
-                        
+                        <p>If you have encountered any issues/problems, please use the form below to report them to us:</p>   
                         <form className="reportForm" onSubmit={handleSubmit}>
                             <div className="formGroup">
                                 <label htmlFor="issue">Describe the issue:</label>
