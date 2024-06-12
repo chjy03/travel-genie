@@ -124,4 +124,17 @@
 }
 .payment .container .total-cost #checkout-btn:hover {
   background-color: #0056b3;
+}
+.payment .container .total-cost #cancel-btn {
+  width: 60%;
+  padding: 5px;
+  margin-top: 20px;
+  background: var(--gradientColor);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+}
+.payment .container .total-cost #cancel-btn:hover {
+  background-color: #0056b3;
 }/*# sourceMappingURL=payment.css.map */

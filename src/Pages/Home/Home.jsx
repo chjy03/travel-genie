@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './home.css';
 import image1 from '../../Assets/scenery1.jpg';
 import image2 from '../../Assets/scenery2.jpg';
@@ -6,6 +6,11 @@ import image3 from '../../Assets/scenery3.jpg';
 import video from '../../Assets/video.mp4';
 
 const Home = () => {
+    useEffect(() => {
+        const userId = localStorage.getItem('userId');
+        console.log('User ID from local storage:', userId);
+    }, []); 
+
     return (
         <section className='home'>
             <div className="setContainer container">
@@ -28,3 +33,7 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+

@@ -71,19 +71,22 @@ router.post('/', async (req, res) => {
             email,
             password: hashedPassword,
             userType,
-           
         });
 
-        console.log(newUser.createdAt);
+        // Save the new user to the database
         await newUser.save();
 
+        // Generate a string representation of the userId
+        const userId = newUser._id.toString();
+
         console.log('New user created successfully:', newUser);
-        res.status(201).json({ message: "User created successfully", user: newUser });
+        res.status(201).json({ message: "User created successfully", userId: userId, user: newUser });
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).json({ error: 'Error signing up' });
     }
 });
+
 
 // GET registered users
 router.get('/', async (req, res) => {
@@ -98,3 +101,5 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
+
+

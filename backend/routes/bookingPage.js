@@ -52,4 +52,49 @@ router.get('/:packageId', async (req, res) => {
   }
 });
 
+// Update booking status to 'paid'
+router.put('/:_id/status', async (req, res) => {
+  try {
+    const { status } = req.body;
+    const bookingId = req.params._id;
+
+    const bookingPage = await BookingPage.findById(bookingId);
+    if (!bookingPage) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    bookingPage.status = status;
+    await bookingPage.save();
+
+    res.json({ message: 'Booking status updated successfully' });
+  } catch (error) {
+    console.error('Error updating booking status:', error);
+    res.status(500).json({ message: 'Error updating booking status' });
+  }
+});
+
+// Route to update booking status to 'cancelled'
+router.put('/:_id/cancel', async (req, res) => {
+  try {
+    const bookingId = req.params._id;
+    console.log(`Received request to cancel booking with ID: ${bookingId}`);
+
+    const bookingPage = await BookingPage.findById(bookingId);
+    if (!bookingPage) {
+      console.log(`Booking with ID: ${bookingId} not found`);
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    bookingPage.status = 'cancelled';
+    await bookingPage.save();
+    console.log(`Booking with ID: ${bookingId} cancelled successfully`);
+
+    res.json({ message: 'Booking cancelled successfully' });
+  } catch (error) {
+    console.error('Error cancelling booking:', error);
+    res.status(500).json({ message: 'Error cancelling booking' });
+  }
+});
+
 module.exports = router;
+

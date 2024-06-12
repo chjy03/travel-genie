@@ -141,6 +141,20 @@
             background-color: #0056b3;
           }
         }
+        #cancel-btn {
+          width: 60%;
+          padding: 5px;
+          margin-top: 20px;
+          background: var(--gradientColor);
+          color: white;
+          border: none;
+          border-radius: 40px;
+          cursor: pointer;
+  
+          &:hover {
+            background-color: #0056b3;
+          }
+        }
       }
     }
   }

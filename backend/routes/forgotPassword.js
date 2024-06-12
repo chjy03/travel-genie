@@ -2,10 +2,10 @@ const express = require('express');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
-const User = require('../models/User'); // Ensure this path is correct
+const User = require('../models/User'); 
 const router = express.Router();
 
-const SECRET_KEY = 'secret'; // You should use an environment variable for this in a real app
+const SECRET_KEY = 'secret'; 
 
 // Configure your email transport
 const transporter = nodemailer.createTransport({
@@ -77,9 +77,8 @@ router.post('/', async (req, res) => {
             subject: 'Password Reset',
             text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
             Please click on the following link, or paste this into your browser to complete the process:\n\n
-            http://localhost:3000/resetPassword/${token}\n\n
-            If you did not request this, please ignore this email and your password will remain unchanged.\n`
-            
+            http://localhost:5001/resetPassword/${token}\n\n
+            If you did not request this, please ignore this email and your password will remain unchanged.\n`    
         };
 
 
@@ -104,34 +103,10 @@ module.exports = router;
 
 
 
-// Reset Password Route
-// router.post('/', async (req, res) => {
-//     try {
-//         const user = await User.findOne({
-//             resetPasswordToken: req.params.token,
-//             resetPasswordExpires: { $gt: Date.now() } // Check if token is not expired
-//         });
 
-//         if (!user) {
-//             return res.status(400).json({ error: "Password reset token is invalid or has expired." });
-//         }
 
-//         // Update the user's password
-//         const { password } = req.body;
-//         const hashedPassword = await bcrypt.hash(password, 10);
-//         user.password = hashedPassword;
 
-//         // Remove the reset token fields
-//         user.resetPasswordToken = undefined;
-//         user.resetPasswordExpires = undefined;
 
-//         await user.save();
 
-//         res.status(200).json({ message: "Password has been reset successfully." });
-//     } catch (error) {
-//         console.error('Error resetting password:', error);
-//         res.status(500).json({ error: 'Error resetting password' });
-//     }
-// });
 
-module.exports = router;
+
