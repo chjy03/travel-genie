@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
-import './reviewForm.css'
+import React from 'react';
+import './reviewForm.css';
+import axios from 'axios';  // Import axios for HTTP requests
 
-const ReviewForm = ({ selectedPost, addReviewToPost, setReviewText, reviewText }) => {
-    const handleSubmit = (e) => {
+const ReviewForm = ({ selectedPost, setSelectedPost, reviewText, setReviewText }) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (reviewText.trim()) {
-            addReviewToPost(selectedPost.id);
-            setReviewText('');  // Clear the textarea after submission
+            try {
+                const response = await axios.post(`http://localhost:5000/api/posts/${selectedPost._id}/reviews`, {
+                    text: reviewText
+                });
+
+                // Update the selectedPost with the new review
+                const updatedPost = response.data;
+                setSelectedPost(updatedPost);
+
+                // Clear the textarea after submission
+                setReviewText('');
+            } catch (error) {
+                console.error('Error adding review:', error);
+            }
         }
     };
 
@@ -15,7 +28,7 @@ const ReviewForm = ({ selectedPost, addReviewToPost, setReviewText, reviewText }
             <h3>Reviews:</h3>
             <div className='reviews-container'>
                 {selectedPost.reviews.map((review, index) => (
-                    <p key={index} className='review-item'>{review.text}</p>  // Assuming reviews are objects with 'text' properties
+                    <p key={index} className='review-item'>{review.text}</p>
                 ))}
             </div>
             <form onSubmit={handleSubmit}>

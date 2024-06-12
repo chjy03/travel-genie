@@ -45,6 +45,8 @@ app.use('/api/planning', require('./routes/planning'));
 app.use("/api/schedule", require("./routes/schedule"));
 app.use('/api/profile', require('./routes/profile'));
 app.use('/api/userData', require('./routes/userData'));
+app.use('/api/news', require('./routes/news'));
+app.use('/api/posts', require('./routes/posts'));
 
 // Port
 const PORT = process.env.PORT || 5000;
