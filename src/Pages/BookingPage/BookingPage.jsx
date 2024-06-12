@@ -436,14 +436,15 @@
 
 // export default BookingPage;
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './bookingPage.css';
 import axios from 'axios';
 
 const BookingPage = () => {
   const { id } = useParams();
-
+  const [packageData, setPackageData] = useState(null);
+  const [dateRanges, setAvailableDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [totalPersons, setTotalPersons] = useState(1);
   const [formData, setFormData] = useState([
@@ -456,6 +457,26 @@ const BookingPage = () => {
   ]);
   const [policyChecked, setPolicyChecked] = useState(false);
   const [showPolicyDetails, setShowPolicyDetails] = useState(false);
+
+  useEffect(() => {
+    const fetchPackageData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/manage-package/${id}`);
+        console.log('Package data:', response.data);
+        setPackageData(response.data);
+
+        if (response.data.dateRanges && Array.isArray(response.data.dateRanges)) {
+          setAvailableDates(response.data.dateRanges);
+        } else {
+          setAvailableDates([]);
+        }
+      } catch (error) {
+        console.error('Error fetching package data:', error);
+      }
+    };
+
+    fetchPackageData();
+  }, [id]);
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
@@ -494,14 +515,16 @@ const BookingPage = () => {
     try {
       const bookingData = {
         packageId: id,
-        selectedDate,
+        selectedDate: new Date(selectedDate.split(' - ')[0]),
         totalPersons,
         persons: formData
       };
+
+      console.log('Booking data to be sent:', bookingData); // Log the data being sent
+
       await axios.post('http://localhost:5000/api/bookingPage', bookingData);
       console.log('Booking submitted successfully!');
       alert('Booking submitted successfully!');
-      // Clear form after successful submission
       setSelectedDate('');
       setTotalPersons(1);
       setFormData([
@@ -513,19 +536,16 @@ const BookingPage = () => {
         }
       ]);
       window.location.href = "/payment";
-       // Redirect to payment page
     } catch (error) {
       console.error('Error submitting booking:', error);
     }
   };
 
-  // Function to validate phone number format
   const isValidPhoneNumber = (phoneNumber) => {
     const phoneRegex = /^\+?\d{8,15}$/;
     return phoneRegex.test(phoneNumber);
   };
 
-  // Function to validate IC/Passport format
   const isValidICPassport = (icPassport) => {
     const icPassportRegex = /^[A-Za-z0-9]{6,}$/;
     return icPassportRegex.test(icPassport);
@@ -535,12 +555,28 @@ const BookingPage = () => {
     setShowPolicyDetails(!showPolicyDetails);
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  };
+
   return (
     <div className="bookingPage">
-      <h2>Booking Page for Package ID: {id}</h2>
+      {packageData ? (
+        <h2>Booking Page for {packageData.title}</h2>
+      ) : (
+        <h2>Loading package details...</h2>
+      )}
       <form onSubmit={handleSubmit}>
         <label htmlFor="date">Select Date:</label>
-        <input type="date" id="date" value={selectedDate} onChange={handleDateChange} required />
+        <select id="date" value={selectedDate} onChange={handleDateChange} required>
+          <option value="">Select a date</option>
+          {dateRanges.map((dateRange) => (
+            <option key={dateRange._id} value={`${dateRange.startDate} - ${dateRange.endDate}`}>
+              {`${formatDate(dateRange.startDate)} - ${formatDate(dateRange.endDate)}`}
+             </option>
+          ))}
+        </select>
 
         <label htmlFor="totalPersons">Total Persons:</label>
         <input
@@ -560,7 +596,7 @@ const BookingPage = () => {
             <input
               type="text"
               id={`name${index}`}
-              name={`name`}
+              name="name"
               value={person.name}
               onChange={(e) => handleChange(e, index)}
               required
@@ -570,7 +606,7 @@ const BookingPage = () => {
             <input
               type="email"
               id={`email${index}`}
-              name={`email`}
+              name="email"
               value={person.email}
               onChange={(e) => handleChange(e, index)}
               required
@@ -580,7 +616,7 @@ const BookingPage = () => {
             <input
               type="tel"
               id={`phone${index}`}
-              name={`phone`}
+              name="phone"
               value={person.phone}
               onChange={(e) => handleChange(e, index)}
               required
@@ -592,7 +628,7 @@ const BookingPage = () => {
             <input
               type="text"
               id={`icPassport${index}`}
-              name={`icPassport`}
+              name="icPassport"
               value={person.icPassport}
               onChange={(e) => handleChange(e, index)}
               required
@@ -631,15 +667,20 @@ const BookingPage = () => {
                 <br />
                 <strong>Changes to Bookings:</strong> Changes to your booking may be allowed depending on availability and the terms and conditions of the service provider. Additional charges may apply for booking changes. Please refer to your booking confirmation email for more information.
                 <br />
-              <strong>Travel Documents:</strong> It is the responsibility of the traveler to ensure that all travel documents (passport, visa, etc.) are valid and up-to-date. TravelGenie is not responsible for any issues arising due to invalid or missing travel documents.
-              <br />
-              <strong>Travel Insurance:</strong> We highly recommend that you purchase travel insurance to protect yourself against unforeseen circumstances such as trip cancellations, medical emergencies, and lost luggage. TravelGenie does not provide travel insurance, but we can assist you in finding suitable coverage.
-              <br /><br/>
-            </p>
-          </div>
-        )}
+                <strong>Travel Documents:</strong> It is the responsibility of the traveler to ensure that all travel documents (passport, visa, etc.) are valid and up-to-date. We are not liable for any issues or delays caused by incomplete or incorrect travel documentation.
+                <br />
+                <strong>Liability:</strong> We act as an intermediary between you and the service providers (airlines, hotels, etc.) and are not liable for any loss, damage, or injury resulting from the actions or omissions of these providers. Our liability is limited to the amount paid for the booking.
+                <br />
+                <strong>Travel Insurance:</strong> We strongly recommend purchasing travel insurance to cover unforeseen events such as trip cancellations, medical emergencies, and lost luggage. Travel insurance is not included in the booking unless specified.
+                <br />
+                <strong>Governing Law:</strong> These booking terms and conditions are governed by the laws of Malaysia. Any disputes arising from the booking will be subject to the exclusive jurisdiction of the courts of Malaysia.
+                <br /><br />
+                <strong>Contact Information:</strong> If you have any questions or need assistance with your booking, please contact our customer support team at <strong>booking@travelflix.com</strong>.
+              </p>
+            </div>
+          )}
         </div>
-        <button type="submit">Book Now</button>
+        <button type="submit">Submit Booking</button>
       </form>
     </div>
   );
