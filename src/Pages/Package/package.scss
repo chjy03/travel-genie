@@ -23,7 +23,7 @@
 
     .overlay {
         position: absolute;
-        height: 45%;
+        height: 42%;
         width: 100%;
         background: rgb(120, 137, 143);
         top: 0;
@@ -34,7 +34,7 @@
 
     video {
         position: absolute;
-        height: 4%;
+        height: 42%;
         width: 100%;
         top: 0;
         bottom: 0;
@@ -142,7 +142,7 @@
                 font-size: 1rem;
                 font-weight: 600;
                 cursor: pointer;
-                margin-top: 1rem;
+                margin-top: 1rem; // Ensure the button has a top margin
             }
         }
     }

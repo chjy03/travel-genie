@@ -286,9 +286,10 @@ const PackageListing = ({ packages }) => {
           Most visited destinations
         </h3>
       </div>
+
       <div className="secContent grid">
         {packages.length === 0 ? (
-          <div className="noResultsMessage">No travel packages found.</div>
+          <div className="noResultsMessage">No travel packages found. Please have a look at other travel packages.</div>
         ) : (
           packages.map(({ id, imgSrc, title, location, description, price }) => (
             <div key={id} className="singleDestination">
