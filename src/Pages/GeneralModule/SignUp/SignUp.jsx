@@ -5,6 +5,8 @@ import { GrMail } from 'react-icons/gr';
 import { GoPasskeyFill } from 'react-icons/go';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+
 
 const SignUp = () => {
     const [name, setName] = useState('');
@@ -39,40 +41,123 @@ const SignUp = () => {
         e.preventDefault();
     
         if (!name || !email || !password) {
-            console.log('Please fill all required fields.');
-            alert('Please fill all required fields.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill all required fields.',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
             return;
         }
     
         if (!validateEmail(email)) {
-            console.log('Invalid email format. Please include "@" and "gmail" in your email.');
-            alert('Invalid email format. Please include "@" and "gmail" in your email.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Email',
+                text: 'Invalid email format. Please include "@" and "gmail.com" in your email.',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
             return;
         }
     
+        // Check if the username already exists
+        const usernameExists = users.some(user => user.name === name);
+        // Check if the email already exists
+        const emailExists = users.some(user => user.email === email);
+    
+        if (usernameExists && emailExists) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Username and Email Exist',
+                text: 'Please choose another one',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
+            return;
+        }
+    
+        if (usernameExists) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Username Exists',
+                text: 'Please choose another one',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
+            return;
+        }
+    
+        if (emailExists) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Email Exists',
+                text: 'Please choose another one',
+                customClass: {
+                    confirmButton: 'custom-swal-button'
+                }
+            });
+            return;
+        }
+    
+        // If username and email are unique, proceed with signup
         axios.post('http://localhost:5000/api/signUp', { name, email, password, userType })
             .then(result => {
-                console.log(result);
                 if (result.status === 201) {
-                    console.log('User registered successfully. Redirecting to login page.');
-                    alert('User registered successfully.');
-                    localStorage.setItem('userId', result.data.userId);
-                    console.log('Registered userId : ', result.data.userId);
-                    navigate('/logIn');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        html: 'User registered successful.<br>Redirecting to login page.',
+                        customClass: {
+                            confirmButton: 'custom-swal-button'
+                        }
+                    }).then(() => {
+                        localStorage.setItem('userId', result.data.userId);
+                        navigate('/logIn');
+                    });
                 } else {
-                    console.error('Failed to sign up');
-                    alert('Failed to sign up. Please try again.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to sign up. Please try again.',
+                        customClass: {
+                            confirmButton: 'custom-swal-button'
+                        }
+                    });
                 }
             })
             .catch(error => {
-                console.error('Error signing up:', error);
                 if (error.response && error.response.data && error.response.data.error) {
-                    alert(error.response.data.error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.response.data.error,
+                        customClass: {
+                            confirmButton: 'custom-swal-button'
+                        }
+                    });
                 } else {
-                    alert('Error signing up. Please try again.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Error signing up. Please try again.',
+                        customClass: {
+                            confirmButton: 'custom-swal-button'
+                        }
+                    });
                 }
             });
     };
+    
+    
+    
+    
+    
 
     return (
         <div className="signUp">

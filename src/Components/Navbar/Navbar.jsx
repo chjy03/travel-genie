@@ -5,6 +5,7 @@ import { TbGridDots } from 'react-icons/tb';
 import { IoPersonCircle } from 'react-icons/io5';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logoImage from '../../Assets/logo.jpg';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
     const [active, setActive] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = () => {
     const userId = localStorage.getItem('userId');
     const isLoggedIn = localStorage.getItem('token') !== null; // Check if user is logged in
     useEffect(() => {
-        console.log('User ID:', userId);
+        //console.log('User ID:', userId);
     }, [userId]);
 
     const toggleNav = () => {
@@ -41,22 +42,35 @@ const Navbar = () => {
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
         if (isLoggedIn) {
-            console.log('User id:', userId);
+            //console.log('User id:', userId);
         }
     };
 
     const handleLogout = (event) => {
         event.preventDefault(); // Prevent default navigation
-        const confirmLogout = window.confirm('Are you sure you want to log out?');
-        if (confirmLogout) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('userType'); // Clear the userType from localStorage
-            localStorage.removeItem('userId');
-            navigate('/logIn');
-        } else {
-            console.log('Logout cancelled'); // This line is optional for debugging purposes
-        }
+    
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will be logged out.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1E90FF', // Set custom button color
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            customClass: {
+                confirmButton: 'custom-swal-button' // Apply custom class to confirm button
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userType');
+                localStorage.removeItem('userId');
+                navigate('/logIn');
+            }
+        });
     };
+    
+    
 
     return (
         <section className='navBarSection'>
