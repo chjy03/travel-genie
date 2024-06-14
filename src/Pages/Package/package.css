@@ -23,7 +23,7 @@
 }
 .package .overlay {
   position: absolute;
-  height: 38%;
+  height: 45%;
   width: 100%;
   background: rgb(120, 137, 143);
   top: 0;
@@ -33,7 +33,7 @@
 }
 .package video {
   position: absolute;
-  height: 38%;
+  height: 45%;
   width: 100%;
   top: 0;
   bottom: 0;

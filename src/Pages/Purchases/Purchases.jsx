@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Purchases.css'; // Assuming there's a CSS file for styling
+import './Purchases.css'; 
 
 const Purchases = () => {
   const [pastPurchases, setPastPurchases] = useState([]);
@@ -102,11 +102,11 @@ const Purchases = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // You can replace this with a loading spinner or animation
+    return <div>Loading...</div>; 
   }
 
   if (error) {
-    return <div>Error: {error}</div>; // You can customize the error message or UI here
+    return <div>Error: {error}</div>; 
   }
 
   return (

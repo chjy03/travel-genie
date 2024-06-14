@@ -12,150 +12,143 @@
     --cardBG: rgb(225, 225, 235);
 }
 
-.forum-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    background-color: var(--whiteColor);
-    padding: 30px;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.forum-page h1{
+.forum-page {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .forum-page h1 {
+    position: relative;
+    width: max-content;
+    margin: 0 auto;
+    color: var(--blackColor);
+    z-index: 1;
     font-size: 2.5rem;
     padding: 10px;
-    margin-top: 21px;
-    color: var(--blackColor);
-    margin-bottom: 15px;
-}
-
-.forum-page h2{
-    color: var(--inputColor);
-}
-
-.forum-page h3,
-.post h2{
-    color: var(--blackColor);
-}
-
-.post-preview {
-    border: 1px solid var(--PrimaryColor);
-    padding: 15px;
-    border-radius: 10px;
-    background-color: var(--whiteColor);
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-}
-
-.post-preview:hover {
-    transform: scale(1.05);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-button {
-    background-color: var(--PrimaryColor);
-    color: var(--whiteColor);
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: var(--SecondaryColor);
-}
-
-.like-button.active {
-    background-color: red; /* Optionally use a variable for the active color if you add one to :root */
-    color: var(--whiteColor);
-}
-
-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid var(--inputColor);
-    background-color: var(--whiteColorDeam);
-}
-
-textarea:focus {
-    border-color: var(--SecondaryColor);
-    outline: none;
-}
-
-.forum-header {
+    margin-top: 35px;
+  }
+  
+  .forum-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-}
-.forum-grid {
-    display: flex;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.post-preview {
-    background-color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .forum-header h1 {
+    position: relative;
+        width: max-content;
+        margin: 0 auto;
+        color: var(--blackColor);
+        z-index: 1;
+        font-size: 2.5rem;
+        padding: 10px;
+        margin-top: 35px;
+  }
+  
+  .forum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .post-preview {
+    background: var(--cardBG);
+    padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.post-preview:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-.post-header h3 {
-    font-size: 1.25rem;
-    margin: 16px 16px 0;
-    color: #1a126d;
-}
-
-.post-body {
-    padding: 0 16px;
-    flex: 1;
-}
-
-.post-body p {
-    color: #666;
-    line-height: 1.5;
-    font-size: 1rem;
-    margin-bottom: 16px;
-}
-
-.post-actions {
-    padding: 10px 16px;
-    text-align: right;
-}
-
-.post-actions button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.post-actions button:hover {
-    background-color: #0056b3;
-}
-
-.post{
-    font-size: 20px;
-    h2 {
-        text-align: left; 
-        margin-left: 0; 
+    box-shadow: 0 2px 4px rgba(140, 140, 141, 0.549);
+    transition: transform 0.3s ease;
+  
+    &:hover {
+      transform: translateY(-5px);
     }
-}
+  
+    .post-header {
+      margin-bottom: 10px;
+    }
+  
+    .post-header h3 {
+      font-size: 1.5rem;
+      color: var(--blackColor);
+    }
+  
+    .post-body {
+      color: var(--textColor);
+      font-size: 1.2rem;
+    }
+  
+    .post-actions {
+      margin-top: 10px;
+  
+      button {
+        background-color: var(--PrimaryColor);
+        color: var(--whiteColor);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: var(--SecondaryColor);
+        }
+      }
+    }
+  }
+  
+  .post {
+    background: var(--cardBG);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(140, 140, 141, 0.549);
+    
+  
+    h2 {
+      font-size: 2rem;
+      color: var(--blackColor);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  
+    p {
+      color: var(--textColor);
+      font-size: 1.2rem;
+      line-height: 1.6;
+      align-items: center;
+    }
+  
+    .review-form {
+      margin-top: 20px; /* Adjust margin as needed */
+    }
+  
+    .review-form textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid var(--greyText);
+      border-radius: 5px;
+      resize: vertical;
+      margin-bottom: 10px;
+    }
+  
+    .review-form button {
+      background-color: var(--PrimaryColor);
+      color: var(--whiteColor);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: var(--SecondaryColor);
+      }
+    }
+  }
+  

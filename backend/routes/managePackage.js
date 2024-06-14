@@ -266,5 +266,21 @@ router.post('/search', async (req, res) => {
   }
 });
 
+// Delete outdated travel packages
+router.delete('/delete-outdated', async (req, res) => {
+  try {
+    const today = new Date();
+    const result = await ManagePackage.deleteMany({
+      'dateRanges.startDate': { $lt: today }
+    });
+
+    console.log('Deleted Outdated Packages:', result);
+    res.json({ message: `Deleted ${result.deletedCount} outdated packages.` });
+  } catch (error) {
+    console.error('Error deleting outdated packages:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
 
 module.exports = router;
