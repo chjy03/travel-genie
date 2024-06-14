@@ -1,104 +1,98 @@
 .slider {
-  width: 100%;
-  height: 110vh;
   position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin: auto;
   overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .slide {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: none;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transform: translateX(-50%);
-  transition: all 0.5s ease;
-  pointer-events: none; /* Important to ensure clicks do not register on non-visible slides */
+  transition: opacity 0.5s ease;
 }
 
-@media screen and (min-width: 600px) {
-  .slide img {
-    width: 100%;
-    height: 100%;
-  }
+.slide.current {
+  display: block;
+  opacity: 1;
 }
+
 .slide img {
+  width: 100%;
   height: 100%;
-  padding-top: px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.arrow.prev {
+  left: 10px;
+}
+
+.arrow.next {
+  right: 10px;
 }
 
 .content {
   position: absolute;
-  top: 23rem;
-  margin-top: -2.5rem;
-  left: 5rem;
-  width: 50%;
-  padding: 3rem;
-  background: rgba(182, 202, 241, 0.3);
-  animation: slide-up 1s ease 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes slide-up {
-  0% {
-    visibility: visible;
-    top: 23rem;
-  }
-  100% {
-    visibility: visible;
-    top: 17rem;
-  }
-}
-@media screen and (max-width: 600px) {
-  .content {
-    width: 80%;
-  }
-}
-.content > * {
+  bottom: 20px;
+  left: 20px;
   color: #fff;
-  margin-bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+  width: calc(100% - 40px);
 }
 
-.current {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto; /* Re-enable pointer events on the current slide */
-  z-index: 10; /* Ensure the current slide is above others */
+.content h2 {
+  margin: 0;
+  font-size: 1.5rem;
 }
 
-.current .content {
-  opacity: 1;
+.content p {
+  margin: 10px 0;
+  font-size: 1rem;
 }
 
-.arrow {
-  border: 2px solid #fff;
-  border-radius: 50%;
-  background: transparent;
+.content hr {
+  border: 0;
+  border-top: 1px solid #fff;
+  margin: 10px 0;
+}
+
+.btn {
+  background-color: #007bff;
   color: #fff;
-  width: 2rem;
-  height: 2rem;
+  border: none;
+  padding: 10px 20px;
   cursor: pointer;
-  position: absolute;
-  top: 35%;
-  z-index: 999;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-.arrow:hover {
-  background: #fff;
-  color: #777;
-}
-
-.next {
-  right: 1.5rem;
-}
-
-.prev {
-  left: 1.5rem;
-}
-
-hr {
-  height: 2px;
-  background: #fff;
-  width: 50%;
+.btn:hover {
+  background-color: #0056b3;
 }/*# sourceMappingURL=news.css.map */

@@ -1,11 +1,9 @@
 .forum-form-container {
-  display: flex;
-  flex-direction: column;
+  background: var(--cardBG);
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #f9f9f9;
-  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(140, 140, 141, 0.549);
+  margin-bottom: 20px;
 }
 
 .forum-form-container form {
@@ -14,22 +12,38 @@
 }
 
 .forum-form-container label {
+  display: block;
   margin-bottom: 10px;
+  color: var(--blackColor);
 }
 
 .forum-form-container input[type=text],
-.forum-form-container textarea,
-.forum-form-container input[type=file] {
+.forum-form-container textarea {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--greyText);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  resize: vertical; /* Allow vertical resizing on textarea */
 }
 
-.btnn subtn {
-  margin-left: 5px;
+.forum-form-container input[type=file] {
+  margin-bottom: 10px;
 }
 
-.btnn cancelbtn {
-  margin-right: 5px;
+.forum-form-container button {
+  background-color: var(--PrimaryColor);
+  color: var(--whiteColor);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.forum-form-container button:hover {
+  background-color: var(--SecondaryColor);
+}
+.forum-form-container button + button {
+  margin-left: 10px;
 }/*# sourceMappingURL=forumForm.css.map */
