@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
+import "./planning.css";
 import PlanModal from "../../Components/Modal/PlanModal";
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineLocationMarker, HiXCircle, HiStar } from "react-icons/hi";
-import "./planning.css";
 
 const Planning = () => {
   const [destinations, setDestinations] = useState([]);
@@ -13,12 +13,16 @@ const Planning = () => {
   const [selectedRating, setSelectedRating] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+
+
   // Fetch all destinations data from database
   useEffect(() => {
+
     const fetchData = async () => {
       try {
         const response = await axios.get("/api/planning");
         setDestinations(response.data);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -34,8 +38,8 @@ const Planning = () => {
         destination.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
         destination.tags.some((tag) =>
           tag.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      : true;
+        ): true;
+
     return matchesRating && matchesSearch;
   });
 
@@ -50,10 +54,12 @@ const Planning = () => {
   // Add selected destination to list
   const addToItinerary = (destination) => {
     if (!selectedDestinations.includes(destination)) {
+
       // not exist => add it to the selectedDestinations array
       setSelectedDestinations([...selectedDestinations, destination]);
-      console.log(destination);
+
     } else {
+
       //  exists => display a message or handle it as needed
       console.log(`${destination} is already in the itinerary.`);
     }
@@ -65,11 +71,6 @@ const Planning = () => {
     setSelectedDestinations(updatedDestinations);
   };
 
-  const handleDestinationClick = (destination) => {
-    // Navigate to the page showing full details of the destination
-    console.log(`Navigating to details page of ${destination}`);
-  };
-
   const handleModalOpen = () => {
     setModalOpen(true);
   };
@@ -78,25 +79,6 @@ const Planning = () => {
     setModalOpen(false);
   };
 
-
-  // Handle form submission for creating a schedule
-   const handleSubmitPlan = async (startDate, endDate, duration, selectedDestinations) => {
-     console.log(startDate, endDate, duration, selectedDestinations);
-     try {
-       const response = await axios.post("/api/schedule", {
-         startDate,
-         endDate,
-         duration,
-         selectedDestinations,
-       });
-       console.log("Plan submitted successfully:", response.data);
-     } catch (error) {
-       console.error("Error submitting plan:", error);
-       if (error.response) {
-         console.error("Response data:", error.response.data);
-       }
-     }
-   };
    
   return (
     <section className="planning">
@@ -138,7 +120,7 @@ const Planning = () => {
             <div className="selectedList">
               {selectedDestinations.map((destination, index) => (
                 <div className="selectedItem" key={index}>
-                  <span onClick={() => handleDestinationClick(destination)}>
+                  <span>
                     {destination}
                   </span>
 
@@ -161,7 +143,7 @@ const Planning = () => {
             {modalOpen && (
               <PlanModal
                 onClose={handleModalClose}
-                onSubmit={handleSubmitPlan}
+                //onSubmit={handleSubmitPlan}
                 selectedDestinations={selectedDestinations}
               />
             )}

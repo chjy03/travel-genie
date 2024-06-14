@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
-const Destination = require("../models/Destination");
 
 const scheduleSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
   startDate: {
     type: Date,
     required: true,
@@ -16,18 +19,12 @@ const scheduleSchema = new mongoose.Schema({
   },
   selectedDestinations: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Destination",
+      type: String,
       required: true,
     },
   ],
-  userEmail:{
-    type: String,
-    required: true,
-  },
 });
 
+const Schedule = mongoose.model("Schedule", scheduleSchema);
 
-const Schedule = mongoose.model('Schedule', scheduleSchema);
-
-module.exports = Schedule; 
+module.exports = Schedule;

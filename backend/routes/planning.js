@@ -29,7 +29,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-// // Get a specific destination by ID
+
+
+// Get a specific destination details by ID
 router.get("/detail/:id", async (req, res) => {
   try {
     const destination = await Destination.findOne({ id: req.params.id });
