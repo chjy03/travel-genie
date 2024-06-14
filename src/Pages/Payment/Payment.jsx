@@ -6,8 +6,6 @@ import Modal from '../../Components/Modal/Modal';
 const Payment = () => {
   const [bookingPackages, setBookingPackages] = useState([]);
   const [packages, setPackages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
@@ -35,22 +33,14 @@ const Payment = () => {
           bookingData.some(bp => (bp.packageId === pkg.id && bp.status === 'unpaid'))
         );
         setPackages(filteredPackages);
-
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
-        setError(error.message);
-        setLoading(false);
+        setCancelMessage('Failed to fetch data. Please try again later.');
       }
     };
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const total = packages.reduce((acc, pkg) => acc + pkg.price, 0);
-    setTotalCost(total.toFixed(2));
-  }, [packages]);
 
   useEffect(() => {
     const fetchUnpaidBookingId = async () => {
@@ -70,8 +60,24 @@ const Payment = () => {
         setCancelMessage('Error fetching booking ID. Please try again later.');
       }
     };
+
     fetchUnpaidBookingId();
   }, []);
+
+  useEffect(() => {
+    const calculateTotalCost = () => {
+      let total = 0;
+      packages.forEach(pkg => {
+        const booking = bookingPackages.find(bp => bp.packageId === pkg.id && bp.status === 'unpaid');
+        if (booking) {
+          total += pkg.price * booking.totalPersons;
+        }
+      });
+      setTotalCost(total.toFixed(2));
+    };
+
+    calculateTotalCost();
+  }, [packages, bookingPackages]);
 
   const toggleModal = (pkgId = '') => {
     if (pkgId) {
@@ -79,7 +85,7 @@ const Payment = () => {
       const pkg = packages.find(p => p.id === pkgId);
 
       if (pkg && booking) {
-        const content = `Destination: ${pkg.location || 'N/A'}\nSelected Date: ${new Date(booking.selectedDate).toLocaleDateString()}`;
+        const content = `Destination: ${pkg.location || 'N/A'}\nSelected Date: ${new Date(booking.selectedDate).toLocaleDateString()}\nTotal Person(s): ${booking.totalPersons}`;
         setModalContent(content);
       } else {
         setModalContent('Details not available');
@@ -90,8 +96,24 @@ const Payment = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleCheckout = () => {
-    window.location.href = "/card"; 
+  const handleCheckout = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/bookingPage/${bookingId}/totalCost`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ totalCost })
+      });
+
+      if (response.ok) {
+        navigate("/card");
+      } else {
+        console.error('Failed to update the total cost.');
+      }
+    } catch (error) {
+      console.error('Error updating total cost:', error);
+    }
   };
 
   const handleCancel = async () => {

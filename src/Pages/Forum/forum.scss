@@ -12,6 +12,13 @@
     --cardBG: rgb(225, 225, 235);
 }
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .forum-page {
     display: flex;
     flex-direction: column;
@@ -22,35 +29,53 @@
     padding: 30px;
 }
 
-.forum-page h1{
+.news-and-promotions, .forum-section {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+
+.news-and-promotions h1, .forum-header h1 {
     font-size: 2.5rem;
     padding: 10px;
-    margin-top: 21px;
     color: var(--blackColor);
     margin-bottom: 15px;
 }
 
-.forum-page h2{
-    color: var(--inputColor);
+.news-section {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
 }
 
-.forum-page h3,
-.post h2{
+.news-section h2 {
+    margin-top: 0;
     color: var(--blackColor);
 }
 
-.post-preview {
-    border: 1px solid var(--PrimaryColor);
-    padding: 15px;
-    border-radius: 10px;
-    background-color: var(--whiteColor);
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+.news-section p {
+    color: var(--inputColor);
 }
 
-.post-preview:hover {
-    transform: scale(1.05);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    padding: 10px 0;
 }
 
 button {
@@ -68,19 +93,6 @@ button:hover {
     background-color: var(--SecondaryColor);
 }
 
-.like-button.active {
-    background-color: red; /* Optionally use a variable for the active color if you add one to :root */
-    color: var(--whiteColor);
-}
-
-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid var(--inputColor);
-    background-color: var(--whiteColorDeam);
-}
-
 textarea:focus {
     border-color: var(--SecondaryColor);
     outline: none;
@@ -91,12 +103,13 @@ textarea:focus {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 20px;
 }
+
 .forum-grid {
-    display: flex;
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
-    padding: 20px;
 }
 
 .post-preview {
@@ -152,10 +165,10 @@ textarea:focus {
     background-color: #0056b3;
 }
 
-.post{
-    font-size: 20px;
-    h2 {
-        text-align: left; 
-        margin-left: 0; 
-    }
+.post {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
 }

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +11,9 @@ const Schedule = () => {
   const [destinations, setDestinations] = useState([]);
 
   useEffect(() => {
+
     const fetchSchedule = async () => {
+
       try {
         const response = await axios.get(`http://localhost:5000/api/schedule/${userID}`);
         // Set the fetched schedule and destinations to the state
@@ -25,6 +28,7 @@ const Schedule = () => {
         fetchSchedule();
         }
   }, [userID]);
+
 
   if (!schedule) {
     return <div>Loading...</div>;

@@ -9,6 +9,10 @@ const bookingPageSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+  totalPersons:{
+    type: Number,
+    default: 1
+  },
   persons: [{
     name: {
       type: String,
@@ -27,6 +31,10 @@ const bookingPageSchema = new mongoose.Schema({
       required: true
     }
   }],
+  totalCost: {
+    type: Number,
+    default: 0
+  },
   status: {
     type: String,
     enum: ['unpaid', 'paid', 'cancelled'],
@@ -37,3 +45,4 @@ const bookingPageSchema = new mongoose.Schema({
 const BookingPage = mongoose.model('BookingPage', bookingPageSchema);
 
 module.exports = BookingPage;
+

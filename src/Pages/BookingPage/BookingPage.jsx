@@ -516,6 +516,7 @@ const BookingPage = () => {
       const bookingData = {
         packageId: id,
         selectedDate: new Date(selectedDate.split(' - ')[0]),
+        totalPersons,
         persons: formData
       };
 
