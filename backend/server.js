@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const config = require('config');
 const cors = require('cors');
+const cron = require('node-cron');
+const axios = require('axios');
 
 dotenv.config();
 
@@ -47,6 +49,34 @@ app.use('/api/profile', require('./routes/profile'));
 app.use('/api/userData', require('./routes/userData'));
 app.use('/api/news', require('./routes/news'));
 app.use('/api/posts', require('./routes/posts'));
+
+// Route to delete outdated travel packages
+const ManagePackage = require('./models/ManagePackage');
+
+app.delete('/api/manage-package/delete-outdated', async (req, res) => {
+  try {
+    const today = new Date();
+    const result = await ManagePackage.deleteMany({
+      'dateRanges.startDate': { $lt: today }
+    });
+
+    console.log('Deleted Outdated Packages:', result);
+    res.json({ message: `Deleted ${result.deletedCount} outdated packages.` });
+  } catch (error) {
+    console.error('Error deleting outdated packages:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
+// Schedule the deletion of outdated packages to run every day at midnight
+cron.schedule('0 0 * * *', async () => {
+  try {
+    const response = await axios.delete('http://localhost:5000/api/manage-package/delete-outdated');
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error running scheduled task:', error);
+  }
+});
 
 // Port
 const PORT = process.env.PORT || 5000;
