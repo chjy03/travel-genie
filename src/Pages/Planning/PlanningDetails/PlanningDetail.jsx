@@ -9,7 +9,7 @@ const PlanningDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  
 
 
   const leavePage = () => {

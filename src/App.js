@@ -28,41 +28,40 @@ const App = () => {
     const isUserSignedIn = !!localStorage.getItem('token');
 
     return (
-        <Router>
-            <div className="App">
-                <Navbar />
-                <Routes>
-                    {/* Set the default route to render Landing component */}
-                    <Route path="/" element={<Home />} />
-
-                    {/* Define other routes */}
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/package" element={<Package />} />
-                    <Route path="/planning" element={<Planning />} />
-                    <Route path="/payment" element={<Payment />} />
-                    <Route path="/forum" element={<Forum />} />
-                    <Route path="/signUp" element={<SignUp />} />
-                    <Route path="/forgotPassword" element={<ForgotPassword />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/userData/:userId" element={<Profile />} />
-                    <Route path="/logIn" element={<Login />} />
-                    <Route path="/resetPassword/:token" element={<ResetPassword />} />
-                    <Route path="/package-listing" element={<PackageListing />} />
-                    <Route path="/package/:id" element={<PackageDetail />} /> {/* Remove data prop */}
-                    <Route path="/booking/:id" element={<BookingPage />} />
-                    <Route path="/manage-package" element={<ManagePackage />} />
-                    <Route path="/report" element={<Report />} />
-                    <Route path="/home-listing" element={<HomeListing />} />
-                    <Route path="/detail/:id" element={<PlanningDetail />} />
-                    <Route path="/schedule" element={<Schedule />} />
-
-                    <Route path="/card" element={<Card />} />
-                    <Route path="/purchases" element={<Purchases />} />
-                    
-                </Routes>
-                <Footer />
-            </div>
-        </Router>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            {/* Set the default route to render Landing component */}
+            <Route path="/" element={<Home />} />
+            {/* Define other routes */}
+            <Route path="/home" element={<Home />} />
+            <Route path="/package" element={<Package />} />
+            <Route path="/planning" element={<Planning />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/forum" element={<Forum />} />
+            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/userData/:userId" element={<Profile />} />
+            <Route path="/logIn" element={<Login />} />
+            <Route path="/resetPassword/:token" element={<ResetPassword />} />
+            <Route path="/package-listing" element={<PackageListing />} />
+            <Route path="/package/:id" element={<PackageDetail />} />{" "}
+            {/* Remove data prop */}
+            <Route path="/booking/:id" element={<BookingPage />} />
+            <Route path="/manage-package" element={<ManagePackage />} />
+            <Route path="/report" element={<Report />} />
+            <Route path="/home-listing" element={<HomeListing />} />
+            <Route path="/detail/:id" element={<PlanningDetail />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/schedule/:userID" element={<Schedule />} />
+            <Route path="/card" element={<Card />} />
+            <Route path="/purchases" element={<Purchases />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
     );
 };
 
