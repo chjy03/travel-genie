@@ -114,11 +114,13 @@ const Navbar = () => {
                                 Planning
                             </NavLink>
                         </li>
-                        <li className="navItem">
-                            <NavLink to="/purchases" className="navLink" onClick={closeNav}>
-                                My Purchases
-                            </NavLink>
-                        </li>
+                        {isLoggedIn && (
+                            <li className="navItem">
+                                <NavLink to="/purchases" className="navLink" onClick={closeNav}>
+                                    My Purchases
+                                </NavLink>
+                            </li>
+                        )}
                         <li className="navItem">
                             <NavLink to="/forum" className="navLink" onClick={closeNav}>
                                 Forum

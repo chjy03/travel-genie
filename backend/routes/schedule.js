@@ -1,71 +1,47 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const Schedule = require("../models/Schedule");
 const Destination = require("../models/Destination");
 
-// Create schedule
-router.post("/", async (req, res) => {
+// POST new schedule
+router.post('/', async (req, res) => {
+  const schedule = new Schedule({
+    userId: req.body.userId,
+    startDate: new Date(req.body.startDate),
+    endDate: new Date(req.body.endDate),
+    duration: req.body.duration,
+    selectedDestinations: req.body.selectedDestinations,
+  });
+
   try {
-    console.log(req.body);
-    const { startDate, endDate, duration, selectedDestinations } = req.body;
-
-    // Create a new instance of Schedule
-    const Schedule = new Schedule({
-      startDate,
-      endDate,
-      duration,
-      selectedDestinations,
-    });
-
     // Save the new Schedule to the database
-    const savedSchedule = await newSchedule.save();
-    console.log("New schedule saved:", savedSchedule);
-
-    // Send a response with the new schedule
-    res.status(201).json(savedSchedule);
+    const newSchedule = await schedule.save();
+    res.status(201).json(newSchedule);
   } catch (error) {
     console.error("Error creating schedule:", error);
-    res.status(500).send("Server error");
+    res.status(500).json("Server error");
   }
 });
 
-// GET schedule data
-router.get("/", async (req, res) => {
+// GET schedule data for a user
+router.get('/:userId', async (req, res) => {
   try {
-    // Fetch the schedule data
-    const schedule = await Schedule.find();
-    res.json(schedule);
+    const schedule = await Schedule.findOne({ userId: req.params.userId });
+    if (!schedule) {
+      return res.status(404).json({ message: 'Schedule not found' });
+    }
+
+    // Fetch destination details based on the selected destinations in the schedule
+    const destinations = await Destination.find({
+      title: { $in: schedule.selectedDestinations },
+    });
+
+    res.json({ schedule, destinations });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error fetching schedule:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
-
-router.get("/:id", async (req, res) => {
-  try {
-    const schedule = await Schedule.findById(req.params.id).populate(
-      "selectedDestinations"
-    );
-    if (!schedule)
-      return res.status(404).json({ message: "Schedule not found" });
-    res.json(schedule);
-  } catch (error) {
-    console.error("Error fetching schedule:", error);
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// Endpoint to fetch destinations by IDs
-router.post("/destinations", async (req, res) => {
-  const { selectedDestinations } = req.body;
-  try {
-    const destinations = await Destination.find({title: { $in: selectedDestinations }, });
-    res.json(destinations);
-  } catch (error) {
-    console.error("Error fetching destinations:", error);
-    res.status(500).json({ error: "Error fetching destinations" });
-  }
-});
 
 module.exports = router;
