@@ -730,7 +730,7 @@ const ManagePackage = () => {
 
   return (
     <div className="managePackage">
-      <h2>Add Manage Package</h2>
+      <h2>Add Travel Package</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="id">ID:</label>
