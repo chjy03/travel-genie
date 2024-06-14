@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import AddForumButton from './userExperience/addForumButton';
 import ForumForm from './userExperience/forumForm';
 import NewsAndPromotions from './newsAndPromotions/news';
 import ReviewForm from './reviews/reviewForm';
@@ -101,7 +100,7 @@ const ForumPage = () => {
         <>
           <div className="forum-header">
             <h1>Forum</h1>
-            <AddForumButton onClick={handleAddForumClick} />
+            <button onClick={handleAddForumClick} className="add-forum-button">Add Forum</button>
           </div>
           <div className="forum-grid">
             {posts.map(post => (
@@ -125,3 +124,5 @@ const ForumPage = () => {
 };
 
 export default ForumPage;
+
+
