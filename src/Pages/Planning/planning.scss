@@ -59,33 +59,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
           }
-  
-          .filter-checkbox {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-          
-           
-            label {
-                color: var(--textColor);
-                cursor: pointer;
-                font-size: 0.9rem;
-                margin-right: 7rem;
-                color: var(--blackColor);
-                white-space: nowrap; 
-                flex-grow: 1;
-            }
-  
-            input[type="checkbox"] {
-                margin-top: 6px;
-                margin-left: 10px;
-                margin-right: 10px;
-                width: 16px; /* Adjust the width if needed */
-                height: 16px; /* Adjust the height if needed */
-            }
-          }
         }
   
         .selectedDest {
